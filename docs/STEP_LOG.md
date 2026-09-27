@@ -219,3 +219,7 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 12 redesign - TraderLadder + journal hybrid
 - [2026-09-28 00:05] [Step 140] Checkpoint: Phase 12 redesign - TraderLadder + journal hybrid
+- [2026-09-28 00:16] [Step 141] Fixed dashboard/app.py TemplateResponse signature (Starlette >= 0.29)
+
+### [CHECKPOINT] Phase 12 dashboard working
+- [2026-09-28 00:19] [Step 142] Checkpoint: Phase 12 dashboard working

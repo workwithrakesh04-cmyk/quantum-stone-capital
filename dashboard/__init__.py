@@ -1,0 +1,1 @@
+"""Quantum Stone Capital dashboard."""
