@@ -100,8 +100,8 @@ def test_pipeline_deterministic_for_same_input(brain):
 def test_pipeline_layers_passed_order(brain):
     ctx = _ctx_from_csv()
     result = brain.run(ctx)
-    # Layer order should be monotonic (0 -> 1 -> 2 -> 3 -> 6 -> 7)
+    # Layer order should be monotonic (0 -> 1 -> 2 -> 3 -> 4 -> 6 -> 7)
     order = ["layer0_data", "layer1_account_rules", "layer2_pricing",
-             "layer3_strategies", "layer6_debate", "layer7_main_brain"]
+             "layer3_strategies", "layer4_routing", "layer6_debate", "layer7_main_brain"]
     for i, name in enumerate(order):
         assert result.layers_passed[i] == name, "wrong order at " + name

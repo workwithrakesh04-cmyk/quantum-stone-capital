@@ -103,6 +103,7 @@ def run_once(brain: MainBrainV2, state) -> int:
             continue
         try:
             result = brain.run(ctx, account_name="personal")
+            routing = result.metadata.get("routing", {}) if hasattr(result, "metadata") else {}
             decision = Decision(
                 symbol=symbol,
                 direction=result.direction,
@@ -110,6 +111,9 @@ def run_once(brain: MainBrainV2, state) -> int:
                 decision=result.decision,
                 strategy_name=result.strategy_name,
                 reasons=result.reasons[:5],
+                account_name=routing.get("account_name"),
+                routing_reason=routing.get("reason"),
+                rule_source=routing.get("rule_source"),
             )
             state.add_decision(decision)
             count += 1

@@ -240,3 +240,12 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 13 step 5
 - [2026-09-28 00:26] [Step 153] Checkpoint: Phase 13 step 5
+- [2026-09-28 00:27] [Step 154] Updated dashboard/state.py (routing stats + decision metadata)
+- [2026-09-28 00:27] [Step 155] run_brain.py captures account routing metadata into decisions
+- [2026-09-28 00:27] [Step 156] Added Routing panel to dashboard HTML
+- [2026-09-28 00:27] [Step 157] Added routing panel CSS
+- [2026-09-28 00:28] [Step 158] Added renderRouting to dashboard JS + called from WebSocket handler
+- [2026-09-28 00:28] [Step 159] Created tests/test_prop_rules.py (15 tests)
+
+### [CHECKPOINT] Phase 13 complete
+- [2026-09-28 00:29] [Step 160] Checkpoint: Phase 13 complete

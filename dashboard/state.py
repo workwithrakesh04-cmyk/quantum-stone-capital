@@ -1,6 +1,6 @@
 """
 Shared runtime state for the dashboard.
-Holds the feed aggregator, broker pool, and recent brain decisions.
+Holds the feed aggregator, broker pool, recent decisions, routing stats.
 """
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -21,6 +21,9 @@ class Decision:
     strategy_name: Optional[str]
     reasons: List[str] = field(default_factory=list)
     timestamp: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    account_name: Optional[str] = None
+    routing_reason: Optional[str] = None
+    rule_source: Optional[str] = None
 
 
 class AppState:
@@ -52,6 +55,29 @@ class AppState:
         with self._lock:
             return list(self.decisions[-n:])
 
+    def routing_stats(self) -> dict:
+        """Aggregate routing stats across recent decisions."""
+        with self._lock:
+            decisions = list(self.decisions)
+
+        stats = {
+            "personal": 0,
+            "prop": 0,
+            "blocked": 0,
+            "by_rule_source": {"personal": 0, "prop_firm": 0, "both_blocked": 0},
+            "total": len(decisions),
+        }
+        for d in decisions:
+            if d.account_name == "personal":
+                stats["personal"] += 1
+            elif d.account_name == "prop":
+                stats["prop"] += 1
+            else:
+                stats["blocked"] += 1
+            if d.rule_source in stats["by_rule_source"]:
+                stats["by_rule_source"][d.rule_source] += 1
+        return stats
+
     def snapshot(self) -> dict:
         feed_prices = {}
         for sym, upd in self.feeds.all_latest().items():
@@ -69,6 +95,7 @@ class AppState:
             "prices": feed_prices,
             "accounts": broker_snapshot.get("accounts", {}),
             "broker_prices": broker_snapshot.get("prices", {}),
+            "routing_stats": self.routing_stats(),
             "recent_decisions": [
                 {
                     "symbol": d.symbol,
@@ -78,6 +105,9 @@ class AppState:
                     "strategy_name": d.strategy_name,
                     "reasons": d.reasons,
                     "timestamp": d.timestamp,
+                    "account_name": d.account_name,
+                    "routing_reason": d.routing_reason,
+                    "rule_source": d.rule_source,
                 }
                 for d in self.recent_decisions(20)
             ],

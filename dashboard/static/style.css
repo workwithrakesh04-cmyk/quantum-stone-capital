@@ -550,3 +550,39 @@ footer {
     .cal-cell { font-size: 9px; }
     .cal-cell .pnl { font-size: 8px; }
 }
+
+
+/* Routing panel */
+.routing-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+}
+
+.routing-stat {
+    background: var(--bg-1);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    text-align: center;
+}
+
+.routing-stat .label {
+    font-size: 10px;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.routing-stat .val {
+    font-size: 22px;
+    color: var(--text-0);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.routing-stat .val.blue { color: var(--blue); }
+.routing-stat .val.amber { color: var(--amber); }
+.routing-stat .val.red { color: var(--red); }

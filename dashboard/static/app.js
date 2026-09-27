@@ -360,6 +360,45 @@ function renderCalendar(accounts) {
     document.getElementById("calendar").innerHTML = html;
 }
 
+
+// ---------- render: routing stats ----------
+
+function renderRouting(stats) {
+    const el = document.getElementById("routing-stats");
+    if (!el) return;
+    if (!stats) {
+        el.innerHTML = '<div class="empty">No routing data yet</div>';
+        return;
+    }
+    const s = stats;
+    el.innerHTML = `
+        <div class="routing-stat">
+            <div class="label">Total</div>
+            <div class="val">${s.total || 0}</div>
+        </div>
+        <div class="routing-stat">
+            <div class="label">Personal</div>
+            <div class="val blue">${s.personal || 0}</div>
+        </div>
+        <div class="routing-stat">
+            <div class="label">Prop</div>
+            <div class="val amber">${s.prop || 0}</div>
+        </div>
+        <div class="routing-stat">
+            <div class="label">Blocked</div>
+            <div class="val red">${s.blocked || 0}</div>
+        </div>
+        <div class="routing-stat">
+            <div class="label">Personal Rule</div>
+            <div class="val blue">${(s.by_rule_source && s.by_rule_source.personal) || 0}</div>
+        </div>
+        <div class="routing-stat">
+            <div class="label">Prop Rule</div>
+            <div class="val amber">${(s.by_rule_source && s.by_rule_source.prop_firm) || 0}</div>
+        </div>
+    `;
+}
+
 // ---------- WebSocket ----------
 
 let ws = null;
@@ -388,6 +427,7 @@ function connect() {
             renderEquityChart(accounts);
             renderCalendar(accounts);
             renderDecisions(decisions);
+            renderRouting(data.routing_stats);
 
             footerInfo.textContent = "Updated " + new Date(data.now).toLocaleTimeString() +
                 " · Started " + new Date(data.started_at).toLocaleString();
