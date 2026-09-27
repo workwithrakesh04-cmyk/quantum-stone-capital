@@ -1,0 +1,58 @@
+﻿# ============================================================
+# Quantum Stone Capital — HFT AI Brain Bot
+# Python dependencies (Phase 1)
+# ============================================================
+
+# Core scientific stack
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.11.0
+
+# Machine learning
+scikit-learn>=1.3.0
+xgboost>=2.0.0
+lightgbm>=4.0.0
+
+# Deep learning (CPU by default — override if GPU available)
+torch>=2.0.0
+
+# Reinforcement learning
+stable-baselines3>=2.0.0
+gymnasium>=0.29.0
+
+# Technical analysis
+ta>=0.10.2
+
+# Data handling
+pyarrow>=14.0.0
+h5py>=3.9.0
+
+# Configuration
+pyyaml>=6.0
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+
+# Logging
+loguru>=0.7.0
+
+# Visualization
+matplotlib>=3.7.0
+plotly>=5.15.0
+seaborn>=0.12.0
+
+# Statistics
+statsmodels>=0.14.0
+arch>=6.0.0
+
+# Utilities
+tqdm>=4.65.0
+joblib>=1.3.0
+click>=8.1.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Jupyter
+jupyter>=1.0.0
+ipykernel>=6.25.0
