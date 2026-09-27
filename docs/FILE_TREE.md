@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-27 17:37 UTC
+Auto-generated: 2026-09-27 17:42 UTC
 
-Total files: 93
+Total files: 98
 
 ```
 .gitignore
@@ -12,6 +12,7 @@ README.md
 config/master.yaml
 core/__init__.py
 core/account_manager.py
+core/debate_engine.py
 core/elliott_wave.py
 core/execution_engine.py
 core/footprint.py
@@ -26,6 +27,9 @@ docs/FILE_TREE.md
 docs/STEP_LOG.md
 jurors/__init__.py
 jurors/base_juror.py
+jurors/execution_juror.py
+jurors/risk_juror.py
+jurors/strategy_juror.py
 layers/__init__.py
 layers/layer0_data.py
 layers/layer1_account_rules.py
@@ -70,6 +74,7 @@ strategies/signal_filter.py
 strategies/vpa/coulling_vpa.yaml
 tests/__init__.py
 tests/test_account_manager.py
+tests/test_debate_engine.py
 tests/test_elliott_wave.py
 tests/test_execution_engine.py
 tests/test_fibonacci.py

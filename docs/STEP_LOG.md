@@ -167,3 +167,11 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 8 complete
 - [2026-09-27 23:07] [Step 102] Checkpoint: Phase 8 complete
+- [2026-09-27 23:12] [Step 103] Created core/market_context.py (single input shape)
+- [2026-09-27 23:12] [Step 104] Created core/pipeline_result.py (single output shape)
+- [2026-09-27 23:12] [Step 105] Created core/strategy_selector.py (pick strategy by regime + timeframe)
+- [2026-09-27 23:12] [Step 106] Created core/trade_proposal.py (proposal dataclass + to_dict)
+- [2026-09-27 23:12] [Step 107] Created core/main_brain_v2.py (end-to-end orchestrator)
+
+### [CHECKPOINT] Phase 9 step 5
+- [2026-09-27 23:12] [Step 108] Checkpoint: Phase 9 step 5
