@@ -1,9 +1,5 @@
 """
-Main Brain v2: end-to-end decision pipeline.
-
-Flow:
-  MarketContext -> Account check -> Strategy select -> Build proposal
-    -> Debate Engine (workers + jurors) -> PipelineResult
+Main Brain v2: end-to-end decision pipeline with account routing.
 """
 from typing import Optional
 import yaml
@@ -15,6 +11,8 @@ from core.strategy_selector import StrategySelector
 from core.debate_engine import DebateEngine
 from core.account_manager import AccountManager
 from core.risk_engine import RiskEngine
+from core.account_router import AccountRouter
+from brokers.broker_pool import BrokerPool
 from microstructure.engine import MicrostructureEngine
 from strategies.signal_filter import SignalFilter
 
@@ -24,6 +22,7 @@ class MainBrainV2:
         self,
         config_path: str = "config/master.yaml",
         registry_root: str = "strategies",
+        broker_pool: Optional[BrokerPool] = None,
     ):
         with open(config_path) as f:
             self.config = yaml.safe_load(f)
@@ -40,7 +39,9 @@ class MainBrainV2:
         )
         self.debate = DebateEngine()
 
-    # ---------- public entry point ----------
+        # Optional: attach a BrokerPool for routing
+        self.broker_pool = broker_pool
+        self.account_router = AccountRouter(broker_pool) if broker_pool else None
 
     def run(
         self,
@@ -48,23 +49,22 @@ class MainBrainV2:
         account_name: str = "personal",
         risk_pct: Optional[float] = None,
         prefer_strategies: Optional[list] = None,
+        is_news: bool = False,
+        is_weekend: bool = False,
     ) -> PipelineResult:
         result = PipelineResult()
         result.layers_passed.append("layer0_data")
 
-        # Layer 1: account rules sanity
         if account_name not in self.account_mgr.accounts:
             result.reasons.append("unknown_account")
             return result
         result.layers_passed.append("layer1_account_rules")
 
-        # Layer 2: pricing / fair value (lightweight)
         if context.last_price is None:
             result.reasons.append("no_price_data")
             return result
         result.layers_passed.append("layer2_pricing")
 
-        # Layer 3: strategy selection
         strategy_name = self.selector.first(
             regime=context.regime,
             timeframe=context.timeframe,
@@ -77,9 +77,6 @@ class MainBrainV2:
         result.strategy_name = strategy_name
         result.layers_passed.append("layer3_strategies")
 
-        # Layer 4: risk (position size and RR check happen inside proposal)
-
-        # Compute signal score (extreme filter)
         if context.momentum is not None and context.closes:
             history = context.closes[-50:]
             score = self.signal_filter.score(context.momentum, history)
@@ -87,16 +84,36 @@ class MainBrainV2:
             context.signal_score = score
             context.passes_filter = score > 0.0
 
-        # Layer 5-6: debate
         debate_context = self._context_to_debate_dict(context)
         proposal = self._build_proposal(
             context=context, spec=spec, strategy_name=strategy_name,
             account_name=account_name, risk_pct=risk_pct,
         )
+
+        # Route the trade if we have a pool
+        if self.account_router is not None and context.last_price is not None:
+            risk_amount = proposal.risk_pct * (self.account_mgr.accounts[account_name].capital)
+            routing = self.account_router.route(
+                risk_amount=risk_amount,
+                preferred=account_name,
+                is_news=is_news,
+                is_weekend=is_weekend,
+            )
+            result.metadata["routing"] = {
+                "account_name": routing.account_name,
+                "allowed": routing.allowed,
+                "reason": routing.reason,
+                "rule_source": routing.rule_source,
+                "warnings": routing.warnings,
+            }
+            if not routing.allowed:
+                result.reasons.append("routing_blocked: " + routing.reason)
+                return result
+        result.layers_passed.append("layer4_routing")
+
         debate_result = self.debate.debate(debate_context, proposal.to_dict())
         result.layers_passed.append("layer6_debate")
 
-        # Layer 7: final
         result.decision = debate_result.decision
         result.direction = debate_result.direction
         result.confidence = debate_result.confidence
@@ -111,13 +128,10 @@ class MainBrainV2:
             result.risk_pct = proposal.risk_pct
             result.order_type = proposal.order_type
 
-        # Collect juror warnings
         for v in debate_result.verdicts:
             result.warnings.extend(v.warnings)
         result.layers_passed.append("layer7_main_brain")
         return result
-
-    # ---------- helpers ----------
 
     def _context_to_debate_dict(self, ctx: MarketContext) -> dict:
         return {
@@ -138,12 +152,7 @@ class MainBrainV2:
         }
 
     def _build_proposal(
-        self,
-        context: MarketContext,
-        spec: dict,
-        strategy_name: str,
-        account_name: str,
-        risk_pct: Optional[float],
+        self, context, spec, strategy_name, account_name, risk_pct,
     ) -> TradeProposal:
         account = self.account_mgr.accounts[account_name]
         cfg = self.config["accounts"][account_name]
@@ -194,7 +203,6 @@ class MainBrainV2:
 
     def _stop_from_context(self, context: MarketContext, spec: dict) -> float:
         if context.lows:
-            # Simple: recent swing low minus small buffer
             return min(context.lows[-10:]) * 0.999
         return (context.last_price or 0.0) * 0.99
 

@@ -1,14 +1,14 @@
 ﻿# PROJECT STATE - Quantum Stone Capital
 
-**Last updated:** 2026-09-28 00:24
+**Last updated:** 2026-09-28 00:26
 **Repo:** https://github.com/workwithrakesh04-cmyk/quantum-stone-capital
 **Local:** E:\quantum-stone-capital
 **Branch:** main
 
 ## Current Snapshot
-- **Last commit:** be71d86 Phase 12: dashboard + brain loop with feed warmup (259 tests)
-- **Tests passing:** 244
-- **Last checkpoint:** Phase 12 complete
+- **Last commit:** 8275946 Phase 12: dashboard (FastAPI + WebSocket + TraderLadder/journal UI) + brain loop with feed warmup + tests + docs (259 total)
+- **Tests passing:** 243
+- **Last checkpoint:** Phase 13 step 5
 
 ## Quick Resume
 - docs/RESUME_PROMPT.md

@@ -144,7 +144,7 @@ def main():
     wait_for_feeds(state, SYMBOLS, max_wait_seconds=args.warmup, min_symbols=args.min_symbols)
 
     logger.info("Brain loop starting (interval=" + str(args.interval) + "s)")
-    brain = MainBrainV2()
+    brain = MainBrainV2(broker_pool=state.pool)
 
     if args.once:
         n = run_once(brain, state)

@@ -232,3 +232,11 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 12 complete
 - [2026-09-28 00:24] [Step 147] Checkpoint: Phase 12 complete
+- [2026-09-28 00:25] [Step 148] Created core/prop_rules.py (prop firm rule engine)
+- [2026-09-28 00:25] [Step 149] Upgraded core/account_router.py (prop rules + personal/prop fallback)
+- [2026-09-28 00:25] [Step 150] Created core/trade_router.py (routes trades to correct account)
+- [2026-09-28 00:25] [Step 151] Updated main_brain_v2.py (routes trades through AccountRouter)
+- [2026-09-28 00:26] [Step 152] run_brain.py passes broker_pool to MainBrainV2 for routing
+
+### [CHECKPOINT] Phase 13 step 5
+- [2026-09-28 00:26] [Step 153] Checkpoint: Phase 13 step 5
