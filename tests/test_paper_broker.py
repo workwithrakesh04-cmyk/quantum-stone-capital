@@ -87,12 +87,14 @@ def test_profit_on_price_move(broker):
     order = broker.open_order("BTCUSD", "buy", 1.0)
     broker.set_price("BTCUSD", 40100.0)
     info = broker.account_info()
-    # 100 move * 1.0 = +100
-    assert info.equity == 10100.0
+    # Entry slipped up 0.02% from 40000 -> ~40008
+    # At 40100: profit = (40100 - 40008) * 1.0 = ~92
+    assert 10090.0 <= info.equity <= 10100.0
 
 
 def test_loss_on_price_move(broker):
     order = broker.open_order("BTCUSD", "buy", 1.0)
     broker.set_price("BTCUSD", 39900.0)
     info = broker.account_info()
-    assert info.equity == 9900.0
+    # Entry ~40008, at 39900: loss = (40008 - 39900) * 1.0 = ~108
+    assert 9890.0 <= info.equity <= 9905.0

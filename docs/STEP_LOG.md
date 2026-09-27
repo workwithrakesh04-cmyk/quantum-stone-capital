@@ -208,3 +208,8 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 11 - live feeds working
 - [2026-09-27 23:56] [Step 133] Checkpoint: Phase 11 - live feeds working
+- [2026-09-27 23:58] [Step 134] Fixed 3 test bugs (fixture param + slippage-aware assertions)
+- [2026-09-27 23:58] [Step 135] Fixed 3 test bugs (fixture param + slippage-aware assertions)
+
+### [CHECKPOINT] Phase 11 complete - all tests green
+- [2026-09-27 23:59] [Step 136] Checkpoint: Phase 11 complete - all tests green

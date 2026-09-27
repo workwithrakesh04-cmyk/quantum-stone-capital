@@ -63,7 +63,7 @@ def test_runner_stop(runner):
     assert runner._stop is True
 
 
-def test_runner_dry_run_no_orders(runner):
+def test_runner_dry_run_no_orders(runner, broker):
     # Force a trade by stubbing brain.run via monkeypatch
     from core.pipeline_result import PipelineResult
     fake = PipelineResult(decision="trade", direction="long", confidence=0.9,
