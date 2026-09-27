@@ -60,3 +60,6 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] auto-checkpoint
 - [2026-09-27 22:27] [Step 023] Checkpoint: auto-checkpoint
+
+### [CHECKPOINT] update_file_tree fixed
+- [2026-09-27 22:28] [Step 024] Checkpoint: update_file_tree fixed
