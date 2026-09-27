@@ -99,3 +99,11 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 4 complete
 - [2026-09-27 22:41] [Step 050] Checkpoint: Phase 4 complete
+- [2026-09-27 22:43] [Step 051] Created utils/fibonacci.py (retracements, extensions, ratio matching)
+- [2026-09-27 22:43] [Step 052] Created core/elliott_wave.py (5-wave validation + Fibonacci targets)
+- [2026-09-27 22:44] [Step 053] Created core/harmonic.py (Gartley, Butterfly, Cypher, Shark, AB=CD + PCI)
+- [2026-09-27 22:44] [Step 054] Created strategies/harmonic/seo_patterns.yaml (10 harmonic strategies)
+- [2026-09-27 22:44] [Step 055] Created strategies/elliott_wave/wave3_entries.yaml (4 EW strategies)
+
+### [CHECKPOINT] Phase 5 step 5
+- [2026-09-27 22:44] [Step 056] Checkpoint: Phase 5 step 5

@@ -1,0 +1,101 @@
+strategies:
+
+  gartley_bullish:
+    type: harmonic
+    source: "Guide to Precision Harmonic Pattern Trading (Seo, 2020)"
+    timeframes: ["15m", "1h", "4h"]
+    regime: ["ranging", "trending"]
+    long_setup: ["gartley_complete", "price_in_pci"]
+    sl: "below_pci_low"
+    tp: "pcz_target"
+    min_rr: 3.0
+
+  gartley_bearish:
+    type: harmonic
+    source: "Guide to Precision Harmonic Pattern Trading (Seo, 2020)"
+    timeframes: ["15m", "1h", "4h"]
+    regime: ["ranging", "trending"]
+    short_setup: ["gartley_complete", "price_in_pci"]
+    sl: "above_pci_high"
+    tp: "pcz_target"
+    min_rr: 3.0
+
+  butterfly_bullish:
+    type: harmonic
+    source: "Guide to Precision Harmonic Pattern Trading (Seo, 2020)"
+    timeframes: ["1h", "4h", "1d"]
+    regime: ["trending"]
+    long_setup: ["butterfly_complete", "price_in_pci"]
+    sl: "below_pci_low"
+    tp: "pcz_target"
+    min_rr: 4.0
+
+  butterfly_bearish:
+    type: harmonic
+    source: "Guide to Precision Harmonic Pattern Trading (Seo, 2020)"
+    timeframes: ["1h", "4h", "1d"]
+    regime: ["trending"]
+    short_setup: ["butterfly_complete", "price_in_pci"]
+    sl: "above_pci_high"
+    tp: "pcz_target"
+    min_rr: 4.0
+
+  cypher_bullish:
+    type: harmonic
+    source: "Guide to Precision Harmonic Pattern Trading (Seo, 2020)"
+    timeframes: ["15m", "1h", "4h"]
+    regime: ["ranging"]
+    long_setup: ["cypher_complete", "price_in_pci"]
+    sl: "below_pci_low"
+    tp: "pcz_target"
+    min_rr: 3.0
+
+  cypher_bearish:
+    type: harmonic
+    source: "Guide to Precision Harmonic Pattern Trading (Seo, 2020)"
+    timeframes: ["15m", "1h", "4h"]
+    regime: ["ranging"]
+    short_setup: ["cypher_complete", "price_in_pci"]
+    sl: "above_pci_high"
+    tp: "pcz_target"
+    min_rr: 3.0
+
+  shark_bullish:
+    type: harmonic
+    source: "Guide to Precision Harmonic Pattern Trading (Seo, 2020)"
+    timeframes: ["1h", "4h"]
+    regime: ["trending", "volatile"]
+    long_setup: ["shark_complete", "price_in_pci"]
+    sl: "below_pci_low"
+    tp: "pcz_target"
+    min_rr: 3.0
+
+  shark_bearish:
+    type: harmonic
+    source: "Guide to Precision Harmonic Pattern Trading (Seo, 2020)"
+    timeframes: ["1h", "4h"]
+    regime: ["trending", "volatile"]
+    short_setup: ["shark_complete", "price_in_pci"]
+    sl: "above_pci_high"
+    tp: "pcz_target"
+    min_rr: 3.0
+
+  abcd_bullish:
+    type: harmonic
+    source: "Guide to Precision Harmonic Pattern Trading (Seo, 2020)"
+    timeframes: ["15m", "1h"]
+    regime: ["trending", "ranging"]
+    long_setup: ["abcd_complete", "price_in_pci"]
+    sl: "below_C"
+    tp: "D_target"
+    min_rr: 2.5
+
+  abcd_bearish:
+    type: harmonic
+    source: "Guide to Precision Harmonic Pattern Trading (Seo, 2020)"
+    timeframes: ["15m", "1h"]
+    regime: ["trending", "ranging"]
+    short_setup: ["abcd_complete", "price_in_pci"]
+    sl: "above_C"
+    tp: "D_target"
+    min_rr: 2.5
