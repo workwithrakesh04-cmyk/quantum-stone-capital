@@ -1,0 +1,109 @@
+strategies:
+
+  trap_double_top:
+    type: ict_smc
+    source: "LIT & TRAP Trading (Deivid FX)"
+    timeframes: ["5m", "15m", "1h"]
+    regime: ["ranging"]
+    short_setup:
+      - "double_top_formed"
+      - "retail_breakout_above_neckline"
+      - "sweep_back_below"
+    sl: "above_double_top"
+    tp: "range_low"
+    min_rr: 3.0
+
+  trap_double_bottom:
+    type: ict_smc
+    source: "LIT & TRAP Trading (Deivid FX)"
+    timeframes: ["5m", "15m", "1h"]
+    regime: ["ranging"]
+    long_setup:
+      - "double_bottom_formed"
+      - "retail_breakdown_below_neckline"
+      - "sweep_back_above"
+    sl: "below_double_bottom"
+    tp: "range_high"
+    min_rr: 3.0
+
+  trap_fake_breakout_bearish:
+    type: ict_smc
+    source: "LIT & TRAP Trading (Deivid FX)"
+    timeframes: ["5m", "15m"]
+    regime: ["ranging", "volatile"]
+    short_setup:
+      - "price_breaks_above_resistance"
+      - "fails_to_hold"
+      - "closes_back_below"
+    sl: "breakout_high"
+    tp: "range_low"
+    min_rr: 2.5
+
+  trap_fake_breakout_bullish:
+    type: ict_smc
+    source: "LIT & TRAP Trading (Deivid FX)"
+    timeframes: ["5m", "15m"]
+    regime: ["ranging", "volatile"]
+    long_setup:
+      - "price_breaks_below_support"
+      - "fails_to_hold"
+      - "closes_back_above"
+    sl: "breakdown_low"
+    tp: "range_high"
+    min_rr: 2.5
+
+  trap_head_shoulders:
+    type: ict_smc
+    source: "LIT & TRAP Trading (Deivid FX)"
+    timeframes: ["15m", "1h", "4h"]
+    regime: ["trending", "ranging"]
+    short_setup:
+      - "hch_pattern_formed"
+      - "neckline_break_by_retail"
+      - "sweep_back_above_neckline"
+    sl: "right_shoulder_high"
+    tp: "head_target"
+    min_rr: 3.0
+
+  trap_range_breakout_fade:
+    type: ict_smc
+    source: "LIT & TRAP Trading (Deivid FX)"
+    timeframes: ["5m", "15m"]
+    regime: ["ranging"]
+    long_setup:
+      - "range_low_breakout"
+      - "sweep_back_into_range"
+    short_setup:
+      - "range_high_breakout"
+      - "sweep_back_into_range"
+    sl: "range_extreme"
+    tp: "opposite_range_extreme"
+    min_rr: 2.5
+
+  ping_pong_range:
+    type: ict_smc
+    source: "LIT & TRAP Trading (Deivid FX)"
+    timeframes: ["5m", "15m"]
+    regime: ["ranging"]
+    long_setup: ["price_at_range_low", "bullish_rejection_wick"]
+    short_setup: ["price_at_range_high", "bearish_rejection_wick"]
+    sl: "range_extreme_plus_buffer"
+    tp: "opposite_range_extreme"
+    min_rr: 2.0
+
+  premium_discount_reversal:
+    type: ict_smc
+    source: "LIT & TRAP Trading (Deivid FX)"
+    timeframes: ["15m", "1h"]
+    regime: ["trending", "ranging"]
+    long_setup:
+      - "price_in_discount_zone_below_50pct"
+      - "otter_fib_zone_0.62_to_0.88"
+      - "bullish_reversal_signal"
+    short_setup:
+      - "price_in_premium_zone_above_50pct"
+      - "otter_fib_zone_0.62_to_0.88"
+      - "bearish_reversal_signal"
+    sl: "otter_fib_extreme"
+    tp: "opposite_50pct_level"
+    min_rr: 2.5
