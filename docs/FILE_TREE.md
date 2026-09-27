@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-27 17:20 UTC
+Auto-generated: 2026-09-27 17:22 UTC
 
-Total files: 62
+Total files: 68
 
 ```
 .gitignore
@@ -26,6 +26,7 @@ layers/__init__.py
 layers/layer0_data.py
 layers/layer1_account_rules.py
 layers/layer2_pricing.py
+layers/layer2_pricing_ext.py
 layers/layer3_strategies.py
 layers/layer4_risk.py
 layers/layer5_execution.py
@@ -42,6 +43,7 @@ scripts/generate_sample_data.py
 scripts/log_step.ps1
 scripts/update_file_tree.py
 strategies/__init__.py
+strategies/elliott_wave/wave3_entries.yaml
 strategies/harmonic/seo_patterns.yaml
 strategies/ict_smc/crt_secrets.yaml
 strategies/ict_smc/deivid_traps.yaml
@@ -52,7 +54,11 @@ strategies/registry.py
 strategies/signal_filter.py
 tests/__init__.py
 tests/test_account_manager.py
+tests/test_elliott_wave.py
 tests/test_execution_engine.py
+tests/test_fibonacci.py
+tests/test_harmonic.py
+tests/test_harmonic_strategies_load.py
 tests/test_ict_strategies_load.py
 tests/test_layer0_data.py
 tests/test_layers.py

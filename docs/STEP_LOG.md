@@ -116,3 +116,11 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 5 complete
 - [2026-09-27 22:50] [Step 063] Checkpoint: Phase 5 complete
+- [2026-09-27 22:52] [Step 064] Created ml/features/alpha_factors.py (momentum, vol, low-vol, composite)
+- [2026-09-27 22:52] [Step 065] Created ml/features/technical.py (RSI, SMA, EMA, MACD, Bollinger, ATR)
+- [2026-09-27 22:52] [Step 066] Created ml/features/feature_builder.py (15-feature vector)
+- [2026-09-27 22:52] [Step 067] Created ml/models/base.py (abstract BaseModel)
+- [2026-09-27 22:52] [Step 068] Created ml/models/boosted.py (XGBoost + LightGBM)
+
+### [CHECKPOINT] Phase 6 step 5
+- [2026-09-27 22:52] [Step 069] Checkpoint: Phase 6 step 5
