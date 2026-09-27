@@ -141,3 +141,12 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 7 step 5
 - [2026-09-27 22:58] [Step 082] Checkpoint: Phase 7 step 5
+- [2026-09-27 22:59] [Step 083] Created layers/layer6_order_flow.py (order flow + footprint + VPA wrapper)
+- [2026-09-27 23:00] [Step 084] Created tests/test_order_flow.py (12 tests)
+- [2026-09-27 23:00] [Step 085] Created tests/test_footprint.py (10 tests)
+- [2026-09-27 23:00] [Step 086] Created tests/test_vpa.py (10 tests)
+- [2026-09-27 23:00] [Step 087] Created tests/test_order_flow_strategies_load.py (4 tests)
+- [2026-09-27 23:01] [Step 088] Phase 7 complete - 178 tests passing
+
+### [CHECKPOINT] Phase 7 complete
+- [2026-09-27 23:01] [Step 089] Checkpoint: Phase 7 complete
