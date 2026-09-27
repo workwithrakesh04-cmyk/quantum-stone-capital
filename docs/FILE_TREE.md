@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-27 18:25 UTC
+Auto-generated: 2026-09-27 18:27 UTC
 
-Total files: 112
+Total files: 125
 
 ```
 .gitignore
@@ -13,6 +13,8 @@ brokers/__init__.py
 brokers/base_broker.py
 brokers/mt5_broker.py
 brokers/paper_broker.py
+brokers/sim_broker.py
+config/accounts.yaml
 config/master.yaml
 core/__init__.py
 core/account_manager.py
@@ -35,6 +37,14 @@ core/trade_proposal.py
 core/vpa.py
 docs/FILE_TREE.md
 docs/STEP_LOG.md
+feeds/__init__.py
+feeds/aggregator.py
+feeds/base_feed.py
+feeds/binance_feed.py
+feeds/biquote_feed.py
+feeds/default_feed.py
+feeds/gud_feed.py
+feeds/yahoo_feed.py
 jurors/__init__.py
 jurors/base_juror.py
 jurors/execution_juror.py
@@ -70,6 +80,7 @@ scripts/checkpoint.ps1
 scripts/demo_pipeline.py
 scripts/generate_sample_data.py
 scripts/log_step.ps1
+scripts/run_live.py
 scripts/run_paper.py
 scripts/update_file_tree.py
 strategies/__init__.py
@@ -97,12 +108,14 @@ tests/test_ict_strategies_load.py
 tests/test_integration_pipeline.py
 tests/test_layer0_data.py
 tests/test_layers.py
+tests/test_live_runner.py
 tests/test_main_brain.py
 tests/test_microstructure_engine.py
 tests/test_ml_pipeline.py
 tests/test_order.py
 tests/test_order_flow.py
 tests/test_order_flow_strategies_load.py
+tests/test_paper_broker.py
 tests/test_signal_filter.py
 tests/test_strategy_registry.py
 tests/test_utils.py
