@@ -223,3 +223,9 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 12 dashboard working
 - [2026-09-28 00:19] [Step 142] Checkpoint: Phase 12 dashboard working
+- [2026-09-28 00:21] [Step 143] Created scripts/run_brain.py (background brain loop)
+- [2026-09-28 00:21] [Step 144] Created scripts/run_dashboard.py (dashboard + brain loop entry point)
+- [2026-09-28 00:21] [Step 145] Fixed run_brain.py - wait for feeds to warm up before first pass
+
+### [CHECKPOINT] Phase 12 complete
+- [2026-09-28 00:22] [Step 146] Checkpoint: Phase 12 complete

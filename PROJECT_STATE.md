@@ -1,14 +1,14 @@
 ﻿# PROJECT STATE - Quantum Stone Capital
 
-**Last updated:** 2026-09-28 00:19
+**Last updated:** 2026-09-28 00:22
 **Repo:** https://github.com/workwithrakesh04-cmyk/quantum-stone-capital
 **Local:** E:\quantum-stone-capital
 **Branch:** main
 
 ## Current Snapshot
-- **Last commit:** 0353f09 Phase 12 (redesign): dashboard UI inspired by TraderLadder + trading journal (metrics bar, live prices, dual accounts with risk gauges, equity chart, calendar heatmap, decisions table)
+- **Last commit:** a073d67 Phase 12: FastAPI dashboard + TraderLadder/journal hybrid UI + state + WebSocket + broker_pool wiring
 - **Tests passing:** 244
-- **Last checkpoint:** Phase 12 dashboard working
+- **Last checkpoint:** Phase 12 complete
 
 ## Quick Resume
 - docs/RESUME_PROMPT.md

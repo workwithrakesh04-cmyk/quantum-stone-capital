@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-27 18:50 UTC
+Auto-generated: 2026-09-27 18:52 UTC
 
-Total files: 128
+Total files: 132
 
 ```
 .gitignore
@@ -11,6 +11,7 @@ PROJECT_STATE.md
 README.md
 brokers/__init__.py
 brokers/base_broker.py
+brokers/broker_pool.py
 brokers/mt5_broker.py
 brokers/paper_broker.py
 brokers/sim_broker.py
@@ -35,6 +36,9 @@ core/risk_engine.py
 core/strategy_selector.py
 core/trade_proposal.py
 core/vpa.py
+dashboard/__init__.py
+dashboard/app.py
+dashboard/state.py
 dashboard/static/app.js
 dashboard/static/style.css
 dashboard/templates/index.html
