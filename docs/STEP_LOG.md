@@ -150,3 +150,11 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 7 complete
 - [2026-09-27 23:01] [Step 089] Checkpoint: Phase 7 complete
+- [2026-09-27 23:04] [Step 090] Created workers/base_worker.py (Argument + BaseWorker)
+- [2026-09-27 23:04] [Step 091] Created workers/bull_bot.py
+- [2026-09-27 23:04] [Step 092] Created workers/bear_bot.py
+- [2026-09-27 23:04] [Step 093] Created workers/hold_bot.py
+- [2026-09-27 23:04] [Step 094] Created jurors/base_juror.py (Verdict + BaseJuror)
+
+### [CHECKPOINT] Phase 8 step 5
+- [2026-09-27 23:04] [Step 095] Checkpoint: Phase 8 step 5
