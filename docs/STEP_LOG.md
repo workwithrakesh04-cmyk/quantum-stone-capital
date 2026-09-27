@@ -54,3 +54,6 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Recovery system fixed
 - [2026-09-27 22:25] [Step 021] Checkpoint: Recovery system fixed
+
+### [CHECKPOINT] update_file_tree.py fixed
+- [2026-09-27 22:27] [Step 022] Checkpoint: update_file_tree.py fixed
