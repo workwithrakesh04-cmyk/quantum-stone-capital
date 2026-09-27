@@ -71,3 +71,11 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 3 step 5
 - [2026-09-27 22:31] [Step 030] Checkpoint: Phase 3 step 5
+- [2026-09-27 22:33] [Step 031] Created tests/test_microstructure_engine.py (11 tests)
+- [2026-09-27 22:33] [Step 032] Created tests/test_strategy_registry.py (8 tests)
+- [2026-09-27 22:33] [Step 033] Created tests/test_signal_filter.py (7 tests)
+- [2026-09-27 22:33] [Step 034] Created tests/test_layers.py (5 integration tests)
+- [2026-09-27 22:34] [Step 035] Phase 3 complete - all tests passing
+
+### [CHECKPOINT] Phase 3 complete
+- [2026-09-27 22:34] [Step 036] Checkpoint: Phase 3 complete
