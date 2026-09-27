@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-27 17:04 UTC
+Auto-generated: 2026-09-27 17:09 UTC
 
-Total files: 44
+Total files: 48
 
 ```
 .gitignore
@@ -43,6 +43,10 @@ strategies/signal_filter.py
 tests/__init__.py
 tests/test_account_manager.py
 tests/test_layer0_data.py
+tests/test_layers.py
+tests/test_microstructure_engine.py
+tests/test_signal_filter.py
+tests/test_strategy_registry.py
 tests/test_utils.py
 utils/__init__.py
 utils/logger.py

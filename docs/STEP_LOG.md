@@ -79,3 +79,11 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 3 complete
 - [2026-09-27 22:34] [Step 036] Checkpoint: Phase 3 complete
+- [2026-09-27 22:36] [Step 037] Created core/execution_engine.py (slippage, TWAP splitting, fill simulation)
+- [2026-09-27 22:38] [Step 038] Created core/order.py (Order dataclass + enums)
+- [2026-09-27 22:38] [Step 039] Created layers/layer5_execution.py
+- [2026-09-27 22:39] [Step 040] Created strategies/ict_smc/fede_ict.yaml (6 ICT strategies)
+- [2026-09-27 22:39] [Step 041] Created strategies/ict_smc/woods_smc.yaml (5 advanced ICT strategies)
+
+### [CHECKPOINT] Phase 4 step 5
+- [2026-09-27 22:39] [Step 042] Checkpoint: Phase 4 step 5
