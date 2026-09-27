@@ -158,3 +158,12 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 8 step 5
 - [2026-09-27 23:04] [Step 095] Checkpoint: Phase 8 step 5
+- [2026-09-27 23:06] [Step 096] Created jurors/risk_juror.py (veto power over RR, risk, DD, positions)
+- [2026-09-27 23:06] [Step 097] Created jurors/strategy_juror.py (validates strategy + regime + confluence)
+- [2026-09-27 23:07] [Step 098] Created jurors/execution_juror.py (validates slippage + impact + timing)
+- [2026-09-27 23:07] [Step 099] Created core/debate_engine.py (workers + jurors orchestration)
+- [2026-09-27 23:07] [Step 100] Created tests/test_debate_engine.py (17 tests)
+- [2026-09-27 23:07] [Step 101] Phase 8 complete - 196 tests passing
+
+### [CHECKPOINT] Phase 8 complete
+- [2026-09-27 23:07] [Step 102] Checkpoint: Phase 8 complete

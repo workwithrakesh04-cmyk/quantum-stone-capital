@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-27 17:34 UTC
+Auto-generated: 2026-09-27 17:37 UTC
 
-Total files: 88
+Total files: 93
 
 ```
 .gitignore
@@ -25,6 +25,7 @@ core/vpa.py
 docs/FILE_TREE.md
 docs/STEP_LOG.md
 jurors/__init__.py
+jurors/base_juror.py
 layers/__init__.py
 layers/layer0_data.py
 layers/layer1_account_rules.py
@@ -93,4 +94,8 @@ utils/logger.py
 utils/math_utils.py
 utils/time_utils.py
 workers/__init__.py
+workers/base_worker.py
+workers/bear_bot.py
+workers/bull_bot.py
+workers/hold_bot.py
 ```
