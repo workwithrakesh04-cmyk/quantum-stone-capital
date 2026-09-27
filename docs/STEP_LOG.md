@@ -133,3 +133,11 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 6 complete
 - [2026-09-27 22:56] [Step 076] Checkpoint: Phase 6 complete
+- [2026-09-27 22:57] [Step 077] Created core/order_flow.py (delta, cumulative delta, absorption, imbalance)
+- [2026-09-27 22:58] [Step 078] Created core/footprint.py (levels, POC, imbalances, absorption)
+- [2026-09-27 22:58] [Step 079] Created core/vpa.py (Coulling VPA: effort vs result)
+- [2026-09-27 22:58] [Step 080] Created strategies/vpa/coulling_vpa.yaml (4 VPA strategies)
+- [2026-09-27 22:58] [Step 081] Created strategies/order_flow/footprint_setups.yaml (6 order flow strategies)
+
+### [CHECKPOINT] Phase 7 step 5
+- [2026-09-27 22:58] [Step 082] Checkpoint: Phase 7 step 5

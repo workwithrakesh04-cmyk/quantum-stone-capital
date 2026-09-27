@@ -1,0 +1,59 @@
+strategies:
+
+  vpa_stopping_volume:
+    type: vpa
+    source: "Volume Price Analysis (Coulling)"
+    timeframes: ["15m", "1h", "4h"]
+    regime: ["trending", "ranging"]
+    long_setup:
+      - "high_volume_wide_spread_at_low"
+      - "close_in_upper_half_of_bar"
+      - "next_bar_reversal_confirmation"
+    short_setup:
+      - "high_volume_wide_spread_at_high"
+      - "close_in_lower_half_of_bar"
+      - "next_bar_reversal_confirmation"
+    sl: "bar_extreme"
+    tp: "prior_swing_or_2x_bar_range"
+    min_rr: 2.5
+
+  vpa_absorption_reversal:
+    type: vpa
+    source: "Volume Price Analysis (Coulling)"
+    timeframes: ["1h", "4h"]
+    regime: ["trending", "ranging"]
+    long_setup:
+      - "high_volume_narrow_spread"
+      - "bullish_close_with_lower_wick"
+      - "next_bar_bullish_followthrough"
+    short_setup:
+      - "high_volume_narrow_spread"
+      - "bearish_close_with_upper_wick"
+      - "next_bar_bearish_followthrough"
+    sl: "bar_extreme"
+    tp: "2x_bar_range"
+    min_rr: 2.5
+
+  vpa_no_demand_test:
+    type: vpa
+    source: "Volume Price Analysis (Coulling)"
+    timeframes: ["1h", "4h", "1d"]
+    regime: ["trending"]
+    short_setup:
+      - "price_rallies_on_low_volume"
+      - "vpa_weak_effort_vs_result"
+    sl: "prior_high"
+    tp: "prior_support"
+    min_rr: 2.0
+
+  vpa_no_supply_test:
+    type: vpa
+    source: "Volume Price Analysis (Coulling)"
+    timeframes: ["1h", "4h", "1d"]
+    regime: ["trending"]
+    long_setup:
+      - "price_falls_on_low_volume"
+      - "vpa_weak_effort_vs_result"
+    sl: "prior_low"
+    tp: "prior_resistance"
+    min_rr: 2.0

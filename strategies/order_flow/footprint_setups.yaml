@@ -1,0 +1,77 @@
+strategies:
+
+  footprint_absorption_reversal_bullish:
+    type: order_flow
+    source: "Footprint Guide (El Trader de Huella)"
+    timeframes: ["1m", "5m", "15m"]
+    regime: ["trending", "ranging"]
+    long_setup:
+      - "bottom_absorption_detected"
+      - "cumulative_delta_bullish_divergence"
+      - "reversal_confirmation_candle"
+    sl: "absorption_low"
+    tp: "prior_poc_or_high"
+    min_rr: 2.5
+
+  footprint_absorption_reversal_bearish:
+    type: order_flow
+    source: "Footprint Guide (El Trader de Huella)"
+    timeframes: ["1m", "5m", "15m"]
+    regime: ["trending", "ranging"]
+    short_setup:
+      - "top_absorption_detected"
+      - "cumulative_delta_bearish_divergence"
+      - "reversal_confirmation_candle"
+    sl: "absorption_high"
+    tp: "prior_poc_or_low"
+    min_rr: 2.5
+
+  cumulative_delta_divergence_bullish:
+    type: order_flow
+    source: "Footprint Guide (El Trader de Huella)"
+    timeframes: ["1m", "5m", "15m"]
+    regime: ["trending"]
+    long_setup:
+      - "price_makes_lower_low"
+      - "cumulative_delta_makes_higher_low"
+      - "delta_flips_positive"
+    sl: "recent_swing_low"
+    tp: "prior_swing_high"
+    min_rr: 3.0
+
+  cumulative_delta_divergence_bearish:
+    type: order_flow
+    source: "Footprint Guide (El Trader de Huella)"
+    timeframes: ["1m", "5m", "15m"]
+    regime: ["trending"]
+    short_setup:
+      - "price_makes_higher_high"
+      - "cumulative_delta_makes_lower_high"
+      - "delta_flips_negative"
+    sl: "recent_swing_high"
+    tp: "prior_swing_low"
+    min_rr: 3.0
+
+  footprint_imbalance_stack_buy:
+    type: order_flow
+    source: "Footprint Guide (El Trader de Huella)"
+    timeframes: ["1m", "5m"]
+    regime: ["trending"]
+    long_setup:
+      - "3_plus_consecutive_buy_imbalance_levels"
+      - "price_holds_above_stack"
+    sl: "bottom_of_stack"
+    tp: "next_resistance"
+    min_rr: 2.0
+
+  footprint_imbalance_stack_sell:
+    type: order_flow
+    source: "Footprint Guide (El Trader de Huella)"
+    timeframes: ["1m", "5m"]
+    regime: ["trending"]
+    short_setup:
+      - "3_plus_consecutive_sell_imbalance_levels"
+      - "price_holds_below_stack"
+    sl: "top_of_stack"
+    tp: "next_support"
+    min_rr: 2.0

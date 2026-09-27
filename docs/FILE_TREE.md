@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-27 17:26 UTC
+Auto-generated: 2026-09-27 17:28 UTC
 
-Total files: 73
+Total files: 78
 
 ```
 .gitignore
@@ -36,11 +36,15 @@ microstructure/engine.py
 microstructure/kyle_lambda.py
 microstructure/spread_estimator.py
 ml/__init__.py
+ml/backtest/metrics.py
+ml/backtest/walk_forward.py
 ml/features/alpha_factors.py
 ml/features/feature_builder.py
 ml/features/technical.py
 ml/models/base.py
 ml/models/boosted.py
+ml/models/ppo_agent.py
+ml/pipeline.py
 requirements.txt
 scripts/build_master_config.py
 scripts/checkpoint.ps1
@@ -68,6 +72,7 @@ tests/test_ict_strategies_load.py
 tests/test_layer0_data.py
 tests/test_layers.py
 tests/test_microstructure_engine.py
+tests/test_ml_pipeline.py
 tests/test_order.py
 tests/test_signal_filter.py
 tests/test_strategy_registry.py
