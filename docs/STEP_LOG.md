@@ -189,3 +189,19 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 10 step 5
 - [2026-09-27 23:21] [Step 118] Checkpoint: Phase 10 step 5
+- [2026-09-27 23:22] [Step 119] Created scripts/run_live.py (guarded MT5 live entry point)
+- [2026-09-27 23:22] [Step 120] Created tests/test_paper_broker.py (16 tests)
+- [2026-09-27 23:23] [Step 121] Created tests/test_live_runner.py (10 tests)
+- [2026-09-27 23:30] [Step 122] Created config/accounts.yaml (personal retail + prop firm, no consistency rule)
+- [2026-09-27 23:30] [Step 123] Created brokers/sim_broker.py (custom multi-account paper broker)
+- [2026-09-27 23:33] [Step 124] Created feeds/base_feed.py (PriceUpdate + BaseFeed)
+- [2026-09-27 23:34] [Step 125] Created feeds/binance_feed.py (BTC + ETH live via WebSocket, REST fallback)
+- [2026-09-27 23:34] [Step 126] Created feeds/biquote_feed.py (FX + Gold + Crypto polling)
+- [2026-09-27 23:35] [Step 127] Created feeds/aggregator.py (combines feeds + health)
+- [2026-09-27 23:42] [Step 128] Fixed feeds/biquote_feed.py to match real biquote API shape
+- [2026-09-27 23:44] [Step 129] Created feeds/yahoo_feed.py (NASDAQ, S&P, Dow — no API key)
+- [2026-09-27 23:53] [Step 130] Created feeds/gud_feed.py (Chainlink oracle feed for FX/Gold/Crypto/SPY)
+- [2026-09-27 23:54] [Step 131] Updated feeds/default_feed.py (Binance + gud-price + Biquote backup)
+
+### [CHECKPOINT] Phase 11 - live feeds working
+- [2026-09-27 23:55] [Step 132] Checkpoint: Phase 11 - live feeds working

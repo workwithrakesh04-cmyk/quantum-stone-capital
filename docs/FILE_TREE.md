@@ -1,14 +1,18 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-27 17:51 UTC
+Auto-generated: 2026-09-27 18:25 UTC
 
-Total files: 106
+Total files: 112
 
 ```
 .gitignore
 KNOWLEDGE_BASE.md
 PROJECT_STATE.md
 README.md
+brokers/__init__.py
+brokers/base_broker.py
+brokers/mt5_broker.py
+brokers/paper_broker.py
 config/master.yaml
 core/__init__.py
 core/account_manager.py
@@ -17,6 +21,7 @@ core/elliott_wave.py
 core/execution_engine.py
 core/footprint.py
 core/harmonic.py
+core/live_runner.py
 core/main_brain.py
 core/main_brain_v2.py
 core/market_context.py
@@ -65,6 +70,7 @@ scripts/checkpoint.ps1
 scripts/demo_pipeline.py
 scripts/generate_sample_data.py
 scripts/log_step.ps1
+scripts/run_paper.py
 scripts/update_file_tree.py
 strategies/__init__.py
 strategies/elliott_wave/wave3_entries.yaml

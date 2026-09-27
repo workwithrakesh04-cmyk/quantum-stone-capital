@@ -1,0 +1,40 @@
+accounts:
+  personal:
+    type: retail
+    description: Personal retail trading account
+    capital: 10000
+    max_risk_per_trade: 0.01
+    max_daily_loss: 0.03
+    max_drawdown: 0.1
+    max_concurrent_positions: 5
+    leverage: 30
+    instruments:
+    - BTCUSD
+    - XAUUSD
+    - EURUSD
+    - GBPUSD
+    allow_news_trading: true
+    allow_weekend_holding: true
+    min_trading_days: 0
+  prop:
+    type: prop_firm
+    description: Prop firm funded account
+    firm: Custom Prop Firm
+    capital: 100000
+    max_risk_per_trade: 0.01
+    max_daily_loss: 0.05
+    max_drawdown: 0.1
+    max_concurrent_positions: 5
+    leverage: 100
+    instruments:
+    - BTCUSD
+    - XAUUSD
+    - EURUSD
+    - GBPUSD
+    allow_news_trading: true
+    allow_weekend_holding: false
+    min_trading_days: 0
+    consistency_rule: null
+    profit_target: 0.08
+    trailing_drawdown: false
+    notes: No consistency rule. Max daily 5%, max DD 10% (static).

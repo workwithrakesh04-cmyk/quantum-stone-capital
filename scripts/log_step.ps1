@@ -8,6 +8,12 @@ param(
 
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm"
 
+# Check that the previous command succeeded (only log if so)
+if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne $null) {
+    Write-Host "SKIP: previous command exited with code $LASTEXITCODE, not logging step" -ForegroundColor Yellow
+    exit 1
+}
+
 $logPath = "docs/STEP_LOG.md"
 if (-not (Test-Path $logPath)) {
     Write-Host "ERROR: docs/STEP_LOG.md not found." -ForegroundColor Red
@@ -15,7 +21,7 @@ if (-not (Test-Path $logPath)) {
 }
 
 $content = Get-Content $logPath -Raw
-$matches = [regex]::Matches($content, "\[Step (\d+)\]")
+$matches = [regex]::Matches($content, '\[Step (\d+)\]')
 $maxStep = 0
 foreach ($m in $matches) {
     $n = [int]$m.Groups[1].Value
