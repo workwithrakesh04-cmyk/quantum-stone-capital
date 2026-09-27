@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-27 17:42 UTC
+Auto-generated: 2026-09-27 17:49 UTC
 
-Total files: 98
+Total files: 103
 
 ```
 .gitignore
@@ -18,10 +18,15 @@ core/execution_engine.py
 core/footprint.py
 core/harmonic.py
 core/main_brain.py
+core/main_brain_v2.py
+core/market_context.py
 core/order.py
 core/order_flow.py
+core/pipeline_result.py
 core/pricing_engine.py
 core/risk_engine.py
+core/strategy_selector.py
+core/trade_proposal.py
 core/vpa.py
 docs/FILE_TREE.md
 docs/STEP_LOG.md

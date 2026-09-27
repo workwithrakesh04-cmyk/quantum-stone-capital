@@ -1,56 +1,104 @@
 strategies:
-
   algo_candle_mitigation:
     type: ict_smc
-    source: "Advanced ICT Institutional SMC (David Woods, 2022)"
-    timeframes: ["5m", "15m", "1h"]
-    regime: ["trending"]
-    long_setup: ["algo_candle_detected", "breaks_structure", "mitigation_entry"]
-    short_setup: ["algo_candle_detected", "breaks_structure", "mitigation_entry"]
-    sl: "algo_candle_extreme"
-    tp: "htf_liquidity_target"
+    source: Advanced ICT Institutional SMC (David Woods, 2022)
+    timeframes:
+    - 5m
+    - 15m
+    - 1h
+    regime:
+    - trending_up
+    - trending_down
+    - trending
+    long_setup:
+    - algo_candle_detected
+    - breaks_structure
+    - mitigation_entry
+    short_setup:
+    - algo_candle_detected
+    - breaks_structure
+    - mitigation_entry
+    sl: algo_candle_extreme
+    tp: htf_liquidity_target
     min_rr: 3.5
-
   htf_circle_trade:
     type: ict_smc
-    source: "Advanced ICT Institutional SMC (David Woods, 2022)"
-    timeframes: ["1h", "4h"]
-    regime: ["trending", "ranging"]
-    long_setup: ["htf_cycle_aligned", "daily_open_discount", "ltf_entry_model"]
-    sl: "ltf_swing_low"
-    tp: "htf_liquidity_target"
+    source: Advanced ICT Institutional SMC (David Woods, 2022)
+    timeframes:
+    - 1h
+    - 4h
+    regime:
+    - trending_up
+    - ranging
+    - trending_down
+    - trending
+    long_setup:
+    - htf_cycle_aligned
+    - daily_open_discount
+    - ltf_entry_model
+    sl: ltf_swing_low
+    tp: htf_liquidity_target
     min_rr: 4.0
-
   ping_pong_1m:
     type: ict_smc
-    source: "Advanced ICT Institutional SMC (David Woods, 2022)"
-    timeframes: ["1m"]
-    regime: ["volatile"]
-    session_filter: ["LO", "NYO", "HIGH_IMPACT_NEWS"]
-    long_setup: ["fvg_fill", "algo_candle_mitigation", "structure_shift"]
-    short_setup: ["fvg_fill", "algo_candle_mitigation", "structure_shift"]
-    sl: "structure_extreme"
-    tp: "next_liquidity_level"
+    source: Advanced ICT Institutional SMC (David Woods, 2022)
+    timeframes:
+    - 1m
+    regime:
+    - volatile
+    session_filter:
+    - LO
+    - NYO
+    - HIGH_IMPACT_NEWS
+    long_setup:
+    - fvg_fill
+    - algo_candle_mitigation
+    - structure_shift
+    short_setup:
+    - fvg_fill
+    - algo_candle_mitigation
+    - structure_shift
+    sl: structure_extreme
+    tp: next_liquidity_level
     min_rr: 2.0
-
   daily_circle_reversal:
     type: ict_smc
-    source: "Advanced ICT Institutional SMC (David Woods, 2022)"
-    timeframes: ["5m", "15m"]
-    regime: ["trending"]
-    long_setup: ["daily_circle_discount", "liquidity_sweep_below", "reversal_shift"]
-    short_setup: ["daily_circle_premium", "liquidity_sweep_above", "reversal_shift"]
-    sl: "sweep_extreme"
-    tp: "daily_circle_opposite_open"
+    source: Advanced ICT Institutional SMC (David Woods, 2022)
+    timeframes:
+    - 5m
+    - 15m
+    regime:
+    - trending_up
+    - trending_down
+    - trending
+    long_setup:
+    - daily_circle_discount
+    - liquidity_sweep_below
+    - reversal_shift
+    short_setup:
+    - daily_circle_premium
+    - liquidity_sweep_above
+    - reversal_shift
+    sl: sweep_extreme
+    tp: daily_circle_opposite_open
     min_rr: 3.0
-
   strong_high_low_reversal:
     type: ict_smc
-    source: "Advanced ICT Institutional SMC (David Woods, 2022)"
-    timeframes: ["15m", "1h", "4h"]
-    regime: ["ranging"]
-    long_setup: ["weak_low_formed", "strong_low_broken", "displacement_up"]
-    short_setup: ["weak_high_formed", "strong_high_broken", "displacement_down"]
-    sl: "displacement_origin"
-    tp: "opposite_strong_level"
+    source: Advanced ICT Institutional SMC (David Woods, 2022)
+    timeframes:
+    - 15m
+    - 1h
+    - 4h
+    regime:
+    - ranging
+    long_setup:
+    - weak_low_formed
+    - strong_low_broken
+    - displacement_up
+    short_setup:
+    - weak_high_formed
+    - strong_high_broken
+    - displacement_down
+    sl: displacement_origin
+    tp: opposite_strong_level
     min_rr: 3.0

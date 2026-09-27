@@ -175,3 +175,9 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 9 step 5
 - [2026-09-27 23:12] [Step 108] Checkpoint: Phase 9 step 5
+- [2026-09-27 23:14] [Step 109] Created scripts/demo_pipeline.py (end-to-end demo)
+- [2026-09-27 23:16] [Step 110] Created tests/test_main_brain.py (15 tests)
+- [2026-09-27 23:16] [Step 111] Created tests/test_integration_pipeline.py (8 integration tests)
+
+### [CHECKPOINT] Phase 9 complete
+- [2026-09-27 23:19] [Step 112] Checkpoint: Phase 9 complete

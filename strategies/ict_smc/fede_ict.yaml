@@ -1,64 +1,115 @@
 strategies:
-
   ifvg:
     type: ict_smc
-    source: "Fede Esses ICT/SMC"
-    timeframes: ["1m", "5m", "15m"]
-    regime: ["trending", "ranging"]
-    long_setup: ["fvg_created", "price_returns_to_fvg", "inverted_fvg"]
-    short_setup: ["fvg_created", "price_returns_to_fvg", "inverted_fvg"]
-    sl: "below_fvg"
-    tp: "next_liquidity_pool"
+    source: Fede Esses ICT/SMC
+    timeframes:
+    - 1m
+    - 5m
+    - 15m
+    regime:
+    - trending_up
+    - ranging
+    - trending_down
+    - trending
+    long_setup:
+    - fvg_created
+    - price_returns_to_fvg
+    - inverted_fvg
+    short_setup:
+    - fvg_created
+    - price_returns_to_fvg
+    - inverted_fvg
+    sl: below_fvg
+    tp: next_liquidity_pool
     min_rr: 3.0
-
   turtle_soup:
     type: ict_smc
-    source: "Fede Esses ICT/SMC"
-    timeframes: ["5m", "15m"]
-    regime: ["ranging", "volatile"]
-    long_setup: ["liquidity_sweep_below", "reversal_candle"]
-    short_setup: ["liquidity_sweep_above", "reversal_candle"]
-    sl: "sweep_extreme"
-    tp: "opposite_liquidity"
+    source: Fede Esses ICT/SMC
+    timeframes:
+    - 5m
+    - 15m
+    regime:
+    - ranging
+    - volatile
+    long_setup:
+    - liquidity_sweep_below
+    - reversal_candle
+    short_setup:
+    - liquidity_sweep_above
+    - reversal_candle
+    sl: sweep_extreme
+    tp: opposite_liquidity
     min_rr: 2.5
-
   mmxm:
     type: ict_smc
-    source: "Fede Esses ICT/SMC"
-    timeframes: ["5m", "15m", "1h"]
-    regime: ["trending"]
-    long_setup: ["market_maker_buy_model", "accumulation", "manipulation", "distribution"]
-    sl: "manipulation_low"
-    tp: "distribution_high"
+    source: Fede Esses ICT/SMC
+    timeframes:
+    - 5m
+    - 15m
+    - 1h
+    regime:
+    - trending_up
+    - trending_down
+    - trending
+    long_setup:
+    - market_maker_buy_model
+    - accumulation
+    - manipulation
+    - distribution
+    sl: manipulation_low
+    tp: distribution_high
     min_rr: 4.0
-
   breaker_block:
     type: ict_smc
-    source: "Fede Esses ICT/SMC"
-    timeframes: ["5m", "15m", "1h"]
-    regime: ["trending"]
-    long_setup: ["order_block_failed", "breaker_formed", "retest"]
-    sl: "below_breaker"
-    tp: "next_structure"
+    source: Fede Esses ICT/SMC
+    timeframes:
+    - 5m
+    - 15m
+    - 1h
+    regime:
+    - trending_up
+    - trending_down
+    - trending
+    long_setup:
+    - order_block_failed
+    - breaker_formed
+    - retest
+    sl: below_breaker
+    tp: next_structure
     min_rr: 3.0
-
   order_block_retest:
     type: ict_smc
-    source: "Fede Esses ICT/SMC"
-    timeframes: ["15m", "1h", "4h"]
-    regime: ["trending"]
-    long_setup: ["last_down_candle_before_impulse", "price_retests_ob", "bullish_reaction"]
-    sl: "below_ob"
-    tp: "prior_high"
+    source: Fede Esses ICT/SMC
+    timeframes:
+    - 15m
+    - 1h
+    - 4h
+    regime:
+    - trending_up
+    - trending_down
+    - trending
+    long_setup:
+    - last_down_candle_before_impulse
+    - price_retests_ob
+    - bullish_reaction
+    sl: below_ob
+    tp: prior_high
     min_rr: 3.0
-
   liquidity_sweep:
     type: ict_smc
-    source: "Fede Esses ICT/SMC"
-    timeframes: ["5m", "15m"]
-    regime: ["ranging", "volatile"]
-    long_setup: ["equal_lows_swept", "reversal_confirmation"]
-    short_setup: ["equal_highs_swept", "reversal_confirmation"]
-    sl: "sweep_extreme"
-    tp: "opposite_liquidity"
+    source: Fede Esses ICT/SMC
+    timeframes:
+    - 5m
+    - 15m
+    regime:
+    - ranging
+    - volatile
+    long_setup:
+    - equal_lows_swept
+    - reversal_confirmation
+    short_setup:
+    - equal_highs_swept
+    - reversal_confirmation
+    sl: sweep_extreme
+    tp: opposite_liquidity
     min_rr: 2.5
