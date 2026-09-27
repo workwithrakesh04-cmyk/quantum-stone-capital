@@ -2,7 +2,7 @@
 
 Auto-generated: 2026-09-27 16:57 UTC
 
-Total files: 36
+Total files: 38
 
 ```
 .gitignore
@@ -15,6 +15,7 @@ core/account_manager.py
 core/main_brain.py
 core/pricing_engine.py
 core/risk_engine.py
+docs/FILE_TREE.md
 docs/STEP_LOG.md
 jurors/__init__.py
 layers/__init__.py
@@ -31,6 +32,7 @@ scripts/build_master_config.py
 scripts/checkpoint.ps1
 scripts/generate_sample_data.py
 scripts/log_step.ps1
+scripts/update_file_tree.py
 strategies/__init__.py
 tests/__init__.py
 tests/test_account_manager.py

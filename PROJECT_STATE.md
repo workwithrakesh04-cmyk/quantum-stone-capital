@@ -6,9 +6,9 @@
 **Branch:** main
 
 ## Current Snapshot
-- **Last commit:** a37116a fix: recovery scripts (PowerShell string concat, no parsing bugs)
+- **Last commit:** bad3a53 fix: create scripts/update_file_tree.py
 - **Tests passing:** 29
-- **Last checkpoint:** update_file_tree.py fixed
+- **Last checkpoint:** auto-checkpoint
 
 ## Quick Resume
 - docs/RESUME_PROMPT.md
