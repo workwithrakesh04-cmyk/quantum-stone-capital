@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-27 17:09 UTC
+Auto-generated: 2026-09-27 17:10 UTC
 
-Total files: 48
+Total files: 53
 
 ```
 .gitignore
@@ -12,7 +12,9 @@ README.md
 config/master.yaml
 core/__init__.py
 core/account_manager.py
+core/execution_engine.py
 core/main_brain.py
+core/order.py
 core/pricing_engine.py
 core/risk_engine.py
 docs/FILE_TREE.md
@@ -24,6 +26,7 @@ layers/layer1_account_rules.py
 layers/layer2_pricing.py
 layers/layer3_strategies.py
 layers/layer4_risk.py
+layers/layer5_execution.py
 microstructure/__init__.py
 microstructure/bayesian_fair_value.py
 microstructure/engine.py
@@ -37,6 +40,8 @@ scripts/generate_sample_data.py
 scripts/log_step.ps1
 scripts/update_file_tree.py
 strategies/__init__.py
+strategies/ict_smc/fede_ict.yaml
+strategies/ict_smc/woods_smc.yaml
 strategies/library.yaml
 strategies/registry.py
 strategies/signal_filter.py
