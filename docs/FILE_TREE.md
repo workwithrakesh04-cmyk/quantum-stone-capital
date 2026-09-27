@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-27 18:52 UTC
+Auto-generated: 2026-09-27 18:54 UTC
 
-Total files: 132
+Total files: 134
 
 ```
 .gitignore
@@ -87,6 +87,8 @@ scripts/checkpoint.ps1
 scripts/demo_pipeline.py
 scripts/generate_sample_data.py
 scripts/log_step.ps1
+scripts/run_brain.py
+scripts/run_dashboard.py
 scripts/run_live.py
 scripts/run_paper.py
 scripts/update_file_tree.py
