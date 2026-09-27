@@ -63,3 +63,11 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] update_file_tree fixed
 - [2026-09-27 22:28] [Step 024] Checkpoint: update_file_tree fixed
+- [2026-09-27 22:29] [Step 025] Created microstructure/engine.py (integrated Kyle + Bayesian + spread)
+- [2026-09-27 22:29] [Step 026] Created strategies/registry.py (YAML auto-discovery + regime matching)
+- [2026-09-27 22:30] [Step 027] Created strategies/signal_filter.py (extreme-only z-score filter)
+- [2026-09-27 22:30] [Step 028] Created strategies/library.yaml with first batch (9 strategies)
+- [2026-09-27 22:30] [Step 029] Created layers/layer3_strategies.py + layer4_risk.py
+
+### [CHECKPOINT] Phase 3 step 5
+- [2026-09-27 22:31] [Step 030] Checkpoint: Phase 3 step 5

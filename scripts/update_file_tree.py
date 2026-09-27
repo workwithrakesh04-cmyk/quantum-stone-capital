@@ -1,7 +1,7 @@
 """Generate docs/FILE_TREE.md from git-tracked files."""
 import subprocess
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 def get_files():
@@ -11,7 +11,7 @@ def get_files():
 
 def build_tree():
     files = get_files()
-    now = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     lines = [
         "# File Tree - Quantum Stone Capital",
         "",

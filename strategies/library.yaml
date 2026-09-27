@@ -1,0 +1,100 @@
+strategies:
+
+  bb_9ema:
+    type: swing
+    source: "51 Trading Strategies (Singhal, 2023)"
+    timeframes: ["30m"]
+    regime: ["trending", "ranging"]
+    long_setup: ["price_at_lower_bb"]
+    long_trigger: ["bullish_candle_above_high"]
+    sl: "candle_low"
+    tp: "upper_bb"
+    min_rr: 2.0
+
+  double_rsi:
+    type: intraday
+    source: "51 Trading Strategies (Singhal, 2023)"
+    timeframes: ["5m"]
+    confluence_timeframe: "1h"
+    regime: ["trending", "ranging"]
+    long_setup: ["rsi_5m_below_30", "rsi_1h_above_50"]
+    short_setup: ["rsi_5m_above_70", "rsi_1h_below_50"]
+    sl: "recent_swing_low"
+    tp: "opposite_rsi_extreme"
+    min_rr: 2.0
+
+  cpr_trend:
+    type: intraday
+    source: "51 Trading Strategies (Singhal, 2023)"
+    timeframes: ["15m", "1h"]
+    regime: ["trending"]
+    long_setup: ["price_above_r1", "supertrend_below", "narrow_cpr"]
+    short_setup: ["price_below_s1", "supertrend_above", "narrow_cpr"]
+    sl: "supertrend"
+    tp: "next_pivot"
+    min_rr: 2.0
+
+  smc_ob_retest:
+    type: ict_smc
+    source: "Advanced ICT Institutional SMC (Woods, 2022)"
+    timeframes: ["5m", "15m", "1h", "4h"]
+    regime: ["trending", "ranging"]
+    long_setup: ["order_block_retest", "bos_confirmed"]
+    short_setup: ["order_block_retest", "bos_confirmed"]
+    sl: "below_order_block"
+    tp: "next_liquidity"
+    min_rr: 3.0
+
+  vcp:
+    type: price_action
+    source: "51 Trading Strategies (Singhal, 2023)"
+    timeframes: ["1d"]
+    regime: ["trending"]
+    pattern_required: true
+    long_setup: ["impulse_up", "3_contractions", "volume_dry_up"]
+    entry: "breakout_candle_close"
+    sl: "third_pullback_low"
+    tp: "1:3_min"
+    min_rr: 3.0
+
+  turtle_system1:
+    type: systematic
+    source: "Way of the Turtle (Faith, 2007)"
+    timeframes: ["1d"]
+    regime: ["trending"]
+    long_setup: ["price_above_20d_high"]
+    short_setup: ["price_below_20d_low"]
+    sl: "2N"
+    tp: "10d_exit"
+    min_rr: 2.0
+
+  turtle_system2:
+    type: systematic
+    source: "Way of the Turtle (Faith, 2007)"
+    timeframes: ["1d"]
+    regime: ["trending"]
+    long_setup: ["price_above_55d_high"]
+    short_setup: ["price_below_55d_low"]
+    sl: "2N"
+    tp: "20d_exit"
+    min_rr: 2.0
+
+  gartley_bull:
+    type: harmonic
+    source: "Guide to Precision Harmonic Pattern Trading (Seo, 2020)"
+    timeframes: ["15m", "1h", "4h"]
+    regime: ["ranging"]
+    long_setup: ["gartley_5point_bullish", "pci_zone"]
+    sl: "below_pci"
+    tp: "pcz_target"
+    min_rr: 3.0
+
+  cwmr:
+    type: ops
+    source: "Online Quantitative Trading Strategies (Glucksman, 2025)"
+    timeframes: ["1d"]
+    regime: ["ranging"]
+    long_setup: ["cwmr_mean_reversion_signal"]
+    sl: "2pct"
+    tp: "mean_reversion_target"
+    min_rr: 1.5
