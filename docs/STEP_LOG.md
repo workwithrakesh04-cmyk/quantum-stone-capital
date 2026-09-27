@@ -107,3 +107,12 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 5 step 5
 - [2026-09-27 22:44] [Step 056] Checkpoint: Phase 5 step 5
+- [2026-09-27 22:45] [Step 057] Created layers/layer2_pricing_ext.py (EW + harmonic + Fibonacci targets)
+- [2026-09-27 22:45] [Step 058] Created tests/test_fibonacci.py (8 tests)
+- [2026-09-27 22:45] [Step 059] Created tests/test_elliott_wave.py (10 tests)
+- [2026-09-27 22:45] [Step 060] Created tests/test_harmonic.py (12 tests)
+- [2026-09-27 22:45] [Step 061] Created tests/test_harmonic_strategies_load.py (4 tests)
+- [2026-09-27 22:50] [Step 062] Fixed missing strategies/elliott_wave folder - 124 tests passing
+
+### [CHECKPOINT] Phase 5 complete
+- [2026-09-27 22:50] [Step 063] Checkpoint: Phase 5 complete

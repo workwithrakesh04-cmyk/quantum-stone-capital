@@ -1,0 +1,57 @@
+strategies:
+
+  ew_wave3_entry_bullish:
+    type: elliott_wave
+    source: "Elliott Wave Principle (Frost & Prechter)"
+    timeframes: ["1h", "4h", "1d"]
+    regime: ["trending"]
+    long_setup:
+      - "wave1_complete"
+      - "wave2_correction_38_to_62_pct"
+      - "wave3_impulse_confirmed"
+    sl: "wave1_start"
+    tp: "wave3_target_1.618"
+    personality: "wave3_strongest_broadest"
+    min_rr: 3.0
+
+  ew_wave3_entry_bearish:
+    type: elliott_wave
+    source: "Elliott Wave Principle (Frost & Prechter)"
+    timeframes: ["1h", "4h", "1d"]
+    regime: ["trending"]
+    short_setup:
+      - "wave1_complete_down"
+      - "wave2_correction_38_to_62_pct"
+      - "wave3_impulse_confirmed"
+    sl: "wave1_start"
+    tp: "wave3_target_1.618"
+    personality: "wave3_strongest_broadest"
+    min_rr: 3.0
+
+  ew_wave5_reversal_bullish:
+    type: elliott_wave
+    source: "Elliott Wave Principle (Frost & Prechter)"
+    timeframes: ["4h", "1d"]
+    regime: ["trending", "volatile"]
+    long_setup:
+      - "wave1_to_wave4_complete"
+      - "wave5_target_hit"
+      - "reversal_confirmation"
+    sl: "wave5_extreme"
+    tp: "wave4_low_or_a_wave_target"
+    personality: "wave5_narrow_breadth_high_optimism"
+    min_rr: 3.0
+
+  ew_wave_c_short:
+    type: elliott_wave
+    source: "Elliott Wave Principle (Frost & Prechter)"
+    timeframes: ["4h", "1d"]
+    regime: ["trending"]
+    short_setup:
+      - "abc_correction_wave_a_complete"
+      - "wave_b_complete_or_extended"
+      - "wave_c_impulse_starting"
+    sl: "wave_b_extreme"
+    tp: "wave_a_extension_1.618"
+    personality: "wave_c_devastating_broad"
+    min_rr: 3.0
