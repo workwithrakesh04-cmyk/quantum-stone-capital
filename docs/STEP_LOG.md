@@ -124,3 +124,12 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 6 step 5
 - [2026-09-27 22:52] [Step 069] Checkpoint: Phase 6 step 5
+- [2026-09-27 22:54] [Step 070] Created ml/models/ppo_agent.py (PPO wrapper with fallback)
+- [2026-09-27 22:54] [Step 071] Created ml/backtest/walk_forward.py (purging + embargoing)
+- [2026-09-27 22:55] [Step 072] Created ml/backtest/metrics.py (Sharpe, max DD, IC, deflated Sharpe)
+- [2026-09-27 22:55] [Step 073] Created ml/pipeline.py (end-to-end ML pipeline)
+- [2026-09-27 22:55] [Step 074] Created tests/test_ml_pipeline.py (18 tests)
+- [2026-09-27 22:56] [Step 075] Phase 6 complete - all tests passing
+
+### [CHECKPOINT] Phase 6 complete
+- [2026-09-27 22:56] [Step 076] Checkpoint: Phase 6 complete
