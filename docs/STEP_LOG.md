@@ -50,3 +50,7 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Recovery system fixed
 - [2026-09-27 22:24] [Step 019] Checkpoint: Recovery system fixed
+- [2026-09-27 22:25] [Step 020] Fixed PowerShell parsing bug in recovery scripts
+
+### [CHECKPOINT] Recovery system fixed
+- [2026-09-27 22:25] [Step 021] Checkpoint: Recovery system fixed
