@@ -213,3 +213,9 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 11 complete - all tests green
 - [2026-09-27 23:59] [Step 136] Checkpoint: Phase 11 complete - all tests green
+- [2026-09-28 00:04] [Step 137] Redesigned dashboard HTML (metric cards + equity chart + calendar heatmap)
+- [2026-09-28 00:04] [Step 138] Redesigned dashboard CSS (gradient, glow, heatmap, gauges)
+- [2026-09-28 00:05] [Step 139] Redesigned dashboard JS (Chart.js equity curve + calendar heatmap + metrics)
+
+### [CHECKPOINT] Phase 12 redesign - TraderLadder + journal hybrid
+- [2026-09-28 00:05] [Step 140] Checkpoint: Phase 12 redesign - TraderLadder + journal hybrid
