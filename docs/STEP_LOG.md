@@ -181,3 +181,11 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Phase 9 complete
 - [2026-09-27 23:19] [Step 112] Checkpoint: Phase 9 complete
+- [2026-09-27 23:20] [Step 113] Created brokers/base_broker.py (BrokerOrder + BrokerAccount + BaseBroker)
+- [2026-09-27 23:20] [Step 114] Created brokers/paper_broker.py (in-memory paper trading)
+- [2026-09-27 23:20] [Step 115] Created brokers/mt5_broker.py (MetaTrader 5 adapter)
+- [2026-09-27 23:20] [Step 116] Created core/live_runner.py (broker + brain loop)
+- [2026-09-27 23:21] [Step 117] Created scripts/run_paper.py (paper trading entry point)
+
+### [CHECKPOINT] Phase 10 step 5
+- [2026-09-27 23:21] [Step 118] Checkpoint: Phase 10 step 5

@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-27 17:49 UTC
+Auto-generated: 2026-09-27 17:51 UTC
 
-Total files: 103
+Total files: 106
 
 ```
 .gitignore
@@ -62,6 +62,7 @@ ml/pipeline.py
 requirements.txt
 scripts/build_master_config.py
 scripts/checkpoint.ps1
+scripts/demo_pipeline.py
 scripts/generate_sample_data.py
 scripts/log_step.ps1
 scripts/update_file_tree.py
@@ -87,8 +88,10 @@ tests/test_footprint.py
 tests/test_harmonic.py
 tests/test_harmonic_strategies_load.py
 tests/test_ict_strategies_load.py
+tests/test_integration_pipeline.py
 tests/test_layer0_data.py
 tests/test_layers.py
+tests/test_main_brain.py
 tests/test_microstructure_engine.py
 tests/test_ml_pipeline.py
 tests/test_order.py
