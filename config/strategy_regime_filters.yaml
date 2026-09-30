@@ -1,0 +1,68 @@
+﻿# Strategy x Regime Filter Configuration (from HFT_Brain)
+system:
+  disabled_strategy_mode: "shadow"
+
+global_disable:
+  - intermarket
+  - sd_zones
+  - engulfing_pinbar
+  - diamond_cancan
+  - value_area
+  - absorption
+  - fvg
+  - delta_divergence
+  - stacked_imbalance
+  - mad_combined
+  - apex_flow
+  - cardwell_rsi
+  - ftr_compression
+  - mad_fl
+  - naked_poc
+  - quasimodo
+  - ml_rsi
+  - ai_trend_flow
+  - ml_momentum
+  - luxalgo_fvg
+  - reversal_123
+  - turtle_soup
+
+regime_enable_only:
+  quasimodo:
+    - VOLATILE
+  volume_cluster:
+    - VOLATILE
+
+regime_rules:
+  RANGING:
+    block: []
+  VOLATILE:
+    block: []
+  TRENDING_UP:
+    block:
+      - false_breakout
+      - trapped_traders
+      - liquidity_sweep
+      - rbd_dbr
+      - quasimodo
+  TRENDING_DOWN:
+    block:
+      - false_breakout
+      - trapped_traders
+      - liquidity_sweep
+
+regime_confidence_overrides:
+  RANGING:
+    min_debate_confidence: 0.70
+  VOLATILE:
+    min_debate_confidence: 0.60
+  TRENDING_UP:
+    min_debate_confidence: 0.80
+  TRENDING_DOWN:
+    min_debate_confidence: 0.75
+
+trade_caps:
+  trapped_traders: 30
+  false_breakout: 30
+  liquidity_sweep: 30
+  quasimodo: 20
+  volume_cluster: 20

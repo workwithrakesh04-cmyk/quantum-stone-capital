@@ -1,0 +1,80 @@
+﻿# Strategy Tier System (from HFT_Brain)
+tiers:
+  tier_1_high_performers:
+    description: "Strong auditor AND system validation - protect and prioritize"
+    weight: 1.0
+    trade_cap: 40
+    review_frequency_days: 30
+    strategies:
+      - false_breakout
+      - volume_cluster
+      - trapped_traders
+      - liquidity_sweep
+
+  tier_2_supporting:
+    description: "Positive auditor - supporting cast"
+    weight: 0.7
+    trade_cap: 20
+    review_frequency_days: 14
+    strategies:
+      - rbd_dbr
+      - sd_zones
+      - mad_fl
+      - ichimoku_rsi
+      - poc
+      - three_drive
+
+  tier_3_probationary:
+    description: "Helped in walk-forward but auditor negative - re-evaluate often"
+    weight: 0.5
+    trade_cap: 12
+    review_frequency_days: 7
+    strategies:
+      - mad_bb
+      - rmd_trail
+
+  tier_4_shadow:
+    description: "Disabled but monitored - promote when profitable"
+    weight: 0.0
+    trade_cap: 0
+    review_frequency_days: 3
+    strategies:
+      - absorption
+      - value_area
+      - diamond_cancan
+      - cardwell_rsi
+      - apex_flow
+      - mad_combined
+      - fvg
+      - engulfing_pinbar
+      - naked_poc
+      - quasimodo
+      - intermarket
+      - delta_divergence
+      - stacked_imbalance
+      - ftr_compression
+      - head_shoulders
+      - double_top_bottom
+
+accounts:
+  personal:
+    enabled_tiers: [tier_1_high_performers, tier_2_supporting, tier_3_probationary]
+    disabled_tiers: [tier_4_shadow]
+
+  prop:
+    enabled_tiers: [tier_1_high_performers, tier_2_supporting, tier_3_probationary]
+    disabled_tiers: [tier_4_shadow]
+
+rules:
+  promotion:
+    tier_4_to_2: "auditor > 0 AND system improves when enabled"
+    tier_4_to_3: "auditor > 0 but system unproven"
+    tier_3_to_2: "auditor improves above 0 for 2+ review periods"
+    tier_3_to_1: "auditor > 5% AND system strongly positive"
+    tier_2_to_1: "consistently top-3 in auditor AND system"
+
+  demotion:
+    tier_1_to_2: "auditor drops below +5%"
+    tier_2_to_3: "auditor drops below 0"
+    tier_2_to_4: "system degrades when enabled"
+    tier_3_to_4: "auditor stays negative 2+ periods OR system degrades"

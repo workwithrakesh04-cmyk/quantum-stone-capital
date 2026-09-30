@@ -1,4 +1,4 @@
-﻿# RESUME PROMPT - Quantum Stone Capital Hybrid Project
+# RESUME PROMPT - Quantum Stone Capital Hybrid Project
 
 **Paste this entire file into a new Claude chat, then say:**
 **"Continue this project."**
@@ -43,7 +43,7 @@ except ~10 lines added to `core/main_brain_v2.py` (Delivery 5b).
 
 - **Last completed delivery:** 5a-1 (strategies_py infrastructure)
 - **Next delivery:** 5a-2 (order_flow strategies)
-- **Total tests passing:** ~450 (after 5a-1 lands)
+- **Total tests passing:** ~450
 - **Commit cadence:** manual commit per delivery; checkpoint every 5th
 - **Baseline before hybrid:** 259 tests (Phase 13 checkpoint)
 

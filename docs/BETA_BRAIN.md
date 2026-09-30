@@ -170,3 +170,33 @@ Then run `.\scripts\checkpoint.ps1 -Label "Hybrid deliveries 1-5 complete"`.
 | `shadow_tracker.py` | Hypothetical trades for disabled strategies |
 | `debate/` | 3-round BUY/SELL/HOLD debate |
 | `jury/` | 3-jury verdict (risk, portfolio, final) |
+
+---
+
+## Delivery 5a-1 — 2026-10-01 — strategies_py Infrastructure
+Commit: pending
+
+**Created:**
+- `strategies_py/base.py` — BaseStrategy abstract + helpers
+- `strategies_py/registry.py` — StrategyRegistry with regime filter + tier
+- `strategies_py/tier_manager.py` — TierManager
+- `strategies_py/loader.py` — auto-discovery loader
+- 8 category packages (`order_flow/`, `liquidity/`, `supply_demand/`,
+  `ict_smc/`, `patterns/`, `ml_adaptive/`, `volatility/`, `trend/`)
+  with `__init__.py`
+- `config/strategy_regime_filters.yaml` (from HFT_Brain)
+- `config/strategy_tiers.yaml` (from HFT_Brain)
+- 4 test files (~23 tests)
+
+**Tests:** 427 → ~450 (+23)
+
+**Notes:**
+- Loader silently skips modules that don't exist yet (later deliveries
+  add them)
+- Registry's `_is_active()` applies: regime_enable_only, regime_rules
+  block, trade_caps
+- Tier manager understands per-account enabled/disabled tiers
+
+**Next:** 5a-2 (order_flow strategies: absorption, delta_divergence,
+stacked_imbalance, trapped_traders, naked_poc, poc_strategy,
+value_area, volume_cluster)

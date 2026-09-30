@@ -1,16 +1,15 @@
 # PROJECT STATE - Quantum Stone Capital
 
-**Last updated:** 2026-10-01 01:24
+**Last updated:** 2026-10-01 01:27
 **Repo:** https://github.com/workwithrakesh04-cmyk/quantum-stone-capital
 **Local:** E:\quantum-stone-capital
 **Branch:** main
 
 ## Current Snapshot
-- **Last commit:** e9247be Hybrid Delivery 4b: Beta jury (risk + portfolio + final + verdict engine)
-- **Tests passing:** 427 (pre-D0; will grow with 5a series)
-- **Last checkpoint:** Phase 13 complete (hybrid era uses manual commits)
-- **Last delivery:** D4b (Beta jury + verdict engine)
-- **Next delivery:** 5a-1 (strategies_py infrastructure)
+- **Last commit:** 7b2a299 Delivery 0: continuity layer (docs + project state refresh)
+- **Tests passing:** ~450 (D5a-1 landed; adding tests in later 5a series)
+- **Last delivery:** D5a-1 (strategies_py infrastructure)
+- **Next delivery:** 5a-2 (order_flow strategies)
 
 ## Quick Resume
 - **docs/RESUME_PROMPT.md**  <- paste into a new chat to resume
@@ -26,15 +25,13 @@
     .\venv\Scripts\Activate.ps1
     pytest tests/ -q
     git log --oneline -10
-    git ls-files
 
 ## Running the Hybrid (once 5b lands)
-    python scripts/run_hybrid.py --once    # one pass
-    python scripts/run_hybrid.py           # continuous
+    python scripts/run_hybrid.py --once
 
 ## Training Cycle
-    python scripts/train_brain_daily.py                 # train on newest JSONL
-    python scripts/train_brain_daily.py --status        # show current + available
-    python scripts/train_brain_daily.py --list          # list state folders
-    python scripts/train_brain_daily.py --rollback DATE # rollback
+    python scripts/train_brain_daily.py
+    python scripts/train_brain_daily.py --status
+    python scripts/train_brain_daily.py --list
+    python scripts/train_brain_daily.py --rollback DATE
 
