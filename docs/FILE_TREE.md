@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-30 19:45 UTC
+Auto-generated: 2026-09-30 19:54 UTC
 
-Total files: 188
+Total files: 198
 
 ```
 .gitignore
@@ -20,6 +20,11 @@ beta_brain/debate/hold_bot.py
 beta_brain/debate/sell_bot.py
 beta_brain/debate/transcript.py
 beta_brain/jury/__init__.py
+beta_brain/jury/final_jury.py
+beta_brain/jury/portfolio_jury.py
+beta_brain/jury/risk_jury.py
+beta_brain/jury/transcript.py
+beta_brain/jury/verdict_engine.py
 beta_brain/paper_trader.py
 beta_brain/performance_metrics.py
 beta_brain/regime_tagger.py
@@ -143,12 +148,17 @@ tests/test_beta_account_guard.py
 tests/test_beta_debate_bots.py
 tests/test_beta_debate_engine.py
 tests/test_beta_debate_transcript.py
+tests/test_beta_final_jury.py
+tests/test_beta_jury_transcript.py
 tests/test_beta_paper_trader.py
 tests/test_beta_performance_metrics.py
+tests/test_beta_portfolio_jury.py
 tests/test_beta_regime_tagger.py
+tests/test_beta_risk_jury.py
 tests/test_beta_shadow_tracker.py
 tests/test_beta_signal.py
 tests/test_beta_strategy_analyzer.py
+tests/test_beta_verdict_engine.py
 tests/test_consensus_audit.py
 tests/test_debate_engine.py
 tests/test_elliott_wave.py
