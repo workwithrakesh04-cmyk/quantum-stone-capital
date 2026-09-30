@@ -1,0 +1,37 @@
+﻿# Consensus Arbiter Configuration
+beta:
+  enabled: true
+  strategies_config: "config/strategy_regime_filters.yaml"
+  tiers_config: "config/strategy_tiers.yaml"
+
+arbiter:
+  size_multiplier:
+    both_agree: 1.0
+    qsc_only:   0.5
+    beta_only:  0.5
+    disagree:   0.0
+    both_hold:  0.0
+  priority: "qsc"
+  beta_disable_regimes: ["CHOPPY"]
+  qsc_disable_regimes:  []
+  require_jury_agreement: true
+  log_all_arbitrations: true
+  log_dir: "logs/consensus"
+
+training:
+  enabled: true
+  state_dir: "data/models/brain"
+  pointer_file: "data/models/brain/current.json"
+  target: "strategy_weights_and_arbiter_thresholds"
+  strategy_weight_bounds:
+    min: 0.5
+    max: 1.5
+    win_rate_up_threshold: 0.55
+    win_rate_down_threshold: 0.45
+    up_step: 1.05
+    down_step: 0.95
+  arbiter_threshold_bounds:
+    both_agree_min_win_rate: 0.55
+    beta_only_min_win_rate: 0.40
+    qsc_only_min_win_rate: 0.40
+  archive_dir: "logs/consensus/archive"
