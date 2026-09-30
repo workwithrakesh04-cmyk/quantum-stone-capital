@@ -5,12 +5,16 @@ import json
 import os
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 from loguru import logger
 
 
 class ConsensusAudit:
-    def __init__(self, log_dir: str = "logs/consensus", archive_dir: str = "logs/consensus/archive"):
+    def __init__(
+        self,
+        log_dir: str = "logs/consensus",
+        archive_dir: str = "logs/consensus/archive",
+    ):
         self.log_dir = Path(log_dir)
         self.archive_dir = Path(archive_dir)
         self.log_dir.mkdir(parents=True, exist_ok=True)
@@ -31,7 +35,10 @@ class ConsensusAudit:
                     archive_path = self.archive_dir / self._file_path.name
                     try:
                         os.replace(str(self._file_path), str(archive_path))
-                        logger.info(f"ConsensusAudit: archived {self._file_path.name} -> {archive_path}")
+                        logger.info(
+                            f"ConsensusAudit: archived "
+                            f"{self._file_path.name} -> {archive_path}"
+                        )
                     except Exception as e:
                         logger.error(f"ConsensusAudit: archive failed: {e}")
             self._today = day
@@ -59,24 +66,32 @@ class ConsensusAudit:
         except Exception as e:
             logger.error(f"ConsensusAudit: write failed: {e}")
 
-    def read_day(self, day: str) -> list:
-        """Read all records for a day. Looks in active first, then archive."""
-        paths_to_try = [self.log_dir / f"{day}.jsonl", self.archive_dir / f"{day}.jsonl"]
+    def read_day(self, day: str) -> List[Dict[str, Any]]:
+        """Read all records for a day. Active first, then archive."""
+        paths_to_try = [
+            self.log_dir / f"{day}.jsonl",
+            self.archive_dir / f"{day}.jsonl",
+        ]
         for p in paths_to_try:
             if p.exists():
                 records = []
                 try:
-                    with open(p, "r", encoding="utf-8") as f:
+                    with open(p, "r", encoding="utf-8-sig") as f:
                         for line in f:
                             line = line.strip()
                             if line:
-                                records.append(json.loads(line))
+                                try:
+                                    records.append(json.loads(line))
+                                except json.JSONDecodeError:
+                                    logger.warning(
+                                        f"ConsensusAudit: skipping malformed line in {p}"
+                                    )
                 except Exception as e:
                     logger.error(f"ConsensusAudit: read failed for {p}: {e}")
                 return records
         return []
 
-    def list_days(self) -> list:
+    def list_days(self) -> List[str]:
         """List all days present in active or archive."""
         days = set()
         for p in self.log_dir.glob("*.jsonl"):
@@ -84,6 +99,35 @@ class ConsensusAudit:
         for p in self.archive_dir.glob("*.jsonl"):
             days.add(p.stem)
         return sorted(days)
+
+    def newest_active_day(self, min_size: int = 1) -> Optional[str]:
+        """Return the most recent date (YYYY-MM-DD) of an active JSONL
+        that has at least `min_size` bytes (or 1 line). Returns None if
+        no candidate exists.
+
+        Scans logs/consensus/*.jsonl (NOT archive). Chooses the lexically
+        greatest filename stem that matches YYYY-MM-DD.
+        """
+        candidates = []
+        for p in self.log_dir.glob("*.jsonl"):
+            stem = p.stem
+            # Validate format: YYYY-MM-DD
+            parts = stem.split("-")
+            if len(parts) != 3:
+                continue
+            try:
+                int(parts[0]); int(parts[1]); int(parts[2])
+            except ValueError:
+                continue
+            try:
+                size = p.stat().st_size
+            except Exception:
+                continue
+            if size >= min_size:
+                candidates.append(stem)
+        if not candidates:
+            return None
+        return sorted(candidates)[-1]
 
     def archive_day(self, day: str) -> Optional[Path]:
         """Manually move a day from active to archive."""

@@ -1,6 +1,8 @@
 ﻿"""Trainer - orchestrates the daily training cycle.
 
-1. Reads today's JSONL via ConsensusAudit
+1. Reads target day's JSONL via ConsensusAudit
+   - If day not given: auto-detect newest active JSONL
+   - Fallback: UTC today
 2. Loads previous trained state via current.json pointer
 3. Computes new strategy weights + arbiter thresholds
 4. Writes data/models/brain/YYYY-MM-DD/
@@ -53,6 +55,24 @@ class Trainer:
         self.strategy_trainer = StrategyWeightTrainer(bounds=strategy_bounds)
         self.arbiter_trainer = ArbiterThresholdTrainer(bounds=arbiter_bounds)
 
+    # ------------------------------------------------------------------
+    # Day resolution
+    # ------------------------------------------------------------------
+    def _resolve_day(self, day: Optional[str]) -> str:
+        """If day is None: pick newest active JSONL. Else UTC today."""
+        if day:
+            return day
+        newest = self.audit.newest_active_day()
+        if newest:
+            logger.info(f"Trainer: auto-detected newest active day = {newest}")
+            return newest
+        fallback = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        logger.info(f"Trainer: no active JSONL found, defaulting to UTC today = {fallback}")
+        return fallback
+
+    # ------------------------------------------------------------------
+    # Previous state helpers
+    # ------------------------------------------------------------------
     def _read_pointer(self) -> Optional[str]:
         if not self.pointer_file.exists():
             return None
@@ -88,6 +108,9 @@ class Trainer:
             logger.warning(f"Trainer: previous thresholds read failed: {e}")
             return {}
 
+    # ------------------------------------------------------------------
+    # Writer helpers
+    # ------------------------------------------------------------------
     def _write_pointer(self, day: str) -> None:
         _write_json(self.pointer_file, {
             "active": day,
@@ -124,8 +147,11 @@ class Trainer:
         logger.info(f"Trainer: wrote state folder {folder}")
         return folder
 
+    # ------------------------------------------------------------------
+    # Public API
+    # ------------------------------------------------------------------
     def train(self, day: Optional[str] = None) -> Dict[str, Any]:
-        day = day or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        day = self._resolve_day(day)
         logger.info(f"Trainer: training for {day}")
 
         samples = self.loader.load_day(day)
@@ -134,10 +160,14 @@ class Trainer:
         prev_weights = self._load_previous_weights()
         prev_thresholds = self._load_previous_thresholds()
 
-        new_weights = self.strategy_trainer.compute(with_outcome, previous_weights=prev_weights)
+        new_weights = self.strategy_trainer.compute(
+            with_outcome, previous_weights=prev_weights
+        )
         new_thresholds = self.arbiter_trainer.compute(with_outcome)
 
-        strategy_report = self.strategy_trainer.report(with_outcome, new_weights, prev=prev_weights)
+        strategy_report = self.strategy_trainer.report(
+            with_outcome, new_weights, prev=prev_weights
+        )
         arbiter_report = self.arbiter_trainer.report(with_outcome, new_thresholds)
 
         no_op = len(with_outcome) == 0

@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-30 19:34 UTC
+Auto-generated: 2026-09-30 19:37 UTC
 
-Total files: 163
+Total files: 177
 
 ```
 .gitignore
@@ -29,6 +29,7 @@ config/accounts.yaml
 config/consensus.yaml
 config/master.yaml
 consensus/__init__.py
+consensus/audit.py
 core/__init__.py
 core/account_manager.py
 core/account_router.py
@@ -57,6 +58,10 @@ dashboard/state.py
 dashboard/static/app.js
 dashboard/static/style.css
 dashboard/templates/index.html
+data/models/brain/2026-09-30/arbiter_thresholds.json
+data/models/brain/2026-09-30/meta.json
+data/models/brain/2026-09-30/strategy_weights.json
+data/models/brain/2026-09-30/training_report.json
 data/models/brain/current.json
 docs/BETA_BRAIN.md
 docs/FILE_TREE.md
@@ -133,6 +138,7 @@ tests/test_beta_performance_metrics.py
 tests/test_beta_regime_tagger.py
 tests/test_beta_shadow_tracker.py
 tests/test_beta_strategy_analyzer.py
+tests/test_consensus_audit.py
 tests/test_debate_engine.py
 tests/test_elliott_wave.py
 tests/test_execution_engine.py
@@ -155,9 +161,17 @@ tests/test_paper_broker.py
 tests/test_prop_rules.py
 tests/test_signal_filter.py
 tests/test_strategy_registry.py
+tests/test_training_loader.py
+tests/test_training_strategy_weights.py
+tests/test_training_trainer.py
 tests/test_utils.py
 tests/test_vpa.py
 training/__init__.py
+training/arbiter_thresholds.py
+training/loader.py
+training/rollback.py
+training/strategy_weights.py
+training/trainer.py
 utils/__init__.py
 utils/fibonacci.py
 utils/logger.py
