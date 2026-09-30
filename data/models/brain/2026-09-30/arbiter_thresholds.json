@@ -1,0 +1,8 @@
+{
+  "both_agree_size": 1.0,
+  "beta_only_size": 0.5,
+  "qsc_only_size": 0.5,
+  "beta_disable_regimes": [
+    "CHOPPY"
+  ]
+}

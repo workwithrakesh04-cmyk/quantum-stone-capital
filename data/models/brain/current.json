@@ -1,5 +1,4 @@
-﻿{
-  "active": null,
-  "created": "2026-10-01T00:00:00Z",
-  "note": "Populated by scripts/train_brain_daily.py after first training run."
+{
+  "active": "2026-09-30",
+  "updated": "2026-09-30T19:32:45.158490+00:00"
 }
