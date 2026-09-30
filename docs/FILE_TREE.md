@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-30 19:39 UTC
+Auto-generated: 2026-09-30 19:43 UTC
 
-Total files: 181
+Total files: 177
 
 ```
 .gitignore
@@ -58,10 +58,6 @@ dashboard/state.py
 dashboard/static/app.js
 dashboard/static/style.css
 dashboard/templates/index.html
-data/models/brain/2026-09-30/arbiter_thresholds.json
-data/models/brain/2026-09-30/meta.json
-data/models/brain/2026-09-30/strategy_weights.json
-data/models/brain/2026-09-30/training_report.json
 data/models/brain/2026-10-01/arbiter_thresholds.json
 data/models/brain/2026-10-01/meta.json
 data/models/brain/2026-10-01/strategy_weights.json
