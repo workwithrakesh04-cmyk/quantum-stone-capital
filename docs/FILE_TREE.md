@@ -1,14 +1,18 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-30 19:22 UTC
+Auto-generated: 2026-09-30 19:28 UTC
 
-Total files: 138
+Total files: 151
 
 ```
 .gitignore
 KNOWLEDGE_BASE.md
 PROJECT_STATE.md
 README.md
+backtest/__init__.py
+beta_brain/__init__.py
+beta_brain/debate/__init__.py
+beta_brain/jury/__init__.py
 brokers/__init__.py
 brokers/base_broker.py
 brokers/broker_pool.py
@@ -16,7 +20,9 @@ brokers/mt5_broker.py
 brokers/paper_broker.py
 brokers/sim_broker.py
 config/accounts.yaml
+config/consensus.yaml
 config/master.yaml
+consensus/__init__.py
 core/__init__.py
 core/account_manager.py
 core/account_router.py
@@ -45,7 +51,10 @@ dashboard/state.py
 dashboard/static/app.js
 dashboard/static/style.css
 dashboard/templates/index.html
+data/models/brain/current.json
+docs/BETA_BRAIN.md
 docs/FILE_TREE.md
+docs/HYBRID_ARCHITECTURE.md
 docs/STEP_LOG.md
 feeds/__init__.py
 feeds/aggregator.py
@@ -60,6 +69,7 @@ jurors/base_juror.py
 jurors/execution_juror.py
 jurors/risk_juror.py
 jurors/strategy_juror.py
+knowledge/__init__.py
 layers/__init__.py
 layers/layer0_data.py
 layers/layer1_account_rules.py
@@ -94,6 +104,7 @@ scripts/run_brain.py
 scripts/run_dashboard.py
 scripts/run_live.py
 scripts/run_paper.py
+scripts/train_brain_daily.py
 scripts/update_file_tree.py
 strategies/__init__.py
 strategies/elliott_wave/wave3_entries.yaml
@@ -107,6 +118,7 @@ strategies/order_flow/footprint_setups.yaml
 strategies/registry.py
 strategies/signal_filter.py
 strategies/vpa/coulling_vpa.yaml
+strategies_py/__init__.py
 tests/__init__.py
 tests/test_account_manager.py
 tests/test_debate_engine.py
@@ -133,6 +145,7 @@ tests/test_signal_filter.py
 tests/test_strategy_registry.py
 tests/test_utils.py
 tests/test_vpa.py
+training/__init__.py
 utils/__init__.py
 utils/fibonacci.py
 utils/logger.py
