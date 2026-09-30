@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-30 19:37 UTC
+Auto-generated: 2026-09-30 19:39 UTC
 
-Total files: 177
+Total files: 181
 
 ```
 .gitignore
@@ -62,6 +62,10 @@ data/models/brain/2026-09-30/arbiter_thresholds.json
 data/models/brain/2026-09-30/meta.json
 data/models/brain/2026-09-30/strategy_weights.json
 data/models/brain/2026-09-30/training_report.json
+data/models/brain/2026-10-01/arbiter_thresholds.json
+data/models/brain/2026-10-01/meta.json
+data/models/brain/2026-10-01/strategy_weights.json
+data/models/brain/2026-10-01/training_report.json
 data/models/brain/current.json
 docs/BETA_BRAIN.md
 docs/FILE_TREE.md

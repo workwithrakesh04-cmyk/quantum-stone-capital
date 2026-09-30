@@ -253,3 +253,4 @@ _(steps will be appended here as we build)_
 - [2026-10-01 00:57] [Step 162] Hybrid Delivery 2: beta_brain 6 standalone modules + 62 tests (fixed shadow_tracker ATR-zero test bug)
 - [2026-10-01 01:04] [Step 163] Hybrid Delivery 3b: fix UTF-8 BOM issue in JSON readers + smoke-test training cycle
 - [2026-10-01 01:07] [Step 164] Hybrid Delivery 3c: trainer auto-detects newest active JSONL (timezone-safe)
+- [2026-10-01 01:09] [Step 165] Hybrid Delivery 3d: encoding-tolerant JSONL reader + clean UTF-8 append demo
