@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-10-01 07:50 UTC
+Auto-generated: 2026-10-01 07:52 UTC
 
-Total files: 271
+Total files: 280
 
 ```
 .gitignore
@@ -12,6 +12,7 @@ README.md
 backtest/__init__.py
 beta_brain/__init__.py
 beta_brain/account_guard.py
+beta_brain/beta_brain.py
 beta_brain/debate/__init__.py
 beta_brain/debate/argument_scorer.py
 beta_brain/debate/buy_bot.py
@@ -38,11 +39,15 @@ brokers/mt5_broker.py
 brokers/paper_broker.py
 brokers/sim_broker.py
 config/accounts.yaml
+config/beta_personal.yaml
+config/beta_prop.yaml
 config/consensus.yaml
 config/master.yaml
 config/strategy_regime_filters.yaml
 config/strategy_tiers.yaml
 consensus/__init__.py
+consensus/agreement.py
+consensus/arbiter.py
 consensus/audit.py
 core/__init__.py
 core/account_manager.py
@@ -140,6 +145,7 @@ scripts/generate_sample_data.py
 scripts/log_step.ps1
 scripts/run_brain.py
 scripts/run_dashboard.py
+scripts/run_hybrid.py
 scripts/run_live.py
 scripts/run_paper.py
 scripts/train_brain_daily.py
@@ -210,6 +216,7 @@ strategies_py/volatility/rmd_trail.py
 tests/__init__.py
 tests/test_account_manager.py
 tests/test_beta_account_guard.py
+tests/test_beta_brain.py
 tests/test_beta_debate_bots.py
 tests/test_beta_debate_engine.py
 tests/test_beta_debate_transcript.py
@@ -224,6 +231,7 @@ tests/test_beta_shadow_tracker.py
 tests/test_beta_signal.py
 tests/test_beta_strategy_analyzer.py
 tests/test_beta_verdict_engine.py
+tests/test_consensus_arbiter.py
 tests/test_consensus_audit.py
 tests/test_debate_engine.py
 tests/test_elliott_wave.py
@@ -232,6 +240,7 @@ tests/test_fibonacci.py
 tests/test_footprint.py
 tests/test_harmonic.py
 tests/test_harmonic_strategies_load.py
+tests/test_hybrid_integration.py
 tests/test_ict_strategies_load.py
 tests/test_integration_pipeline.py
 tests/test_knowledge_loader.py

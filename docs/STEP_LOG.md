@@ -265,3 +265,4 @@ _(steps will be appended here as we build)_
 
 ### [CHECKPOINT] Hybrid deliveries 1-5 complete
 - [2026-10-01 13:20] [Step 174] Checkpoint: Hybrid deliveries 1-5 complete
+- [2026-10-01 13:22] [Step 175] Fix: add sys.path to run_hybrid.py so it runs as a direct script

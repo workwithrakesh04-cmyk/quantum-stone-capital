@@ -1,6 +1,16 @@
-﻿"""Hybrid runner: QSC Brain + Beta Brain + Arbiter. Dry run only."""
+﻿"""Hybrid runner: QSC Brain + Beta Brain + Arbiter. Dry run only.
+
+Run as:
+    python scripts/run_hybrid.py --once
+    python -m scripts.run_hybrid --once
+"""
 import argparse
+import sys
 import time
+from pathlib import Path
+
+# Ensure project root is on sys.path when running as a script
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from dashboard.state import get_state, Decision
 from core.market_context import MarketContext
