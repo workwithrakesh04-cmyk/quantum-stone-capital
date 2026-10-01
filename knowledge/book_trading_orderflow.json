@@ -1,0 +1,59 @@
+﻿{
+  "book_id": "TOF",
+  "title": "Trading Order Flow",
+  "author": "Michael Valtos",
+  "category": "order_flow",
+  "core_concepts": [
+    "Bid/Ask volume analysis",
+    "Aggressive buyers/sellers",
+    "Passive participants",
+    "COT (Commitment of Traders) in bar",
+    "Trapped traders",
+    "Absorption",
+    "Initiative activity",
+    "Imbalance levels",
+    "Stacked imbalance",
+    "Single prints",
+    "Big trade detection",
+    "Delta analysis"
+  ],
+  "rules": {
+    "long_entries": [
+      {"rule": "Buying imbalance at support (offer volume > 250% bid)", "weight": 0.70},
+      {"rule": "Stacked buying imbalances (3+ levels)", "weight": 0.75},
+      {"rule": "Trapped sellers at low - high bid volume but no continuation down", "weight": 0.70},
+      {"rule": "Absorption at low with delta flat", "weight": 0.65},
+      {"rule": "COT at low of bar, bar closes high", "weight": 0.60},
+      {"rule": "Initiative buying after value area breakout", "weight": 0.65},
+      {"rule": "Single print at low - buyers stepped in aggressively", "weight": 0.60}
+    ],
+    "short_entries": [
+      {"rule": "Selling imbalance at resistance (bid volume > 250% offer)", "weight": 0.70},
+      {"rule": "Stacked selling imbalances (3+ levels)", "weight": 0.75},
+      {"rule": "Trapped buyers at high - high offer volume but no continuation up", "weight": 0.70},
+      {"rule": "Absorption at high with delta flat", "weight": 0.65},
+      {"rule": "COT at high of bar, bar closes low", "weight": 0.60},
+      {"rule": "Initiative selling after value area breakout down", "weight": 0.65},
+      {"rule": "Single print at high - sellers stepped in aggressively", "weight": 0.60}
+    ],
+    "exits": [
+      {"rule": "Next volume node", "type": "take_profit"},
+      {"rule": "Beyond last imbalance", "type": "stop_loss"},
+      {"rule": "Delta divergence against position", "type": "exit_signal"}
+    ]
+  },
+  "imbalance_thresholds": {
+    "buying_imbalance": 2.5,
+    "selling_imbalance": 2.5,
+    "stacked_imbalance_count": 3,
+    "big_trade_threshold": 100
+  },
+  "applicable_timeframes": ["1m", "5m", "15m"],
+  "confidence_baseline": 0.65,
+  "synergies": {
+    "TD": "Compatible order flow frameworks",
+    "book_52": "VSA + order flow = strong confirmation",
+    "book_62": "S/D zones anchor order flow entries",
+    "book_60": "Liquidity sweeps precede imbalances"
+  }
+}

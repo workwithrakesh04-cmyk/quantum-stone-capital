@@ -1,0 +1,51 @@
+﻿{
+  "book_id": "book_56",
+  "title": "Phantom Notebook",
+  "author": "PhantomFX",
+  "category": "order_flow",
+  "core_concepts": [
+    "Order blocks",
+    "Fair Value Gaps (FVG)",
+    "Imbalance",
+    "Liquidity voids",
+    "Break of Structure (BoS)",
+    "Market Structure Shift (MSS)",
+    "Optimal Trade Entry (OTE)",
+    "Premium/Discount zones"
+  ],
+  "rules": {
+    "long_entries": [
+      {"rule": "Bullish order block (last down candle before impulse up)", "weight": 0.70},
+      {"rule": "Bullish FVG fills (price returns to unfilled gap)", "weight": 0.65},
+      {"rule": "Market Structure Shift bullish (BoS up)", "weight": 0.60},
+      {"rule": "Price in discount zone (below 50% of range)", "weight": 0.55},
+      {"rule": "Optimal Trade Entry at 62-79% retracement", "weight": 0.65},
+      {"rule": "Liquidity void fill + reversal", "weight": 0.70}
+    ],
+    "short_entries": [
+      {"rule": "Bearish order block (last up candle before impulse down)", "weight": 0.70},
+      {"rule": "Bearish FVG fills", "weight": 0.65},
+      {"rule": "Market Structure Shift bearish (BoS down)", "weight": 0.60},
+      {"rule": "Price in premium zone (above 50% of range)", "weight": 0.55},
+      {"rule": "Optimal Trade Entry at 62-79% retracement", "weight": 0.65},
+      {"rule": "Liquidity void fill + reversal", "weight": 0.70}
+    ],
+    "exits": [
+      {"rule": "Next opposing order block", "type": "take_profit"},
+      {"rule": "Below/above order block", "type": "stop_loss"},
+      {"rule": "Opposite liquidity void", "type": "take_profit"}
+    ]
+  },
+  "structure_rules": {
+    "break_of_structure": "Price closes beyond prior swing high/low",
+    "market_structure_shift": "BoS followed by opposite leg",
+    "ote_zone": [0.62, 0.79]
+  },
+  "applicable_timeframes": ["1m", "5m", "15m"],
+  "confidence_baseline": 0.65,
+  "synergies": {
+    "book_62": "Order blocks align with S/D zones",
+    "book_60": "Liquidity sweeps precede FVG fills",
+    "TD": "Order flow confirms order block validity"
+  }
+}

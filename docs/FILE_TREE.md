@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-10-01 07:34 UTC
+Auto-generated: 2026-10-01 07:38 UTC
 
-Total files: 239
+Total files: 260
 
 ```
 .gitignore
@@ -149,6 +149,8 @@ strategies/vpa/coulling_vpa.yaml
 strategies_py/__init__.py
 strategies_py/base.py
 strategies_py/ict_smc/__init__.py
+strategies_py/ict_smc/fvg_strategy.py
+strategies_py/ict_smc/luxalgo_fvg.py
 strategies_py/liquidity/__init__.py
 strategies_py/liquidity/bs_ss_liquidity.py
 strategies_py/liquidity/false_breakout.py
@@ -157,6 +159,11 @@ strategies_py/liquidity/quasimodo.py
 strategies_py/liquidity/turtle_soup.py
 strategies_py/loader.py
 strategies_py/ml_adaptive/__init__.py
+strategies_py/ml_adaptive/adaptive_rsi_ml.py
+strategies_py/ml_adaptive/ai_source_ma.py
+strategies_py/ml_adaptive/ai_trend_flow.py
+strategies_py/ml_adaptive/ml_momentum.py
+strategies_py/ml_adaptive/ml_rsi.py
 strategies_py/order_flow/__init__.py
 strategies_py/order_flow/absorption.py
 strategies_py/order_flow/delta_divergence.py
@@ -167,6 +174,11 @@ strategies_py/order_flow/trapped_traders.py
 strategies_py/order_flow/value_area.py
 strategies_py/order_flow/volume_cluster.py
 strategies_py/patterns/__init__.py
+strategies_py/patterns/diamond_cancan.py
+strategies_py/patterns/double_top_bottom.py
+strategies_py/patterns/engulfing_pinbar.py
+strategies_py/patterns/head_shoulders.py
+strategies_py/patterns/reversal_123.py
 strategies_py/registry.py
 strategies_py/supply_demand/__init__.py
 strategies_py/supply_demand/flag_limits.py
@@ -176,7 +188,15 @@ strategies_py/supply_demand/sd_zones.py
 strategies_py/supply_demand/three_drive.py
 strategies_py/tier_manager.py
 strategies_py/trend/__init__.py
+strategies_py/trend/cardwell_rsi.py
+strategies_py/trend/ichimoku_rsi.py
+strategies_py/trend/intermarket.py
 strategies_py/volatility/__init__.py
+strategies_py/volatility/apex_flow.py
+strategies_py/volatility/mad_loop_bb.py
+strategies_py/volatility/mad_loop_combined.py
+strategies_py/volatility/mad_loop_fl.py
+strategies_py/volatility/rmd_trail.py
 tests/__init__.py
 tests/test_account_manager.py
 tests/test_beta_account_guard.py
@@ -217,6 +237,7 @@ tests/test_paper_broker.py
 tests/test_prop_rules.py
 tests/test_signal_filter.py
 tests/test_strategies_py_base.py
+tests/test_strategies_py_final_batch.py
 tests/test_strategies_py_liquidity_sd.py
 tests/test_strategies_py_loader.py
 tests/test_strategies_py_order_flow.py

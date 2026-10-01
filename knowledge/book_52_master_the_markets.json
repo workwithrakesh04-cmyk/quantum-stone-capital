@@ -1,0 +1,48 @@
+﻿{
+  "book_id": "book_52",
+  "title": "Master the Markets",
+  "author": "Tom Williams",
+  "category": "vsa",
+  "core_concepts": [
+    "Volume Spread Analysis (VSA)",
+    "No Demand bar",
+    "No Supply bar",
+    "Stopping Volume",
+    "Climactic Volume",
+    "Effort vs Result",
+    "Upthrust / Shakeout",
+    "Test bar",
+    "Selling climax / Buying climax"
+  ],
+  "rules": {
+    "long_entries": [
+      {"rule": "Stopping volume at demand - high volume, narrow spread, close up", "weight": 0.75},
+      {"rule": "No Supply bar - low volume down bar in uptrend", "weight": 0.60},
+      {"rule": "Test bar - low volume at support, closes up", "weight": 0.65},
+      {"rule": "Buying climax - extreme volume at bottom with reversal", "weight": 0.70},
+      {"rule": "Effort to fall with no result - high volume no down move", "weight": 0.70}
+    ],
+    "short_entries": [
+      {"rule": "Upthrust - high volume up bar closes on low", "weight": 0.75},
+      {"rule": "No Demand bar - low volume up bar in downtrend", "weight": 0.60},
+      {"rule": "Selling climax - extreme volume at top with reversal", "weight": 0.70},
+      {"rule": "Effort to rise with no result - high volume no up move", "weight": 0.70}
+    ],
+    "exits": [
+      {"rule": "Opposing VSA signal (upthrust after long, stopping volume after short)", "type": "take_profit"},
+      {"rule": "Volume dries up in trend direction", "type": "trailing_exit"}
+    ]
+  },
+  "vsa_metrics": {
+    "volume_classification": ["low", "average", "high", "ultra_high", "extreme"],
+    "spread_classification": ["narrow", "average", "wide", "ultra_wide"],
+    "close_position": ["near_high", "mid", "near_low"]
+  },
+  "applicable_timeframes": ["5m", "15m", "1h"],
+  "confidence_baseline": 0.65,
+  "synergies": {
+    "book_62": "VSA validates S/D zone reactions",
+    "TD": "VSA + order flow = strong confirmation",
+    "TOF": "Volume analysis aligns with VSA"
+  }
+}

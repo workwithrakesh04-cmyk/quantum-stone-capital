@@ -1,12 +1,34 @@
 ﻿"""BaseStrategy - abstract interface for all Beta Python strategies.
 
 Self-contained: uses beta_brain.signal.Signal, not QSC's Signal.
+
+_get_rule_weight() queries the knowledge base (option A: silent fallback).
 """
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Optional
+from loguru import logger
 
 
 from beta_brain.signal import Signal
+
+
+# Lazily-loaded singleton, so tests without knowledge base still work
+_kb = None
+_kb_load_attempted = False
+
+
+def _get_kb():
+    global _kb, _kb_load_attempted
+    if _kb_load_attempted:
+        return _kb
+    _kb_load_attempted = True
+    try:
+        from knowledge.knowledge_loader import get_knowledge_loader
+        _kb = get_knowledge_loader()
+    except Exception as e:
+        logger.warning(f"BaseStrategy: knowledge base unavailable: {e}")
+        _kb = None
+    return _kb
 
 
 class BaseStrategy(ABC):
@@ -20,7 +42,6 @@ class BaseStrategy(ABC):
 
     @abstractmethod
     def analyze(self, candles: List[dict]) -> Signal:
-        """candles: OHLCV dicts (oldest -> newest). Returns Signal."""
         pass
 
     # -------- helpers --------
@@ -76,5 +97,21 @@ class BaseStrategy(ABC):
         return sum(ranges) / n
 
     def _get_rule_weight(self, direction: str, keyword: str = "") -> float:
-        """Fallback weight. Knowledge base integration in 5a-4."""
-        return 0.5
+        """Query knowledge base for the best matching rule weight.
+        Option A: silent fallback to 0.5 if knowledge base unavailable
+        or BOOK_ID not found."""
+        kb = _get_kb()
+        if kb is None or not self.BOOK_ID:
+            return 0.5
+        try:
+            rules = kb.get_rules(self.BOOK_ID, direction)
+        except Exception:
+            return 0.5
+        if not rules:
+            return 0.5
+        if keyword:
+            keyword = keyword.lower()
+            matching = [r for r in rules if keyword in r.get("rule", "").lower()]
+            if matching:
+                return max(r.get("weight", 0.5) for r in matching)
+        return max(r.get("weight", 0.5) for r in rules)

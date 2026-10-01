@@ -1,0 +1,56 @@
+﻿{
+  "book_id": "TD",
+  "title": "Trader Dale ORDER FLOW Trading Setups",
+  "author": "Trader Dale",
+  "category": "order_flow",
+  "core_concepts": [
+    "Volume clusters",
+    "Multiple nodes",
+    "Trades filter",
+    "Stacked imbalances",
+    "Unfinished Business (FTR)",
+    "Take profit from volume",
+    "Stop loss from volume",
+    "Absorption",
+    "Delta divergence"
+  ],
+  "rules": {
+    "long_entries": [
+      {"rule": "Volume cluster within trend (return to strong buy cluster)", "weight": 0.70},
+      {"rule": "Volume cluster within rejection (rejection of lower prices)", "weight": 0.75},
+      {"rule": "Multiple high-volume nodes at same level", "weight": 0.65},
+      {"rule": "Big buy limit order (25+ contracts in EUR futures scale)", "weight": 0.60},
+      {"rule": "Absorption at support (heavy volume, no downside continuation)", "weight": 0.70},
+      {"rule": "Aggressive buyers + delta turns positive at support", "weight": 0.70},
+      {"rule": "Cumulative delta divergence (price down, delta up)", "weight": 0.75}
+    ],
+    "short_entries": [
+      {"rule": "Volume cluster within trend (return to strong sell cluster)", "weight": 0.70},
+      {"rule": "Volume cluster within rejection (rejection of higher prices)", "weight": 0.75},
+      {"rule": "Multiple high-volume nodes at same level", "weight": 0.65},
+      {"rule": "Big sell limit order", "weight": 0.60},
+      {"rule": "Absorption at resistance", "weight": 0.70},
+      {"rule": "Aggressive sellers + delta turns negative at resistance", "weight": 0.70},
+      {"rule": "Cumulative delta divergence (price up, delta down)", "weight": 0.75}
+    ],
+    "exits": [
+      {"rule": "Take profit just before heavy volume area", "type": "take_profit"},
+      {"rule": "Stop behind heavy volume area (10-20% ATR)", "type": "stop_loss"},
+      {"rule": "Trail using 5m imbalances as long as on your side", "type": "trailing"}
+    ]
+  },
+  "volume_metrics": {
+    "cluster_detection": "large single-price volumes",
+    "multiple_nodes": "high-volume nodes across consecutive bars",
+    "trades_filter": {"min_contracts": 25, "instrument": "6E_futures"},
+    "imbalance_ratio": 3.0
+  },
+  "applicable_timeframes": ["1m", "5m", "15m"],
+  "confidence_baseline": 0.65,
+  "synergies": {
+    "TOF": "Same order flow concepts, complementary setups",
+    "VP": "Volume profile maps the clusters",
+    "book_52": "VSA identifies absorption",
+    "book_62": "S/D zones align with volume clusters"
+  }
+}

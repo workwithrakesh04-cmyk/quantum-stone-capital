@@ -278,3 +278,38 @@ Commit: pending
 
 **Next:** 5a-4b (knowledge base: knowledge_loader + 10 book JSONs +
 integration into strategies_py.base._get_rule_weight)
+---
+
+## Delivery 5a-4b — 2026-10-01 — Knowledge Base Port
+Commit: pending
+
+**Created:**
+- `knowledge/books_index.json`
+- `knowledge/book_52_master_the_markets.json` (VSA)
+- `knowledge/book_56_phantom_notebook.json` (Order blocks, FVG)
+- `knowledge/book_60_rcv_notes.json` (Liquidity sweeps)
+- `knowledge/book_61_supply_demand_1.json` (DBR/RBR/DBD/RBD)
+- `knowledge/book_62_supply_demand_2.json` (Quasimodo, CanCan, 3Drive)
+- `knowledge/book_trader_dale_orderflow.json` (Volume clusters)
+- `knowledge/book_trading_orderflow.json` (Trapped traders, COT)
+- `knowledge/book_volume_profile_nextgen.json` (POC, VAH/VAL)
+
+**Rewrote:**
+- `knowledge/knowledge_loader.py` (full query API)
+
+**Modified:**
+- `strategies_py/base.py` — `_get_rule_weight()` now queries knowledge base
+  (option A: silent fallback to 0.5 if unavailable)
+
+**Created tests:**
+- `tests/test_knowledge_loader.py` (8 tests)
+
+**Tests:** 489 → ~497 (+8)
+
+**Strategy audit:** 38 strategies load correctly. HFT_Brain has 42
+files in strategies/ of which 4 are infrastructure (`__init__.py`,
+`base_strategy.py`, `strategy_registry.py`, `tier_manager.py`). Parity
+achieved: 42 - 4 = 38.
+
+**Next:** 5b (BetaBrain wrapper + ConsensusArbiter + run_hybrid.py
++ main_brain_v2 patch + dashboard patch) — CHECKPOINT

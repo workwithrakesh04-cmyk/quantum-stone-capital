@@ -1,0 +1,48 @@
+﻿{
+  "book_id": "book_61",
+  "title": "Reading The Market - Supply And Demand 1",
+  "author": "ReadTheMarket.com",
+  "category": "supply_demand",
+  "volume": 1,
+  "core_concepts": [
+    "Fresh vs tested zones",
+    "Drop-Base-Rally (DBR)",
+    "Rally-Base-Rally (RBR)",
+    "Drop-Base-Drop (DBD)",
+    "Rally-Base-Drop (RBD)",
+    "Zone strength",
+    "Time in zone",
+    "Departure strength"
+  ],
+  "rules": {
+    "long_entries": [
+      {"rule": "Fresh demand zone (never tested)", "weight": 0.75},
+      {"rule": "Strong departure from demand (impulsive move)", "weight": 0.65},
+      {"rule": "Short time in demand zone (base < 5 candles)", "weight": 0.60},
+      {"rule": "Price returns to demand with slow approach", "weight": 0.55},
+      {"rule": "DBR pattern (drop-base-rally)", "weight": 0.70},
+      {"rule": "RBR pattern (rally-base-rally)", "weight": 0.65}
+    ],
+    "short_entries": [
+      {"rule": "Fresh supply zone (never tested)", "weight": 0.75},
+      {"rule": "Strong departure from supply (impulsive drop)", "weight": 0.65},
+      {"rule": "Short time in supply zone (base < 5 candles)", "weight": 0.60},
+      {"rule": "Price returns to supply with slow approach", "weight": 0.55},
+      {"rule": "RBD pattern (rally-base-drop)", "weight": 0.70},
+      {"rule": "DBD pattern (drop-base-drop)", "weight": 0.65}
+    ],
+    "exits": [
+      {"rule": "Next opposing zone", "type": "take_profit"},
+      {"rule": "Zone break + buffer", "type": "stop_loss"}
+    ]
+  },
+  "zone_scoring": {
+    "freshness": 0.30,
+    "departure_strength": 0.25,
+    "time_in_base": 0.20,
+    "approach_speed": 0.15,
+    "zone_width": 0.10
+  },
+  "applicable_timeframes": ["5m", "15m", "1h"],
+  "confidence_baseline": 0.60
+}

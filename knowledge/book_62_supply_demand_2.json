@@ -1,0 +1,73 @@
+﻿{
+  "book_id": "book_62",
+  "title": "Reading The Market - Supply And Demand 2",
+  "author": "ReadTheMarket.com",
+  "category": "supply_demand",
+  "volume": 2,
+  "core_concepts": [
+    "Supply and Demand (S/D) zones",
+    "Price Action Zones (PAZ)",
+    "Caps on Price (RBD/DBR)",
+    "Flag Limits (DBD/RBR)",
+    "Failure to Return (FTR)",
+    "Compression",
+    "3Drive pattern",
+    "Engulf pattern",
+    "Quasimodo (QM)",
+    "Diamond pattern",
+    "CanCan pattern"
+  ],
+  "rules": {
+    "long_entries": [
+      {"rule": "Price returns to fresh demand zone (RBR or DBR)", "weight": 0.70, "confluence": ["volume_cluster", "delta_positive"]},
+      {"rule": "Bullish engulfing candle at demand zone", "weight": 0.55, "confluence": ["delta_positive"]},
+      {"rule": "Quasimodo bullish pattern completed at S/D zone", "weight": 0.65, "confluence": ["liquidity_sweep"]},
+      {"rule": "Diamond pattern at bottom with demand confirmation", "weight": 0.60, "confluence": ["volume_spike"]},
+      {"rule": "CanCan pattern bullish reversal at demand zone", "weight": 0.55, "confluence": []},
+      {"rule": "3Drive bullish pattern completed with FTR confirmation", "weight": 0.70, "confluence": ["delta_positive"]},
+      {"rule": "Compression bottom breakout with strong bullish candle", "weight": 0.60, "confluence": ["volume_cluster"]},
+      {"rule": "Failure to Return (FTR) to broken demand = continuation long", "weight": 0.55, "confluence": []}
+    ],
+    "short_entries": [
+      {"rule": "Price returns to fresh supply zone (RBD or DBD)", "weight": 0.70, "confluence": ["volume_cluster", "delta_negative"]},
+      {"rule": "Bearish engulfing candle at supply zone", "weight": 0.55, "confluence": ["delta_negative"]},
+      {"rule": "Quasimodo bearish pattern completed at S/D zone", "weight": 0.65, "confluence": ["liquidity_sweep"]},
+      {"rule": "Diamond pattern at top with supply confirmation", "weight": 0.60, "confluence": ["volume_spike"]},
+      {"rule": "CanCan pattern bearish reversal at supply zone", "weight": 0.55, "confluence": []},
+      {"rule": "3Drive bearish pattern completed with FTR confirmation", "weight": 0.70, "confluence": ["delta_negative"]},
+      {"rule": "Compression top breakdown with strong bearish candle", "weight": 0.60, "confluence": ["volume_cluster"]},
+      {"rule": "Failure to Return (FTR) to broken supply = continuation short", "weight": 0.55, "confluence": []}
+    ],
+    "exits": [
+      {"rule": "Next opposing S/D zone", "type": "take_profit", "weight": 0.70},
+      {"rule": "Below/above S/D zone + buffer", "type": "stop_loss", "weight": 0.80},
+      {"rule": "Trail behind structure after 1:1 RR", "type": "trailing", "weight": 0.60}
+    ]
+  },
+  "confirmation_patterns": {
+    "engulf": {"direction": "reversal", "weight": 0.55},
+    "quasimodo": {"direction": "reversal", "weight": 0.65},
+    "diamond": {"direction": "reversal", "weight": 0.60},
+    "cancan": {"direction": "reversal", "weight": 0.55},
+    "3drive": {"direction": "reversal", "weight": 0.70},
+    "compression": {"direction": "breakout", "weight": 0.60},
+    "ftr": {"direction": "continuation", "weight": 0.55}
+  },
+  "zone_types": {
+    "RBR": "Rally-Base-Rally (demand continuation)",
+    "DBR": "Drop-Base-Rally (demand reversal)",
+    "RBD": "Rally-Base-Drop (supply reversal)",
+    "DBD": "Drop-Base-Drop (supply continuation)"
+  },
+  "applicable_timeframes": ["1m", "5m", "15m", "1h"],
+  "confidence_baseline": 0.60,
+  "synergies": {
+    "book_52": "VSA confirms S/D reactions (volume + spread analysis)",
+    "book_56": "Order blocks validate S/D zones",
+    "book_60": "Liquidity sweeps precede S/D zone touches",
+    "book_61": "Volume 1 provides base framework",
+    "TD": "Trader Dale order flow provides entry timing",
+    "TOF": "Valtos order flow confirms institutional presence",
+    "VP": "Volume profile identifies high-conviction S/D zones"
+  }
+}

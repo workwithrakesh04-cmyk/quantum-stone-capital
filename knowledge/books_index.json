@@ -1,0 +1,29 @@
+﻿{
+  "version": "1.0.0",
+  "total_books": 62,
+  "books": [
+    {"id": "book_01_50", "title": "Previously Integrated 1-50", "category": "various", "status": "indexed"},
+    {"id": "book_51", "title": "Psico-Cibernetica", "author": "Maxwell Maltz", "category": "psychology"},
+    {"id": "book_52", "title": "Master the Markets", "author": "Tom Williams", "category": "vsa", "file": "book_52_master_the_markets.json"},
+    {"id": "book_53", "title": "Mastering the Trade", "author": "John F. Carter", "category": "discretionary"},
+    {"id": "book_54", "title": "Introduction to Probability", "author": "Bertsekas & Tsitsiklis", "category": "math"},
+    {"id": "book_55", "title": "Notas Hagamos Profits", "author": "NORONFX", "category": "discretionary"},
+    {"id": "book_56", "title": "Phantom Notebook - FREE", "author": "PhantomFX", "category": "order_flow", "file": "book_56_phantom_notebook.json"},
+    {"id": "book_57", "title": "Modern Elliott Wave Theory", "author": "Oscar G. Cagigas", "category": "elliott"},
+    {"id": "book_58", "title": "Prop Trader Secrets", "author": "FundedNext", "category": "prop"},
+    {"id": "book_59", "title": "Probability: Theory and Examples", "author": "Rick Durrett", "category": "math"},
+    {"id": "book_60", "title": "RCV Notes", "author": "RCV Visionaries", "category": "liquidity", "file": "book_60_rcv_notes.json"},
+    {"id": "book_61", "title": "ReadingTheMarket - Supply And Demand 1", "author": "ReadTheMarket.com", "category": "supply_demand", "file": "book_61_supply_demand_1.json"},
+    {"id": "book_62", "title": "ReadingTheMarket - Supply And Demand 2", "author": "ReadTheMarket.com", "category": "supply_demand", "file": "book_62_supply_demand_2.json"},
+    {"id": "TD", "title": "Trader Dale ORDER FLOW Trading Setups", "author": "Trader Dale", "category": "order_flow", "file": "book_trader_dale_orderflow.json"},
+    {"id": "VP", "title": "Volume Profile / Market Profile Next Generation", "author": "Johannes Forthmann", "category": "volume_profile", "file": "book_volume_profile_nextgen.json"},
+    {"id": "TOF", "title": "Trading Order Flow", "author": "Michael Valtos", "category": "order_flow", "file": "book_trading_orderflow.json"}
+  ],
+  "categories": {
+    "vsa": ["book_52"],
+    "order_flow": ["book_56", "TD", "TOF"],
+    "liquidity": ["book_60"],
+    "supply_demand": ["book_61", "book_62"],
+    "volume_profile": ["VP"]
+  }
+}

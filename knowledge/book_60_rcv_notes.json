@@ -1,0 +1,51 @@
+﻿{
+  "book_id": "book_60",
+  "title": "RCV Notes",
+  "author": "RCV Visionaries",
+  "category": "liquidity",
+  "core_concepts": [
+    "Liquidity pools",
+    "Stop hunts",
+    "Liquidity sweeps",
+    "Liquidity grabs",
+    "Inducement",
+    "Equal highs/lows",
+    "Trendline liquidity",
+    "Session liquidity"
+  ],
+  "rules": {
+    "long_entries": [
+      {"rule": "Sweep of sell-side liquidity below equal lows then reversal", "weight": 0.75},
+      {"rule": "Liquidity grab below previous day low with strong close", "weight": 0.70},
+      {"rule": "Stop hunt below session low completes with bullish engulf", "weight": 0.65},
+      {"rule": "Inducement broken below then reclaimed", "weight": 0.60},
+      {"rule": "Trendline liquidity swept then price closes above", "weight": 0.60}
+    ],
+    "short_entries": [
+      {"rule": "Sweep of buy-side liquidity above equal highs then reversal", "weight": 0.75},
+      {"rule": "Liquidity grab above previous day high with strong close", "weight": 0.70},
+      {"rule": "Stop hunt above session high completes with bearish engulf", "weight": 0.65},
+      {"rule": "Inducement broken above then reclaimed", "weight": 0.60},
+      {"rule": "Trendline liquidity swept then price closes below", "weight": 0.60}
+    ],
+    "exits": [
+      {"rule": "Opposing liquidity pool", "type": "take_profit"},
+      {"rule": "Beyond swept level + buffer", "type": "stop_loss"}
+    ]
+  },
+  "liquidity_zones": {
+    "equal_highs": "Buy-side liquidity resting above",
+    "equal_lows": "Sell-side liquidity resting below",
+    "previous_day_high": "Buy-side liquidity",
+    "previous_day_low": "Sell-side liquidity",
+    "session_high": "Buy-side liquidity",
+    "session_low": "Sell-side liquidity"
+  },
+  "applicable_timeframes": ["1m", "5m", "15m", "1h"],
+  "confidence_baseline": 0.65,
+  "synergies": {
+    "book_62": "Liquidity sweeps often coincide with S/D zone touches",
+    "book_56": "Sweeps create FVGs and order blocks",
+    "TD": "Order flow confirms post-sweep aggression"
+  }
+}

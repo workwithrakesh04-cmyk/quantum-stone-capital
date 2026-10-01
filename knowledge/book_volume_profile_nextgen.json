@@ -1,0 +1,56 @@
+﻿{
+  "book_id": "VP",
+  "title": "Volume Profile / Market Profile Next Generation",
+  "author": "Johannes Forthmann",
+  "category": "volume_profile",
+  "core_concepts": [
+    "Volume Profile (VP)",
+    "Market Profile (MP)",
+    "Point of Control (POC)",
+    "Value Area High (VAH)",
+    "Value Area Low (VAL)",
+    "Naked POC",
+    "Initial Balance",
+    "Range Extension",
+    "Single Prints",
+    "Buying/Selling Tail",
+    "Double Distribution"
+  ],
+  "rules": {
+    "long_entries": [
+      {"rule": "Price returns to naked POC from above", "weight": 0.70},
+      {"rule": "Buying tail (single prints) at bottom", "weight": 0.75},
+      {"rule": "Double distribution - return to first distribution", "weight": 0.65},
+      {"rule": "Price rejects VAL and reclaims above", "weight": 0.60},
+      {"rule": "Open above VAH and holds (acceptance)", "weight": 0.65},
+      {"rule": "Failed breakdown below VAL with strong recovery", "weight": 0.70}
+    ],
+    "short_entries": [
+      {"rule": "Price returns to naked POC from below", "weight": 0.70},
+      {"rule": "Selling tail at top", "weight": 0.75},
+      {"rule": "Double distribution - return to first distribution", "weight": 0.65},
+      {"rule": "Price rejects VAH and reclaims below", "weight": 0.60},
+      {"rule": "Open below VAL and holds (acceptance)", "weight": 0.65},
+      {"rule": "Failed breakout above VAH with strong rejection", "weight": 0.70}
+    ],
+    "exits": [
+      {"rule": "Opposing VA edge", "type": "take_profit"},
+      {"rule": "Beyond POC + buffer", "type": "stop_loss"},
+      {"rule": "Naked POC", "type": "take_profit"}
+    ]
+  },
+  "profile_shapes": {
+    "P": "Bullish continuation early",
+    "b": "Bearish continuation early",
+    "D": "Balanced / range day",
+    "double_distribution": "Trend day marker",
+    "trend_day": "Narrow and tall profile"
+  },
+  "applicable_timeframes": ["5m", "15m", "30m", "1h"],
+  "confidence_baseline": 0.60,
+  "synergies": {
+    "TD": "Volume profile locates the clusters TD trades",
+    "book_62": "VPOC as S/D zone",
+    "book_60": "Naked POC as liquidity magnet"
+  }
+}
