@@ -200,3 +200,30 @@ Commit: pending
 **Next:** 5a-2 (order_flow strategies: absorption, delta_divergence,
 stacked_imbalance, trapped_traders, naked_poc, poc_strategy,
 value_area, volume_cluster)
+---
+
+## Delivery 5a-2 — 2026-10-01 — Order Flow Strategies
+Commit: pending
+
+**Created:**
+- `strategies_py/order_flow/absorption.py`
+- `strategies_py/order_flow/delta_divergence.py`
+- `strategies_py/order_flow/stacked_imbalance.py`
+- `strategies_py/order_flow/trapped_traders.py`
+- `strategies_py/order_flow/naked_poc.py`
+- `strategies_py/order_flow/poc_strategy.py`
+- `strategies_py/order_flow/value_area.py`
+- `strategies_py/order_flow/volume_cluster.py`
+- `tests/test_strategies_py_order_flow.py` (9 tests)
+
+**Tests:** 450 → ~458 (+8)
+
+**Notes:**
+- All 8 strategies instantiate, run on flat candles, and return valid Signals
+- delta_divergence and stacked_imbalance require buy_volume/sell_volume fields
+  (only populated on live TickBuffer data; return HOLD on historical candles)
+- Loader in `strategies_py/loader.py` now finds these classes automatically
+
+**Next:** 5a-3 (liquidity + supply_demand: liquidity_sweep,
+false_breakout, bs_ss_liquidity, turtle_soup, quasimodo, rbd_dbr,
+sd_zones, ftr_compression, flag_limits, three_drive)

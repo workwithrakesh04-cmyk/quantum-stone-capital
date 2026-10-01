@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-09-30 19:57 UTC
+Auto-generated: 2026-10-01 07:27 UTC
 
-Total files: 201
+Total files: 219
 
 ```
 .gitignore
@@ -40,6 +40,8 @@ brokers/sim_broker.py
 config/accounts.yaml
 config/consensus.yaml
 config/master.yaml
+config/strategy_regime_filters.yaml
+config/strategy_tiers.yaml
 consensus/__init__.py
 consensus/audit.py
 core/__init__.py
@@ -145,6 +147,18 @@ strategies/registry.py
 strategies/signal_filter.py
 strategies/vpa/coulling_vpa.yaml
 strategies_py/__init__.py
+strategies_py/base.py
+strategies_py/ict_smc/__init__.py
+strategies_py/liquidity/__init__.py
+strategies_py/loader.py
+strategies_py/ml_adaptive/__init__.py
+strategies_py/order_flow/__init__.py
+strategies_py/patterns/__init__.py
+strategies_py/registry.py
+strategies_py/supply_demand/__init__.py
+strategies_py/tier_manager.py
+strategies_py/trend/__init__.py
+strategies_py/volatility/__init__.py
 tests/__init__.py
 tests/test_account_manager.py
 tests/test_beta_account_guard.py
@@ -184,6 +198,10 @@ tests/test_order_flow_strategies_load.py
 tests/test_paper_broker.py
 tests/test_prop_rules.py
 tests/test_signal_filter.py
+tests/test_strategies_py_base.py
+tests/test_strategies_py_loader.py
+tests/test_strategies_py_registry.py
+tests/test_strategies_py_tier_manager.py
 tests/test_strategy_registry.py
 tests/test_training_loader.py
 tests/test_training_strategy_weights.py
