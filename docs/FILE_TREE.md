@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-10-01 14:00 UTC
+Auto-generated: 2026-10-01 14:10 UTC
 
-Total files: 280
+Total files: 286
 
 ```
 .gitignore
@@ -10,6 +10,8 @@ KNOWLEDGE_BASE.md
 PROJECT_STATE.md
 README.md
 backtest/__init__.py
+backtest/beta_backtester.py
+backtest/reporter.py
 beta_brain/__init__.py
 beta_brain/account_guard.py
 beta_brain/beta_brain.py
@@ -82,6 +84,7 @@ data/models/brain/2026-10-01/meta.json
 data/models/brain/2026-10-01/strategy_weights.json
 data/models/brain/2026-10-01/training_report.json
 data/models/brain/current.json
+docs/BACKTEST_ANALYSIS.md
 docs/BETA_BRAIN.md
 docs/CONTEXT.md
 docs/FILE_TREE.md
@@ -96,6 +99,7 @@ feeds/binance_feed.py
 feeds/biquote_feed.py
 feeds/default_feed.py
 feeds/gud_feed.py
+feeds/historical_loader.py
 feeds/yahoo_feed.py
 jurors/__init__.py
 jurors/base_juror.py
@@ -138,6 +142,7 @@ ml/models/boosted.py
 ml/models/ppo_agent.py
 ml/pipeline.py
 requirements.txt
+scripts/backtest_beta.py
 scripts/build_master_config.py
 scripts/checkpoint.ps1
 scripts/demo_pipeline.py
@@ -216,6 +221,7 @@ strategies_py/volatility/rmd_trail.py
 tests/__init__.py
 tests/test_account_manager.py
 tests/test_beta_account_guard.py
+tests/test_beta_backtester.py
 tests/test_beta_brain.py
 tests/test_beta_debate_bots.py
 tests/test_beta_debate_engine.py

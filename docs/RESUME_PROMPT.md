@@ -247,3 +247,42 @@ Read docs/RESUME_PROMPT.md and docs/BACKTEST_ANALYSIS.md.
 Last completed: Delivery 6 with first backtest run.
 Pending: Delivery 6c (bugs), 7 (tune), or new resources.
 I will provide more books and strategies next."
+---
+
+## New Resources Received (2026-10-01)
+
+**Two books summarized (see docs/RESOURCES_BOOKS_2.md):**
+1. Volume Profile, Market Profile, Order Flow (Forthmann)
+2. Follow the Money (FTM/SMC)
+
+**New concepts not yet in our 38 strategies:**
+- Market Profile TPO (time-at-price, distinct from volume profile)
+- Break of Structure (BOS) / Change of Character (CHoCH) as standalone
+- Equal Highs / Equal Lows (EQH/EQL) clustering
+- Order Block with Imbalance (OBIM)
+- Stop Hunt Candle (SHC) - the atomic setup
+- Squeeze (top/bottom extreme reversal)
+- HTF bias + LTF trigger (multi-timeframe)
+- Change of POC (session shift)
+- Hooks and Ledgings (trend continuation)
+- Broadening tops (rare reversal)
+
+**Six-delivery integration plan: docs/INTEGRATION_PLAN_7_12.md**
+
+7. HTF bias + BOS/CHoCH
+8. Liquidity primitives (EQH/EQL, SHC, Squeeze)
+9. SMC entries (OBIM + master FTM)
+10. Market Profile (TPO) + POC shift
+11. Arbiter upgrade (pattern-based sizing)
+12. Adaptive SL from pattern
+
+**Backtest protocol:**
+After each delivery, rerun the BTC backtest and compare:
+- net PnL%, PF, trades, Sharpe, max DD
+- Do not accept regression in Sharpe
+
+**To resume in a new chat, paste:**
+"I am continuing the QSC hybrid project. Read docs/RESUME_PROMPT.md,
+docs/RESOURCES_BOOKS_2.md, docs/INTEGRATION_PLAN_7_12.md, and
+docs/BACKTEST_ANALYSIS.md. Next step: start Delivery 7 or whichever
+delivery I say."
