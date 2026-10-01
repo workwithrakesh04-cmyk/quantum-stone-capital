@@ -354,3 +354,41 @@ Commit: pending
 - Arbiter never raises even with None inputs
 
 **Hybrid era COMPLETE.** All 5 deliveries shipped.
+---
+
+## Delivery 6 - 2026-10-01 - BTC Backtest Runner
+Commit: pending
+
+**Created:**
+- backtest/__init__.py
+- backtest/beta_backtester.py  (core engine)
+- backtest/reporter.py         (terminal + file reports)
+- scripts/backtest_beta.py     (CLI)
+- tests/test_beta_backtester.py (12 tests)
+
+**Modified:** none
+
+**Tests:** 525 -> ~537
+
+**Purpose:** Simulate Beta Brain over historical BTC 5m candles.
+Answers: do the 38 strategies + debate + jury produce profit on real history?
+
+**How it works:**
+1. HistoricalLoader fetches N candles for symbol (BTCUSDT).
+2. Loop over candles from warmup: regime tag -> strategies -> debate
+   -> jury -> paper trade. Process open trades against each new candle.
+3. Close remaining at end. Compute Sharpe/Sortino/Calmar, per-strategy,
+   per-regime, and per-direction aggregations.
+
+**Output:**
+- Terminal report (headline metrics + 3 tables)
+- data/logs/backtest_beta_<symbol>_<ts>.txt
+- data/logs/backtest_beta_<symbol>_<ts>.json
+- data/logs/backtest_beta_<symbol>_<ts>_trades.csv
+
+**CLI:**
+python scripts/backtest_beta.py --symbol BTCUSDT --candles 10000 --warmup 100
+
+**Next:** analyze results; use per-strategy + per-regime tables to
+decide which strategies to shadow/demote, and whether to move to
+shadow trading (Delivery 7).

@@ -206,3 +206,44 @@ Re-run the delivery paste. Nothing prevents re-running.
 - End with verification: `pytest tests/ -q` and a summary
 - Every paste ends with the 4 finalize commands printed as
   `Write-Host` lines the user can copy
+
+---
+
+## Current State (2026-10-01 late)
+
+**Last delivery:** 6 (BTC backtest runner) + first real backtest run
+**Pending:** Optional bug fixes (6c), config tuning (7), shadow trading (8)
+**Resources queue:** user will provide more books + strategies
+
+### Latest Backtest (BTCUSDT 5m, 10000 candles)
+
+- Net PnL: +$567.91 (+5.68%)
+- Profit factor: 1.493
+- Real Sharpe: ~0.5 (reported 10.64 is inflated - bug in annualization)
+- Win rate: 46.43% (28 trades)
+- Best regime: RANGING (+$719)
+- Worst regime: VOLATILE (-$200)
+
+### Known Bugs To Fix (Delivery 6c)
+
+1. Sharpe annualization uses bars-per-year (105120) for trade returns - should use trades-per-year
+2. max_hold_bars not enforced in backtest (a trade ran 320 bars in "scalp" mode)
+3. Missing rejection-stage diagnostics
+
+### Recommended Actions
+
+- **Delivery 6c:** fix Sharpe + max_hold_bars + diagnostics, rerun backtest
+- **Delivery 7:** move mad_bb / rmd_trail / adaptive_rsi_ml to shadow, strengthen VOLATILE block, rerun
+- **Delivery 8:** shadow trading (write outcomes to JSONL so trainer learns)
+
+Full analysis: `docs/BACKTEST_ANALYSIS.md`
+Backtest reports: `data/logs/backtest_beta_BTCUSDT_2026-10-01_1923.*`
+
+### How to Resume in a New Chat
+
+Paste into a new chat:
+"I am continuing the Quantum Stone Capital hybrid project.
+Read docs/RESUME_PROMPT.md and docs/BACKTEST_ANALYSIS.md.
+Last completed: Delivery 6 with first backtest run.
+Pending: Delivery 6c (bugs), 7 (tune), or new resources.
+I will provide more books and strategies next."
