@@ -249,3 +249,32 @@ Commit: pending
 
 **Next:** 5a-4 (ICT/SMC + patterns + ML + volatility + trend, plus
 knowledge base — the final 5a batch)
+---
+
+## Delivery 5a-4a — 2026-10-01 — Final 19 Strategies
+Commit: pending
+
+**Created:**
+- `strategies_py/ict_smc/fvg_strategy.py`, `luxalgo_fvg.py` (2)
+- `strategies_py/patterns/diamond_cancan.py`, `head_shoulders.py`,
+  `double_top_bottom.py`, `engulfing_pinbar.py`, `reversal_123.py` (5)
+- `strategies_py/ml_adaptive/adaptive_rsi_ml.py`, `ai_source_ma.py`,
+  `ai_trend_flow.py`, `ml_momentum.py`, `ml_rsi.py` (5)
+- `strategies_py/volatility/mad_loop_bb.py`, `mad_loop_fl.py`,
+  `mad_loop_combined.py`, `apex_flow.py`, `rmd_trail.py` (5)
+- `strategies_py/trend/ichimoku_rsi.py`, `cardwell_rsi.py`,
+  `intermarket.py` (3)
+- `tests/test_strategies_py_final_batch.py` (20 tests)
+
+**Tests:** 469 → ~489 (+20)
+
+**Notes:**
+- ML strategies (adaptive_rsi_ml, ai_source_ma, ai_trend_flow,
+  ml_momentum) use simplified logic in 5a-4a. Full k-NN analog
+  behavior can be added in a future delivery once we see live results.
+- `ml_rsi` uses level-based logic (oversold <25, overbought >75)
+- Loader's module list now fully populated; `load_all_strategies()`
+  should now return 42 classes
+
+**Next:** 5a-4b (knowledge base: knowledge_loader + 10 book JSONs +
+integration into strategies_py.base._get_rule_weight)

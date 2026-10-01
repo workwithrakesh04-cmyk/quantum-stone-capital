@@ -41,9 +41,9 @@ except ~10 lines added to `core/main_brain_v2.py` (Delivery 5b).
 
 ## 2. Where We Are Right Now
 
-- **Last completed delivery:** 5a-3 (liquidity + supply_demand)
-- **Next delivery:** 5a-4 (ICT/SMC + patterns + ML + volatility + trend)
-- **Total tests passing:** ~469
+- **Last completed delivery:** 5a-4a (final 19 strategies)
+- **Next delivery:** 5a-4b (knowledge base port)
+- **Total tests passing:** ~489
 - **Commit cadence:** manual commit per delivery; checkpoint every 5th
 - **Baseline before hybrid:** 259 tests (Phase 13 checkpoint)
 
