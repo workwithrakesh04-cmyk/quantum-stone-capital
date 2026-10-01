@@ -480,3 +480,45 @@ does not shadow it. A future delivery must wire `TierManager` into
 
 **Next:** D7b - rerun on larger window (20k candles or walk-forward).
 Pure measurement. No config change.
+
+---
+
+## Delivery 7b - 2026-10-01 - 20k-Candle Validation
+Commit: pending
+
+**Modified:** none (source or config)
+**Created:** `docs/D7B_REPORT.md`
+
+**Tests:** 603 (unchanged - no code touched)
+
+**Purpose:** Validate D7c's config changes on 2x the data.
+
+**Result: D7c's magnitude INVALIDATED.**
+
+| Metric | D6c (10k) | D7c (10k) | D7b (20k) |
+|---|---|---|---|
+| Sharpe | 1.08 | 4.84 | **0.17** |
+| Net PnL % | +12.34% | +14.58% | **+2.76%** |
+| Max DD % | 5.35% | 1.47% | **6.56%** |
+| Trades | 58 | 31 | 54 |
+
+D7c's Sharpe 4.84 was a small-sample artifact. On 20k it reverts
+to 0.17. The D7c config change (shadowing `rbd_dbr` + `flag_limits`)
+is not validated as a risk-adjusted improvement.
+
+**What D7b confirmed:**
+- 0.70 confidence gate is correct (clean separation on 20k)
+- 60-min TMO is correct (12 exits, all strategy sums positive)
+- `adaptive_rsi_ml` is a consistent VOLATILE loser (0% WR across
+  both samples; -$502.76 combined)
+- `mad_bb` is NOT a VOLATILE loser (flipped positive on 20k)
+
+**New finding:** CHOPPY regime is a net loser (21 trades, 19% WR,
+-$146.24). D6c had only 4 CHOPPY trades so this was invisible.
+
+**Bottom line:** the strategy set produces +2.76% over 70 days
+with Sharpe 0.17. This is a flat system on a risk-adjusted basis.
+
+**Recommendation for next:** D8b walk-forward validation. D7b
+proved single-window backtests mislead. Walk-forward (10 windows)
+is the correct next step.

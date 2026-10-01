@@ -56,8 +56,8 @@ tail for the exact last step number.
 
 See `docs/HYBRID_ARCHITECTURE.md` for the full design. Key points:
 
-- **Beta Brain** lives entirely in `beta_brain/` Ã¢â‚¬â€ isolated namespace
-- **Python strategies** live in `strategies_py/` Ã¢â‚¬â€ 42 files in 6
+- **Beta Brain** lives entirely in `beta_brain/` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â isolated namespace
+- **Python strategies** live in `strategies_py/` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â 42 files in 6
   categories (order_flow, liquidity, supply_demand, ict_smc, patterns,
   ml_adaptive, volatility, trend)
 - **QSC's YAML strategies** in `strategies/` are untouched
@@ -87,7 +87,7 @@ See `docs/HYBRID_ARCHITECTURE.md` for the full design. Key points:
 
 Full list in `docs/CONTEXT.md`. Summary:
 
-- Q13: Flat test layout Ã¢â‚¬â€ `tests/test_*.py`, no subfolders
+- Q13: Flat test layout ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â `tests/test_*.py`, no subfolders
 - Q14: JSONL daily rotation to `logs/consensus/archive/`
 - Q16: Training target = strategy weights + arbiter thresholds
 - Q17: Manual trainer invocation (`scripts/train_brain_daily.py`)
@@ -135,14 +135,14 @@ After 5b, run: `.\scripts\checkpoint.ps1 -Label "Hybrid deliveries 1-5 complete"
 
 ## 7. Rules the Assistant Must Follow
 
-1. **Every file is created via terminal paste** Ã¢â‚¬â€ no "open VS Code
+1. **Every file is created via terminal paste** ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â no "open VS Code
    and paste this." Use `@'...'@ | Out-File` blocks.
 2. **Data files (JSON/JSONL/YAML) are UTF-8 without BOM.** Use
    `[System.IO.File]::WriteAllText($path, $content, [System.Text.UTF8Encoding]::new($false))`.
    Never `Out-File -Encoding utf8` for those.
 3. **Tests are flat** in `tests/test_*.py`. Run with `pytest tests/ -q`.
 4. **Every delivery ends with:**
-   - `pytest tests/ -q` Ã¢â‚¬â€ must be green
+   - `pytest tests/ -q` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â must be green
    - `.\scripts\log_step.ps1 -Message "..."`
    - `python scripts/update_file_tree.py`
    - `git add . && git commit -m "..." && git push`
@@ -150,12 +150,12 @@ After 5b, run: `.\scripts\checkpoint.ps1 -Label "Hybrid deliveries 1-5 complete"
 6. **No QSC file is deleted or rewritten** except the 2 files listed in
    HYBRID_ARCHITECTURE section 7 (`core/main_brain_v2.py` and
    `dashboard/state.py`) in Delivery 5b.
-7. **Naming:** QSC Brain / Beta Brain / Arbiter / Trainer Ã¢â‚¬â€ never
+7. **Naming:** QSC Brain / Beta Brain / Arbiter / Trainer ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â never
    "brain" alone.
 8. **Windows/PowerShell context:** LF->CRLF warnings from git are
    benign; ignore them.
 9. **Tests:** always report count and PASS/FAIL. If a test fails,
-   diagnose root cause and propose either source fix or test fix Ã¢â‚¬â€
+   diagnose root cause and propose either source fix or test fix ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â
    never silently adjust.
 
 ---
@@ -164,12 +164,12 @@ After 5b, run: `.\scripts\checkpoint.ps1 -Label "Hybrid deliveries 1-5 complete"
 
 | File | Purpose |
 |------|---------|
-| `docs/STEP_LOG.md` | Full chronological history (Steps 001Ã¢â‚¬â€œcurrent) |
+| `docs/STEP_LOG.md` | Full chronological history (Steps 001ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“current) |
 | `PROJECT_STATE.md` | Live snapshot (commit, tests, checkpoint) |
 | `docs/CONTEXT.md` | Locked Q&A decisions + conventions |
 | `docs/HYBRID_ARCHITECTURE.md` | System design (updated) |
 | `docs/BETA_BRAIN.md` | Beta Brain delivery log |
-| `docs/PHASE_LOG.md` | Phase-level narrative (Phases 1Ã¢â‚¬â€œ13, Hybrid) |
+| `docs/PHASE_LOG.md` | Phase-level narrative (Phases 1ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“13, Hybrid) |
 | `docs/FILE_TREE.md` | Auto-generated full file tree |
 | `KNOWLEDGE_BASE.md` | Project knowledge notes (root) |
 | `README.md` | Project overview (root) |
@@ -179,7 +179,7 @@ After 5b, run: `.\scripts\checkpoint.ps1 -Label "Hybrid deliveries 1-5 complete"
 ## 9. Recovery Scenarios
 
 **If a paste failed mid-execution:**
-Re-run the entire paste block. Blocks are idempotent Ã¢â‚¬â€ overwriting
+Re-run the entire paste block. Blocks are idempotent ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â overwriting
 files with `-Force` is safe.
 
 **If tests are red after a paste:**
@@ -209,30 +209,36 @@ Re-run the delivery paste. Nothing prevents re-running.
 
 ---
 
-## Current State (2026-10-01 21:45)
+## Current State (2026-10-01 22:00)
 
-**Last delivery:** 7c (shadow TMO losers + diagnostic aggregations)
-**Pending:** D7b (larger-window validation), D8 (shadow trading), D9 (XAUUSD)
+**Last delivery:** 7b (20k-candle validation of D7c)
+**Pending:** D8b (walk-forward validation), D7d (targeted VOLATILE block), D8 (shadow trading), D9 (XAUUSD)
 **Resources queue:** D7-12 integration plan in `docs/INTEGRATION_PLAN_7_12.md`
 
-### Latest Backtest (BTCUSDT 5m, 10000 candles, D7c config)
+### Latest Backtest (BTCUSDT 5m, 20,000 candles, D7c config)
 
-Final run: `data/logs/backtest_beta_BTCUSDT_2026-10-01_2138.*`
+Final run: `data/logs/backtest_beta_BTCUSDT_2026-10-01_2157.*`
 
-- Net PnL: **+$1,458.48 (+14.58%)**
-- Sharpe: **4.84** (31 trades - small sample, do not cite as stable)
-- Sortino: 9.10 (same caveat)
-- Calmar: 9.92 (same caveat)
-- Max DD: **$167.87 (1.47%)**
-- Trades: 31 (20 W / 11 L), PF 3.028
-- Exits: 13 TP / 14 SL / 4 TMO
-- Best regime: RANGING (+$1,361.05, 65.9% WR)
-- VOLATILE: +$43.43 (was -$431.60 in D6c)
+- Net PnL: **+$275.91 (+2.76%)**
+- Sharpe: **0.17** (real - this is the honest number on 2x data)
+- Sortino: 0.25
+- Calmar: 0.42
+- Max DD: **$667.30 (6.56%)**
+- Trades: 54 (27 W / 27 L), PF 1.165
+- Exits: 18 TP / 24 SL / 12 TMO
+- Best regime: RANGING (+$398.26, 56.2% WR, 146 trades)
+- Worst regimes: CHOPPY (-$146.24, 19% WR) and VOLATILE (-$161.63, 20.7% WR)
 - Shadowed: `rbd_dbr`, `flag_limits` (via `global_disable`)
 
-D6c baseline for comparison: Sharpe 1.08, PnL +12.34%, DD 5.35%,
-58 trades. See `docs/D7_REPORT.md` for the full side-by-side and
-the small-sample caveat.
+### The D7c illusion
+
+D7c (10k candles) showed Sharpe 4.84. D7b (20k candles) shows
+Sharpe 0.17 on the same config. **D7c was a small-sample artifact.**
+Do not cite D7c's Sharpe, Sortino, Calmar, or PnL% as improvements.
+The honest picture is D6c (Sharpe 1.08) -> D7b (Sharpe 0.17).
+
+The strategy set is **flat on a risk-adjusted basis** on 70 days
+of BTCUSDT 5m data. See `docs/D7B_REPORT.md` for full analysis.
 
 ### Rejection Funnel (new from D6c)
 
@@ -264,18 +270,22 @@ the small-sample caveat.
 
 ### Recommended Actions
 
-- **Delivery 7b (next):** rerun on a larger window (20k candles or
-  walk-forward). **Pure measurement, no config change.** Confirm
-  Sharpe, Max DD, and the VOLATILE attribution before trusting
-  D7c's magnitude.
+- **Delivery 8b (next, recommended):** walk-forward validation
+  (10 non-overlapping windows per `INTEGRATION_PLAN_7_12.md`).
+  D7b proved single-window backtests mislead. Walk-forward is the
+  only way to distinguish real edge from one-period luck.
+- **Delivery 7d (candidate):** targeted VOLATILE block for
+  `adaptive_rsi_ml` only (evidence: 0% WR in VOLATILE across both
+  10k and 20k samples, -$502.76 combined). Do NOT block `mad_bb`
+  in VOLATILE - it flipped positive on 20k.
 - **Delivery 8:** shadow trading (write outcomes to JSONL)
 - **Delivery 9:** XAUUSD adapter
 - **Deferred architecture work:** wire `TierManager` into
   `StrategyRegistry` so `strategy_tiers.yaml` becomes authoritative.
-- **Candidate tuning after D7b:** targeted VOLATILE block for
-  `mad_bb` + `adaptive_rsi_ml` (needs confirmation).
-- **DO NOT shadow** `mad_bb`, `rmd_trail`, `adaptive_rsi_ml` - the
-  BACKTEST_ANALYSIS recommendation is invalidated.
+- **Open question:** should CHOPPY be blocked? (D7b new finding:
+  21 trades, 19% WR, -$146.24. Needs walk-forward to confirm.)
+- **DO NOT shadow** `mad_bb`, `rmd_trail`, `adaptive_rsi_ml` at
+  the whole-window level - all three are net-positive on 20k.
 
 Full D6c report: `docs/D6C_REPORT.md`
 Full backtest analysis: `docs/BACKTEST_ANALYSIS.md`

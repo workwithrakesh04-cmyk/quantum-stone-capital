@@ -303,3 +303,77 @@ D7c shadowed them.
 Rerun on a larger window (20k candles or walk-forward). Pure
 measurement, no config change. Confirm Sharpe, Max DD, and the
 VOLATILE attribution before further tuning.
+
+---
+
+# D7b - 20k-Candle Validation of D7c (2026-10-01)
+
+**Reference:** full report in `docs/D7B_REPORT.md`
+**Run:** `data/logs/backtest_beta_BTCUSDT_2026-10-01_2157.*`
+**Config change:** NONE. Pure measurement.
+
+## The three runs, side by side
+
+| Metric | D6c (10k) | D7c (10k) | **D7b (20k)** |
+|---|---|---|---|
+| Net PnL | +$1,233.91 (+12.34%) | +$1,458.48 (+14.58%) | **+$275.91 (+2.76%)** |
+| Max DD % | 5.35% | 1.47% | **6.56%** |
+| Trades | 58 | 31 | 54 |
+| Win rate | 51.72% | 64.52% | 50.00% |
+| Profit factor | 1.587 | 3.028 | **1.165** |
+| Sharpe | 1.08 | 4.84 | **0.17** |
+| Sortino | 1.65 | 9.10 | 0.25 |
+| Calmar | 2.31 | 9.92 | 0.42 |
+
+**D7c's Sharpe 4.84 was a small-sample artifact. It does NOT hold
+on 2x data.** This is exactly the kind of result D7b was designed
+to catch.
+
+## What D7b confirmed
+
+1. **The 0.70 confidence gate is correct.** On 20k, 0.5-0.6 is
+   20/20 rejected, 0.6-0.7 is 30/35 rejected, 0.7+ is 53/53
+   passed. Clean separation. Do not lower.
+2. **The 60-min TMO is correct.** 12 TMO exits on 20k, every
+   strategy's TMO sum is positive.
+3. **`adaptive_rsi_ml` is a consistent VOLATILE loser** (0% WR,
+   -$502.76 combined across 10k + 20k). Real signal.
+4. **`mad_bb` is NOT a VOLATILE loser** - it flipped positive on
+   20k (+$15.20). Do not block it.
+
+## What D7b invalidated
+
+- D7c's magnitude (Sharpe, PnL, Max DD all revert toward
+  D6c-era values on larger data)
+- Any claim that D7c's config change is a large improvement
+
+## NEW finding: CHOPPY is a real loser
+
+D6c had only 4 CHOPPY trades - too few to judge. On 20k:
+
+    Regime      Trades   WR%     PnL
+    RANGING        146   56.2%   +$398.26
+    CHOPPY          21   19.0%   -$146.24
+    VOLATILE        29   20.7%   -$161.63
+
+**The strategy set makes money in RANGING and loses it in CHOPPY
+and VOLATILE.** This is only visible on the larger window.
+
+## What D7b leaves open
+
+- Should `rbd_dbr` + `flag_limits` stay shadowed? (Recommendation:
+  yes, on D6c evidence, but revisit if walk-forward shows either
+  positive in some regime.)
+- Should we block trades in CHOPPY? (Not yet - needs walk-forward
+  to confirm the CHOPPY loss is consistent.)
+- Should we block `adaptive_rsi_ml` in VOLATILE? (Yes, evidence
+  supports it, but effect is likely small.)
+
+## Next: D8b walk-forward
+
+D7b proved single-window backtests mislead. The correct next step
+is walk-forward (10 windows, per `INTEGRATION_PLAN_7_12.md`).
+That is the only way to distinguish real edge from one-period
+luck.
+
+See `docs/D7B_REPORT.md` section 6 for the full recommendation.
