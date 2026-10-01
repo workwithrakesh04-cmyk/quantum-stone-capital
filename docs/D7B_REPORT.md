@@ -255,6 +255,6 @@ D7b is measurement only. No config or code change.
 - D7c backtest report: `data/logs/backtest_beta_BTCUSDT_2026-10-01_2138.*`
 - D6c backtest report: `data/logs/backtest_beta_BTCUSDT_2026-10-01_2123.*`
 - D6 backtest report: `data/logs/backtest_beta_BTCUSDT_2026-10-01_1923.*`
-- Related docs: `docs/D7C_REPORT.md` (wait - that is D7_REPORT.md),
+- Related docs: `docs/D7_REPORT.md`,
   `docs/D6C_REPORT.md`, `docs/BACKTEST_ANALYSIS.md`,
   `docs/INTEGRATION_PLAN_7_12.md`
