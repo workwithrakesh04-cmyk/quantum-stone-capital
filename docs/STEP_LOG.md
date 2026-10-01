@@ -269,3 +269,4 @@ _(steps will be appended here as we build)_
 - [2026-10-01 15:42] [Step 176] Fix: repair poc_strategy.py literal backslash-quote from PowerShell escaping
 - [2026-10-01 19:30] [Step 177] Delivery 6-log: persist backtest analysis + pending decisions
 - [2026-10-01 19:40] [Step 178] Delivery 6-log-2: log two new books + integration plan for D7-12
+- [2026-10-01 19:47] [Step 179] Delivery 7: HTF bias + BOS/CHoCH + monotonic fallback fix

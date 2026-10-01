@@ -31,6 +31,7 @@ _STRATEGY_MODULES = [
     "strategies_py.supply_demand.three_drive",
     # ICT/SMC (5a-4)
     "strategies_py.ict_smc.fvg_strategy",
+    "strategies_py.ict_smc.bos_choch",
     "strategies_py.ict_smc.luxalgo_fvg",
     # Patterns (5a-4)
     "strategies_py.patterns.diamond_cancan",

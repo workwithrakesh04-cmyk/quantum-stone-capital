@@ -7,6 +7,7 @@ from beta_brain.debate.engine import DebateEngine
 from beta_brain.jury.verdict_engine import VerdictEngine
 from strategies_py.registry import StrategyRegistry
 from strategies_py.loader import load_all_strategies
+from core.htf_bias import compute_htf_bias
 
 
 class BetaBrain:
@@ -50,6 +51,12 @@ class BetaBrain:
                 return None
             regime_tag = self.regime_tagger.tag(candles)
             regime = regime_tag.regime
+
+            # HTF bias (uses LTF candles resampled internally)
+            try:
+                htf_bias = compute_htf_bias(candles)
+            except Exception:
+                htf_bias = None
             signals = self.registry.run_all(candles, regime=regime)
             actionable = [s for s in signals if s.direction in ("LONG", "SHORT")]
             if not actionable:
