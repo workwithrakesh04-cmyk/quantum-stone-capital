@@ -1,10 +1,10 @@
-﻿account:
+account:
   type: "personal"
   account_type: "personal"
   starting_balance: 10000
   currency: USDT
 account_rules:
-  enable_timeout_exits: false
+  enable_timeout_exits: true
   max_daily_loss_pct: 10.0
   max_total_drawdown_pct: 15.0
   enable_kill_switch: false

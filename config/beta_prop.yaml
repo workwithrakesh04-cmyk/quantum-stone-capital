@@ -1,4 +1,4 @@
-﻿account:
+account:
   type: "prop"
   account_type: "prop"
   starting_balance: 10000

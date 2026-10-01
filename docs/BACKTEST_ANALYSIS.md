@@ -166,3 +166,57 @@ Option C is preferred.
 | 8c | Strategy parameter sweep |
 | 9 | XAUUSD adapter |
 | 10 | New resources (books + strategies) |
+
+
+---
+
+# D6c - Honest Metrics + Timeout Enforced (2026-10-01)
+
+**Reference:** full report in `docs/D6C_REPORT.md`
+**Final run:** `data/logs/backtest_beta_BTCUSDT_2026-10-01_2123.*`
+
+Three bugs identified in the D6 analysis above are now closed:
+
+| Bug | Status | Before | After |
+|---|---|---|---|
+| Sharpe annualization | CLOSED | 16.95 (fake) | **1.08** (real) |
+| max_hold_bars not enforced | CLOSED | 0 (bug) | **12** (60min / 5m) |
+| Rejection diagnostic missing | CLOSED | one counter | 4-stage funnel |
+| Sortino formula (bonus) | CLOSED | 0.08 (broken) | **1.65** (real) |
+
+## Honest final numbers (TMO enabled)
+
+- Net PnL: **+$1,233.91 (+12.34%)**
+- Sharpe: **1.08**
+- Sortino: **1.65**
+- Calmar: **2.31**
+- Max DD: **$622.10 (5.35%)**
+- Trades: 58 (30 W / 28 L)
+- PF: 1.587
+- Exits: 22 TP / 25 SL / **11 TMO**
+
+## Rejection funnel (new)
+
+    rejected_hold           4277   (43.4%)
+    rejected_low_confidence 5394   (54.8%)   <- biggest filter
+    rejected_risk_jury      171    ( 1.7%)
+    rejected_portfolio_jury 0      ( 0.0%)
+
+## IMPORTANT CORRECTION
+
+The "Recommended Actions -> Option B" section above says to move
+**mad_bb**, **rmd_trail**, **adaptive_rsi_ml** to shadow. **That
+recommendation is now invalidated by the D6c run.**
+
+In the honest run, those three are the top PnL contributors:
+
+- rmd_trail: +$272.83
+- adaptive_rsi_ml: +$257.56
+- mad_bb: +$50.62
+
+**Do NOT shadow them.** The real shadow candidates are:
+
+- flag_limits (-$124.64, worst by far)
+- rbd_dbr (-$28.60, borderline)
+
+See `docs/D6C_REPORT.md` section 6 for full detail.

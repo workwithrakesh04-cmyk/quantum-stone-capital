@@ -392,3 +392,44 @@ python scripts/backtest_beta.py --symbol BTCUSDT --candles 10000 --warmup 100
 **Next:** analyze results; use per-strategy + per-regime tables to
 decide which strategies to shadow/demote, and whether to move to
 shadow trading (Delivery 7).
+
+---
+
+## Delivery 6c - 2026-10-01 - Honest Metrics + Timeout Enforcement
+Commit: pending
+
+**Modified:**
+- `beta_brain/performance_metrics.py` - Sharpe `periods_per_year` now optional,
+  auto-inferred from trade count + period; Sortino downside deviation
+  computed over all trades relative to MAR (was std-of-losers)
+- `backtest/beta_backtester.py` - `_derive_max_hold_bars()` reads config;
+  stage-by-stage rejection counters; `enrich()` receives `period_days`
+- `config/beta_personal.yaml` - `enable_timeout_exits: true`
+- `config/beta_prop.yaml`     - `enable_timeout_exits: true`
+
+**Created:**
+- `tests/test_d6c_performance_metrics.py` (26 tests)
+- `tests/test_d6c_backtester_config.py` (13 tests)
+- `docs/D6C_REPORT.md`
+
+**Untouched:**
+- `beta_brain/paper_trader.py` (timeout branch already existed)
+
+**Tests:** 561 -> 600 (pre-fix run), final 600 after Sortino test fix.
+
+**Bugs closed (from D6 analysis):**
+1. Sharpe annualization inflated (16.95 -> 1.08 real)
+2. `max_hold_bars` not enforced (0 -> 12, 11 TMO exits fire)
+3. Rejection diagnostic single-counter (now 4-stage funnel)
+4. (bonus) Sortino formula (0.08 -> 1.65 real)
+
+**Key finding:** enabling the 60-min timeout reduced net PnL by
+$387 but improved risk-adjusted metrics (max DD 6.62% -> 5.35%).
+The higher pre-D6c PnL was partly from holding losers indefinitely.
+
+**Correction:** the D7 shadow recommendation in BACKTEST_ANALYSIS.md
+(mad_bb, rmd_trail, adaptive_rsi_ml) is invalidated by the D6c run -
+those are now the top 3 PnL contributors. Real shadow candidates
+are flag_limits and rbd_dbr.
+
+**Next:** D7 - tune min-confidence gate + VOLATILE block + TMO analysis.
