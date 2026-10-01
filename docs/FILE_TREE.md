@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-10-01 07:38 UTC
+Auto-generated: 2026-10-01 07:50 UTC
 
-Total files: 260
+Total files: 271
 
 ```
 .gitignore
@@ -98,6 +98,16 @@ jurors/execution_juror.py
 jurors/risk_juror.py
 jurors/strategy_juror.py
 knowledge/__init__.py
+knowledge/book_52_master_the_markets.json
+knowledge/book_56_phantom_notebook.json
+knowledge/book_60_rcv_notes.json
+knowledge/book_61_supply_demand_1.json
+knowledge/book_62_supply_demand_2.json
+knowledge/book_trader_dale_orderflow.json
+knowledge/book_trading_orderflow.json
+knowledge/book_volume_profile_nextgen.json
+knowledge/books_index.json
+knowledge/knowledge_loader.py
 layers/__init__.py
 layers/layer0_data.py
 layers/layer1_account_rules.py
@@ -224,6 +234,7 @@ tests/test_harmonic.py
 tests/test_harmonic_strategies_load.py
 tests/test_ict_strategies_load.py
 tests/test_integration_pipeline.py
+tests/test_knowledge_loader.py
 tests/test_layer0_data.py
 tests/test_layers.py
 tests/test_live_runner.py

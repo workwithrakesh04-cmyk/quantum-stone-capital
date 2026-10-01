@@ -24,6 +24,12 @@ class Decision:
     account_name: Optional[str] = None
     routing_reason: Optional[str] = None
     rule_source: Optional[str] = None
+    alpha_direction: Optional[str] = None
+    alpha_confidence: Optional[float] = None
+    beta_direction: Optional[str] = None
+    beta_confidence: Optional[float] = None
+    consensus: Optional[str] = None
+    size_multiplier: Optional[float] = None
 
 
 class AppState:

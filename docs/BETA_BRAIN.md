@@ -313,3 +313,44 @@ achieved: 42 - 4 = 38.
 
 **Next:** 5b (BetaBrain wrapper + ConsensusArbiter + run_hybrid.py
 + main_brain_v2 patch + dashboard patch) — CHECKPOINT
+---
+
+## Delivery 5b - 2026-10-01 - Full Hybrid Integration (CHECKPOINT)
+Commit: pending
+
+**Created (Part A):**
+- config/beta_personal.yaml
+- config/beta_prop.yaml
+- beta_brain/beta_brain.py
+- consensus/agreement.py
+- consensus/arbiter.py
+- consensus/__init__.py
+- scripts/run_hybrid.py
+
+**Modified (Part B) - only 2 QSC files touched in entire hybrid:**
+- core/main_brain_v2.py   (+10 lines: optional Beta+Arbiter hook)
+- dashboard/state.py      (Decision +6 optional fields)
+
+**Created (Part C):**
+- tests/test_beta_brain.py (8 tests)
+- tests/test_consensus_arbiter.py (12 tests)
+- tests/test_hybrid_integration.py (8 tests)
+
+**Tests:** 497 -> 525 (+28)
+
+**How run_hybrid.py works (dry run):**
+1. Calls QSC Brain via MainBrainV2.run
+2. Calls BetaBrain.run (silent on failure)
+3. Calls ConsensusArbiter.decide
+4. Writes hybrid Decision to dashboard state
+5. Writes JSONL to logs/consensus/YYYY-MM-DD.jsonl
+6. Does NOT execute trades
+
+**Execution:** remains in scripts/run_brain.py.
+
+**Safety:**
+- main_brain_v2 patch auto-reverted if import fails
+- BetaBrain failure never breaks QSC (silent + warning)
+- Arbiter never raises even with None inputs
+
+**Hybrid era COMPLETE.** All 5 deliveries shipped.

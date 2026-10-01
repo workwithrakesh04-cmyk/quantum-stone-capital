@@ -262,3 +262,6 @@ _(steps will be appended here as we build)_
 - [2026-10-01 13:00] [Step 171] Delivery 5a-3: 10 liquidity + supply_demand strategies + 10 tests
 - [2026-10-01 13:04] [Step 172] Delivery 5a-4a: 19 final strategies (ICT/SMC + patterns + ML + volatility + trend) + 20 tests
 - [2026-10-01 13:08] [Step 173] Delivery 5a-4b: knowledge base ported (10 JSON + loader + integration) + 8 tests
+
+### [CHECKPOINT] Hybrid deliveries 1-5 complete
+- [2026-10-01 13:20] [Step 174] Checkpoint: Hybrid deliveries 1-5 complete

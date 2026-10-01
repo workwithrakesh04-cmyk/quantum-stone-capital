@@ -1,0 +1,49 @@
+﻿account:
+  type: "personal"
+  account_type: "personal"
+  starting_balance: 10000
+  currency: USDT
+account_rules:
+  enable_timeout_exits: false
+  max_daily_loss_pct: 10.0
+  max_total_drawdown_pct: 15.0
+  enable_kill_switch: false
+  enable_consistency_rule: false
+loss_scaling:
+  enabled: true
+  thresholds:
+    3: 0.6
+    5: 0.4
+    7: 0.2
+risk:
+  per_trade_pct: 2.0
+modes:
+  scalp:
+    enabled: true
+    risk_per_trade_pct: 1.0
+    min_rr: 1.5
+    max_open_positions: 3
+    max_notional_leverage: 10.0
+    max_holding_minutes: 60
+    max_concurrent_risk_pct: 3.0
+  swing:
+    enabled: true
+    risk_per_trade_pct: 2.0
+    min_rr: 2.0
+    max_open_positions: 1
+    max_notional_leverage: 10.0
+    max_holding_hours: 48
+    max_concurrent_risk_pct: 2.0
+stop_loss:
+  method: "atr"
+  atr_multiplier: 1.5
+  percent_fallback: 0.3
+  max_pct: 1.0
+take_profit:
+  method: "rr"
+  partial_exit_1_pct: 50
+  partial_exit_2_pct: 50
+daily_limits:
+  max_daily_trades: 25
+  disable_after_consecutive_losses: 6
+  cooldown_minutes_after_loss: 0

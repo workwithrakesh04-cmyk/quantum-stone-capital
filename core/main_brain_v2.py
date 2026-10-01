@@ -16,6 +16,16 @@ from brokers.broker_pool import BrokerPool
 from microstructure.engine import MicrostructureEngine
 from strategies.signal_filter import SignalFilter
 
+# Hybrid: optional Beta Brain + Arbiter
+try:
+    from beta_brain.beta_brain import BetaBrain
+    from consensus.arbiter import ConsensusArbiter
+    _HYBRID_AVAILABLE = True
+except Exception:
+    BetaBrain = None
+    ConsensusArbiter = None
+    _HYBRID_AVAILABLE = False
+
 
 class MainBrainV2:
     def __init__(
@@ -42,6 +52,22 @@ class MainBrainV2:
         # Optional: attach a BrokerPool for routing
         self.broker_pool = broker_pool
         self.account_router = AccountRouter(broker_pool) if broker_pool else None
+
+        # Hybrid: load Beta Brain + Arbiter if available
+        self._beta = None
+        self._arbiter = None
+        if _HYBRID_AVAILABLE:
+            try:
+                import yaml as _yaml
+                with open("config/consensus.yaml", "r", encoding="utf-8-sig") as f:
+                    _cfg = _yaml.safe_load(f) or {}
+                _beta_enabled = _cfg.get("beta", {}).get("enabled", True)
+                if _beta_enabled:
+                    self._beta = BetaBrain()
+                    self._arbiter = ConsensusArbiter()
+            except Exception as _e:
+                import logging as _log
+                _log.getLogger(__name__).warning("Hybrid init failed: %s", _e)
 
     def run(
         self,
@@ -131,6 +157,18 @@ class MainBrainV2:
         for v in debate_result.verdicts:
             result.warnings.extend(v.warnings)
         result.layers_passed.append("layer7_main_brain")
+
+        # Hybrid: attach Beta Brain + Arbiter decision (silent if unavailable)
+        if self._beta is not None and self._arbiter is not None:
+            try:
+                _beta_verdict = self._beta.run(context, account_type=account_name)
+                _decision = self._arbiter.decide(result, _beta_verdict)
+                result.metadata["arbiter"] = _decision.to_dict()
+                if _decision.size_multiplier < 1.0 and result.is_trade:
+                    result.position_size *= _decision.size_multiplier
+            except Exception as _e:
+                result.warnings.append("beta_arbiter_failed: " + str(_e))
+
         return result
 
     def _context_to_debate_dict(self, ctx: MarketContext) -> dict:

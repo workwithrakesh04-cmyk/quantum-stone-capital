@@ -1,6 +1,6 @@
-﻿# Hybrid Architecture - Quantum Stone Capital + HFT_Brain
+# Hybrid Architecture - Quantum Stone Capital + HFT_Brain
 
-**Status:** In progress. Delivery 0 complete (continuity layer).
+**Status:** COMPLETE. All deliveries (0, 1, 2, 3, 4a, 4b, 5a-1..5a-4b, 5b) landed. 525 tests passing.
 Next: 5a-1 (strategies_py infrastructure).
 **Last updated:** 2026-10-01
 **Owner:** Quantum Stone Capital
