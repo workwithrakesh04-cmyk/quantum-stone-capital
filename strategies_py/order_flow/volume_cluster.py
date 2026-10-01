@@ -1,4 +1,4 @@
-﻿"""Volume Cluster - bounce/reject at aged high-volume cluster."""
+"""Volume Cluster - bounce/reject at aged high-volume cluster."""
 from typing import List
 from strategies_py.base import BaseStrategy
 from beta_brain.signal import Signal
@@ -38,6 +38,8 @@ class VolumeClusterStrategy(BaseStrategy):
         curr_price = curr["close"]
 
         for cluster_price in sorted(clusters.keys(), key=lambda p: abs(p - curr_price)):
+            if cluster_price <= 0:
+                continue
             dist_pct = abs(curr_price - cluster_price) / cluster_price * 100
             if dist_pct <= self.MAX_DIST_PCT:
                 if self._is_bullish(curr):

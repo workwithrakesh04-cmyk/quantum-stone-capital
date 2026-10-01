@@ -1,8 +1,9 @@
-﻿# Strategy x Regime Filter Configuration (from HFT_Brain)
+# Strategy x Regime Filter Configuration (from HFT_Brain)
 system:
   disabled_strategy_mode: "shadow"
 
 global_disable:
+  - poc
   - intermarket
   - sd_zones
   - engulfing_pinbar

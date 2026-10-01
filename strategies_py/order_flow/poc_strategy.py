@@ -1,4 +1,4 @@
-﻿"""POC Strategy - first-touch POC with directional close filter."""
+"""POC Strategy - first-touch POC with directional close filter."""
 from typing import List
 from strategies_py.base import BaseStrategy
 from beta_brain.signal import Signal
@@ -28,6 +28,8 @@ class POCStrategy(BaseStrategy):
             return self._hold_signal("no volume buckets")
 
         poc = max(price_buckets, key=price_buckets.get)
+        if poc <= 0:
+            return self._hold_signal("invalid POC")
         curr = candles[-1]
         curr_price = curr["close"]
 
