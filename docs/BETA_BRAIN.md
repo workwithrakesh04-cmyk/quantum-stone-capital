@@ -1,4 +1,4 @@
-﻿# Beta Brain - Work Log
+# Beta Brain - Work Log
 
 Detailed log of Beta Brain's evolution. Updated after every delivery
 that touches `beta_brain/`, `strategies_py/`, `consensus/`, or
@@ -415,7 +415,7 @@ Commit: pending
 **Untouched:**
 - `beta_brain/paper_trader.py` (timeout branch already existed)
 
-**Tests:** 561 -> 600 (pre-fix run), final 600 after Sortino test fix.
+**Tests:** 561 -> 588 (final).
 
 **Bugs closed (from D6 analysis):**
 1. Sharpe annualization inflated (16.95 -> 1.08 real)
@@ -433,3 +433,50 @@ those are now the top 3 PnL contributors. Real shadow candidates
 are flag_limits and rbd_dbr.
 
 **Next:** D7 - tune min-confidence gate + VOLATILE block + TMO analysis.
+
+---
+
+## Delivery 7c - 2026-10-01 - Shadow TMO Losers + Diagnostic Aggregations
+Commit: pending
+
+**Modified:**
+- `config/strategy_regime_filters.yaml` - added `rbd_dbr` + `flag_limits`
+  to `global_disable`
+- `config/strategy_tiers.yaml` - moved `rbd_dbr` to tier_4_shadow,
+  added `flag_limits` to tier_4_shadow, added "documentation only" note
+- `backtest/beta_backtester.py` - added 3 diagnostic aggregations:
+  `confidence_histogram`, `volatile_by_strategy`, `tmo_by_strategy`;
+  raw per-debate records kept in `self._debate_records`
+- `tests/test_d6c_backtester_config.py` - fixed 2 broken tests from
+  D7c get_diagnostics change (added missing fixtures + import)
+
+**Created:**
+- `tests/test_d7_diagnostics.py` (15 tests)
+- `docs/D7_REPORT.md`
+
+**Tests:** 588 (D6c) -> 603 (D7c). Net +15.
+
+**Key findings:**
+1. Shadowing `rbd_dbr` + `flag_limits` caused a cascade: fewer signals
+   -> HOLD wins more -> 58 -> 31 trades. All remaining strategies
+   have WR >= 57%.
+2. The 0.70 confidence gate is correct: histogram shows clean
+   separation (0.6-0.7 bucket: 19/20 rejected; 0.7-0.8 bucket:
+   28/28 passed). D6c Focus 1 is resolved - do not lower the gate.
+3. VOLATILE flipped -$431.60 -> +$43.43. Per-strategy attribution
+   shows the loss came from `adaptive_rsi_ml` + `mad_bb` in
+   VOLATILE only; both are profitable overall.
+4. TMO exits dropped 11 -> 4, all winners. D6c Focus 3 resolved.
+
+**Small-sample caveat:** Sharpe 4.84 / Sortino 9.10 / Calmar 9.92
+are on 31 trades. Do not cite as stable. D7b must validate on a
+larger window.
+
+**Architecture note:** `strategy_tiers.yaml` is currently
+documentation only - the registry reads `global_disable` in
+`strategy_regime_filters.yaml`. Moving a strategy to tier_4_shadow
+does not shadow it. A future delivery must wire `TierManager` into
+`StrategyRegistry`.
+
+**Next:** D7b - rerun on larger window (20k candles or walk-forward).
+Pure measurement. No config change.

@@ -1,4 +1,12 @@
-﻿# Strategy Tier System (from HFT_Brain)
+# Strategy Tier System (from HFT_Brain)
+#
+# NOTE (D7c, 2026-10-01): This tier file is currently DOCUMENTATION ONLY.
+# The registry reads `global_disable` in strategy_regime_filters.yaml, not
+# this file. Moving a strategy to tier_4_shadow here does NOT shadow it.
+# To actually disable a strategy, add it to global_disable as well.
+#
+# A future delivery ("wire TierManager into StrategyRegistry") will make
+# this file authoritative. Until then, keep both in sync.
 tiers:
   tier_1_high_performers:
     description: "Strong auditor AND system validation - protect and prioritize"
@@ -17,7 +25,6 @@ tiers:
     trade_cap: 20
     review_frequency_days: 14
     strategies:
-      - rbd_dbr
       - sd_zones
       - mad_fl
       - ichimoku_rsi
@@ -55,6 +62,9 @@ tiers:
       - ftr_compression
       - head_shoulders
       - double_top_bottom
+      # D7c - demoted on evidence from D6c
+      - rbd_dbr         # was tier_2; -$28.60 net, -$209 TMO PnL
+      - flag_limits     # -$124.64 net, 25.0% WR
 
 accounts:
   personal:

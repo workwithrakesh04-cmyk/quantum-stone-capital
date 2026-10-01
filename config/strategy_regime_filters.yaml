@@ -26,6 +26,11 @@ global_disable:
   - luxalgo_fvg
   - reversal_123
   - turtle_soup
+  # D7c - shadowed on evidence from D6c:
+  #   rbd_dbr   : -$28.60 net, -$209.04 across 6 TMO exits (worst TMO contributor)
+  #   flag_limits: -$124.64 net, 25.0% WR (worst by WR), all TMO exits were losers
+  - rbd_dbr
+  - flag_limits
 
 regime_enable_only:
   quasimodo:

@@ -271,3 +271,4 @@ _(steps will be appended here as we build)_
 - [2026-10-01 19:40] [Step 178] Delivery 6-log-2: log two new books + integration plan for D7-12
 - [2026-10-01 19:47] [Step 179] Delivery 7: HTF bias + BOS/CHoCH + monotonic fallback fix
 - [2026-10-01 21:28] [Step 180] Delivery 6c: honest Sharpe/Sortino + config-driven max_hold_bars + stage rejection diagnostics
+- [2026-10-01 21:50] [Step 181] Delivery 7c: shadow rbd_dbr + flag_limits, 3 diagnostic aggregations, fix 2 D6c tests

@@ -56,8 +56,8 @@ tail for the exact last step number.
 
 See `docs/HYBRID_ARCHITECTURE.md` for the full design. Key points:
 
-- **Beta Brain** lives entirely in `beta_brain/` â€” isolated namespace
-- **Python strategies** live in `strategies_py/` â€” 42 files in 6
+- **Beta Brain** lives entirely in `beta_brain/` Ã¢â‚¬â€ isolated namespace
+- **Python strategies** live in `strategies_py/` Ã¢â‚¬â€ 42 files in 6
   categories (order_flow, liquidity, supply_demand, ict_smc, patterns,
   ml_adaptive, volatility, trend)
 - **QSC's YAML strategies** in `strategies/` are untouched
@@ -87,7 +87,7 @@ See `docs/HYBRID_ARCHITECTURE.md` for the full design. Key points:
 
 Full list in `docs/CONTEXT.md`. Summary:
 
-- Q13: Flat test layout â€” `tests/test_*.py`, no subfolders
+- Q13: Flat test layout Ã¢â‚¬â€ `tests/test_*.py`, no subfolders
 - Q14: JSONL daily rotation to `logs/consensus/archive/`
 - Q16: Training target = strategy weights + arbiter thresholds
 - Q17: Manual trainer invocation (`scripts/train_brain_daily.py`)
@@ -135,14 +135,14 @@ After 5b, run: `.\scripts\checkpoint.ps1 -Label "Hybrid deliveries 1-5 complete"
 
 ## 7. Rules the Assistant Must Follow
 
-1. **Every file is created via terminal paste** â€” no "open VS Code
+1. **Every file is created via terminal paste** Ã¢â‚¬â€ no "open VS Code
    and paste this." Use `@'...'@ | Out-File` blocks.
 2. **Data files (JSON/JSONL/YAML) are UTF-8 without BOM.** Use
    `[System.IO.File]::WriteAllText($path, $content, [System.Text.UTF8Encoding]::new($false))`.
    Never `Out-File -Encoding utf8` for those.
 3. **Tests are flat** in `tests/test_*.py`. Run with `pytest tests/ -q`.
 4. **Every delivery ends with:**
-   - `pytest tests/ -q` â€” must be green
+   - `pytest tests/ -q` Ã¢â‚¬â€ must be green
    - `.\scripts\log_step.ps1 -Message "..."`
    - `python scripts/update_file_tree.py`
    - `git add . && git commit -m "..." && git push`
@@ -150,12 +150,12 @@ After 5b, run: `.\scripts\checkpoint.ps1 -Label "Hybrid deliveries 1-5 complete"
 6. **No QSC file is deleted or rewritten** except the 2 files listed in
    HYBRID_ARCHITECTURE section 7 (`core/main_brain_v2.py` and
    `dashboard/state.py`) in Delivery 5b.
-7. **Naming:** QSC Brain / Beta Brain / Arbiter / Trainer â€” never
+7. **Naming:** QSC Brain / Beta Brain / Arbiter / Trainer Ã¢â‚¬â€ never
    "brain" alone.
 8. **Windows/PowerShell context:** LF->CRLF warnings from git are
    benign; ignore them.
 9. **Tests:** always report count and PASS/FAIL. If a test fails,
-   diagnose root cause and propose either source fix or test fix â€”
+   diagnose root cause and propose either source fix or test fix Ã¢â‚¬â€
    never silently adjust.
 
 ---
@@ -164,12 +164,12 @@ After 5b, run: `.\scripts\checkpoint.ps1 -Label "Hybrid deliveries 1-5 complete"
 
 | File | Purpose |
 |------|---------|
-| `docs/STEP_LOG.md` | Full chronological history (Steps 001â€“current) |
+| `docs/STEP_LOG.md` | Full chronological history (Steps 001Ã¢â‚¬â€œcurrent) |
 | `PROJECT_STATE.md` | Live snapshot (commit, tests, checkpoint) |
 | `docs/CONTEXT.md` | Locked Q&A decisions + conventions |
 | `docs/HYBRID_ARCHITECTURE.md` | System design (updated) |
 | `docs/BETA_BRAIN.md` | Beta Brain delivery log |
-| `docs/PHASE_LOG.md` | Phase-level narrative (Phases 1â€“13, Hybrid) |
+| `docs/PHASE_LOG.md` | Phase-level narrative (Phases 1Ã¢â‚¬â€œ13, Hybrid) |
 | `docs/FILE_TREE.md` | Auto-generated full file tree |
 | `KNOWLEDGE_BASE.md` | Project knowledge notes (root) |
 | `README.md` | Project overview (root) |
@@ -179,7 +179,7 @@ After 5b, run: `.\scripts\checkpoint.ps1 -Label "Hybrid deliveries 1-5 complete"
 ## 9. Recovery Scenarios
 
 **If a paste failed mid-execution:**
-Re-run the entire paste block. Blocks are idempotent â€” overwriting
+Re-run the entire paste block. Blocks are idempotent Ã¢â‚¬â€ overwriting
 files with `-Force` is safe.
 
 **If tests are red after a paste:**
@@ -209,25 +209,30 @@ Re-run the delivery paste. Nothing prevents re-running.
 
 ---
 
-## Current State (2026-10-01 21:30)
+## Current State (2026-10-01 21:45)
 
-**Last delivery:** 6c (honest Sharpe/Sortino + max_hold_bars + stage diagnostics)
-**Pending:** D7 (config tuning), D8 (shadow trading), D9 (XAUUSD)
+**Last delivery:** 7c (shadow TMO losers + diagnostic aggregations)
+**Pending:** D7b (larger-window validation), D8 (shadow trading), D9 (XAUUSD)
 **Resources queue:** D7-12 integration plan in `docs/INTEGRATION_PLAN_7_12.md`
 
-### Honest Backtest (BTCUSDT 5m, 10000 candles, TMO enabled)
+### Latest Backtest (BTCUSDT 5m, 10000 candles, D7c config)
 
-Final run: `data/logs/backtest_beta_BTCUSDT_2026-10-01_2123.*`
+Final run: `data/logs/backtest_beta_BTCUSDT_2026-10-01_2138.*`
 
-- Net PnL: **+$1,233.91 (+12.34%)**
-- Sharpe: **1.08** (real - was a fake 16.95)
-- Sortino: **1.65** (real - was broken at 0.08)
-- Calmar: 2.31
-- Max DD: $622.10 (5.35%)
-- Trades: 58 (30 W / 28 L), PF 1.587
-- Exits: 22 TP / 25 SL / **11 TMO**
-- Best regime: RANGING (+$1,612.55)
-- Worst regime: VOLATILE (-$431.60, 25.5% WR)
+- Net PnL: **+$1,458.48 (+14.58%)**
+- Sharpe: **4.84** (31 trades - small sample, do not cite as stable)
+- Sortino: 9.10 (same caveat)
+- Calmar: 9.92 (same caveat)
+- Max DD: **$167.87 (1.47%)**
+- Trades: 31 (20 W / 11 L), PF 3.028
+- Exits: 13 TP / 14 SL / 4 TMO
+- Best regime: RANGING (+$1,361.05, 65.9% WR)
+- VOLATILE: +$43.43 (was -$431.60 in D6c)
+- Shadowed: `rbd_dbr`, `flag_limits` (via `global_disable`)
+
+D6c baseline for comparison: Sharpe 1.08, PnL +12.34%, DD 5.35%,
+58 trades. See `docs/D7_REPORT.md` for the full side-by-side and
+the small-sample caveat.
 
 ### Rejection Funnel (new from D6c)
 
@@ -236,25 +241,41 @@ Final run: `data/logs/backtest_beta_BTCUSDT_2026-10-01_2123.*`
     rejected_risk_jury      171    ( 1.7%)
     rejected_portfolio_jury 0      ( 0.0%)
 
-### Bugs from D6 - ALL CLOSED
+### D6c bugs - ALL CLOSED
 
-1. ~~Sharpe annualization~~ -> fixed, real 1.08
-2. ~~max_hold_bars not enforced~~ -> fixed, 11 TMO exits now fire
-3. ~~Rejection diagnostic missing~~ -> fixed, 4-stage funnel
-4. (bonus) ~~Sortino formula~~ -> fixed, real 1.65
+1. ~~Sharpe annualization~~ -> fixed
+2. ~~max_hold_bars not enforced~~ -> fixed
+3. ~~Rejection diagnostic missing~~ -> fixed
+4. (bonus) ~~Sortino formula~~ -> fixed
+
+### D7c findings
+
+- **Confidence gate at 0.70 is correct.** Histogram shows clean
+  separation: 0.6-0.7 bucket is 19/20 rejected, 0.7-0.8 is 28/28
+  passed. Do not lower the gate.
+- **VOLATILE flipped positive** (-$431 -> +$43). No wholesale block
+  needed; consider targeted block for mad_bb + adaptive_rsi_ml in
+  VOLATILE only, pending D7b verification.
+- **TMO exits now healthy** (4 exits, all winners).
+- **Architecture debt:** `strategy_tiers.yaml` is documentation only.
+  The registry reads `global_disable`. Moving a strategy to
+  tier_4_shadow does NOT shadow it. A future delivery must wire
+  `TierManager` into `StrategyRegistry`.
 
 ### Recommended Actions
 
-- **Delivery 7 (next):** tune config
-  - min-confidence gate (54.8% of rejections are below 0.7)
-  - strengthen VOLATILE block (25.5% WR there)
-  - analyse which strategies produced the 11 TMO exits
-  - shadow `flag_limits` (and possibly `rbd_dbr`)
-  - **DO NOT shadow mad_bb / rmd_trail / adaptive_rsi_ml** - the
-    BACKTEST_ANALYSIS recommendation is invalidated by D6c, they are
-    now the top 3 PnL contributors
+- **Delivery 7b (next):** rerun on a larger window (20k candles or
+  walk-forward). **Pure measurement, no config change.** Confirm
+  Sharpe, Max DD, and the VOLATILE attribution before trusting
+  D7c's magnitude.
 - **Delivery 8:** shadow trading (write outcomes to JSONL)
 - **Delivery 9:** XAUUSD adapter
+- **Deferred architecture work:** wire `TierManager` into
+  `StrategyRegistry` so `strategy_tiers.yaml` becomes authoritative.
+- **Candidate tuning after D7b:** targeted VOLATILE block for
+  `mad_bb` + `adaptive_rsi_ml` (needs confirmation).
+- **DO NOT shadow** `mad_bb`, `rmd_trail`, `adaptive_rsi_ml` - the
+  BACKTEST_ANALYSIS recommendation is invalidated.
 
 Full D6c report: `docs/D6C_REPORT.md`
 Full backtest analysis: `docs/BACKTEST_ANALYSIS.md`

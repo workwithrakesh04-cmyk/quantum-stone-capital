@@ -220,3 +220,86 @@ In the honest run, those three are the top PnL contributors:
 - rbd_dbr (-$28.60, borderline)
 
 See `docs/D6C_REPORT.md` section 6 for full detail.
+
+---
+
+# D7c - Shadow TMO Losers + Diagnostic Aggregations (2026-10-01)
+
+**Reference:** full report in `docs/D7_REPORT.md`
+**Final run:** `data/logs/backtest_beta_BTCUSDT_2026-10-01_2138.*`
+
+## Config changes
+
+- Shadowed `rbd_dbr` and `flag_limits` via `global_disable`
+  (in `strategy_regime_filters.yaml`)
+- Moved both to `tier_4_shadow` in `strategy_tiers.yaml`
+  (documentation only - the registry does not read tiers yet)
+- Added 3 diagnostic aggregations to the backtester:
+  `confidence_histogram`, `volatile_by_strategy`, `tmo_by_strategy`
+
+## D6c -> D7c comparison
+
+| Metric | D6c | D7c | Delta |
+|---|---|---|---|
+| Net PnL | +$1,233.91 (+12.34%) | +$1,458.48 (+14.58%) | +$224.57 |
+| Max DD | 5.35% | **1.47%** | -3.88pp |
+| Trades | 58 | 31 | -27 |
+| Win rate | 51.72% | **64.52%** | +12.80pp |
+| Profit factor | 1.587 | **3.028** | +1.441 |
+| Sharpe | 1.08 | 4.84 | +3.76 (see caveat) |
+| Sortino | 1.65 | 9.10 | +7.45 (see caveat) |
+| Calmar | 2.31 | 9.92 | +7.61 (see caveat) |
+
+**SMALL-SAMPLE CAVEAT:** D7c's Sharpe / Sortino / Calmar are
+computed on 31 trades. Do not cite them as stable improvements.
+D7b must validate on a larger window.
+
+## Diagnostic findings (data, not guesses)
+
+### The confidence gate at 0.70 is correct
+
+Histogram for BUY/SELL debates:
+
+    0.5-0.6:  10 all rejected
+    0.6-0.7:  20, 19 rejected, 1 passed
+    0.7-0.8:  28, all passed
+    0.8+:      2, all passed
+
+Mean 0.684, median 0.706. The 0.70 gate sits at the median and
+cleanly separates the passed/rejected populations. **Do not lower
+it.** D6c Focus 1 is resolved.
+
+### VOLATILE flipped positive
+
+VOLATILE regime PnL went -$431.60 -> +$43.43. The 27 fewer trades
+removed the VOLATILE losers. Two strategies accounted for the
+prior VOLATILE loss: `adaptive_rsi_ml` (-$235.29 in VOLATILE) and
+`mad_bb` (-$134.44 in VOLATILE) - but both are net positive overall.
+This suggests a **targeted** VOLATILE block (not a wholesale one) if
+D7b confirms on the larger window. D6c Focus 2 is now: measure, do
+not block blindly.
+
+### TMO exits now healthy
+
+4 TMO exits remain, all winners. The TMO-losing strategies are
+shadowed. D6c Focus 3 (TMO analysis) is resolved by the config
+change.
+
+## IMPORTANT - the D6 shadow recommendation is still invalidated
+
+The "Option B" shadow list at the top of this file still says to
+shadow `mad_bb`, `rmd_trail`, `adaptive_rsi_ml`. **That is still
+wrong.** In D7c:
+
+- `rmd_trail`: +$189.66
+- `adaptive_rsi_ml`: +$149.99 (though -$235.29 in VOLATILE only)
+- `mad_bb`: +$149.45 (though -$134.44 in VOLATILE only)
+
+The correct shadow candidates were `flag_limits` and `rbd_dbr`, and
+D7c shadowed them.
+
+## Next: D7b
+
+Rerun on a larger window (20k candles or walk-forward). Pure
+measurement, no config change. Confirm Sharpe, Max DD, and the
+VOLATILE attribution before further tuning.

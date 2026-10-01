@@ -1,15 +1,14 @@
 """Beta Backtester - historical simulation of the Beta Brain pipeline.
 
 D6c changes:
-  - max_hold_bars now derived from account config (modes.<mode>.max_holding_minutes)
-    and passed to PaperTrader.open_trade. Honors account_rules.enable_timeout_exits.
-  - Stage-by-stage rejection counters:
-        rejected_hold            (no actionable signals / debate HOLD)
-        rejected_low_confidence  (winner_confidence < min_conf)
-        rejected_risk_jury       (risk_jury rejected)
-        rejected_portfolio_jury  (portfolio_jury rejected)
-    trades_rejected is kept as the sum for backward compatibility.
-  - enrich() now receives periods_per_year inferred from trade count + period_days.
+  - max_hold_bars derived from config; stage rejection counters; period_days
+    threaded into performance metrics.
+
+D7c changes:
+  - confidence_histogram: buckets of winner_confidence for BUY/SELL winners,
+    split by whether they passed the min-confidence gate.
+  - volatile_by_strategy: per-strategy trades + PnL restricted to VOLATILE.
+  - tmo_by_strategy: per-strategy trades + PnL + avg bars held for TMO exits.
 """
 import asyncio
 import time
@@ -18,6 +17,7 @@ from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timezone
+from collections import defaultdict
 
 from loguru import logger
 
@@ -36,6 +36,9 @@ TIMEFRAME_MINUTES = {
     "1m": 1, "3m": 3, "5m": 5, "15m": 15, "30m": 30,
     "1h": 60, "2h": 120, "4h": 240, "1d": 1440,
 }
+
+# D7c: histogram bucket edges for winner_confidence
+CONF_BUCKETS = [0.0, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.01]
 
 
 @dataclass
@@ -76,14 +79,11 @@ class BetaBacktester:
         self.max_window = max_window
         self.mode = mode
 
-        # Config
         with open(config_path, "r", encoding="utf-8-sig") as f:
             self.account_cfg = yaml.safe_load(f)
 
-        # Regime tagger
         self.tagger = get_regime_tagger()
 
-        # Registry
         self.registry = StrategyRegistry(
             timeframe=timeframe,
             filter_config_path=regime_filters_path,
@@ -92,7 +92,6 @@ class BetaBacktester:
         self.registry.register_all(load_all_strategies())
         self.registry.instantiate_all()
 
-        # Debate + jury + trader
         self.debate = DebateEngine()
         self.jury = VerdictEngine()
         self.jury.set_config(account_type, self.account_cfg)
@@ -104,7 +103,6 @@ class BetaBacktester:
             on_trade_close=self._on_trade_close,
         )
 
-        # D6c: derive max_hold_bars from config
         self.max_hold_bars = self._derive_max_hold_bars()
 
         # Tracking
@@ -117,19 +115,14 @@ class BetaBacktester:
         self.rejected_risk_jury = 0
         self.rejected_portfolio_jury = 0
 
-    # ------------------------------------------------------------------
-    # D6c helpers
+        # D7c: raw per-debate records for post-hoc aggregation
+        # Each entry: {"winner": str, "confidence": float, "min_conf": float,
+        #              "passed_gate": bool, "regime": str}
+        self._debate_records: List[Dict[str, Any]] = []
+
     # ------------------------------------------------------------------
 
     def _derive_max_hold_bars(self) -> int:
-        """Derive max_hold_bars from account config for the current mode.
-
-        Rules:
-          - account_rules.enable_timeout_exits == False  -> 0 (no timeout)
-          - modes[<mode>].max_holding_minutes == N       -> N / tf_minutes
-          - modes[<mode>].max_holding_hours == H         -> H*60 / tf_minutes
-          - neither present                              -> 0
-        """
         rules = self.account_cfg.get("account_rules", {}) or {}
         if not rules.get("enable_timeout_exits", False):
             return 0
@@ -140,8 +133,7 @@ class BetaBacktester:
         tf_min = TIMEFRAME_MINUTES.get(self.timeframe)
         if tf_min is None:
             logger.warning(
-                f"BetaBacktester: unknown timeframe {self.timeframe}; "
-                f"max_hold_bars=0"
+                f"BetaBacktester: unknown timeframe {self.timeframe}; max_hold_bars=0"
             )
             return 0
 
@@ -153,8 +145,6 @@ class BetaBacktester:
         if minutes is None:
             return 0
         return max(int(minutes) // tf_min, 1)
-
-    # ------------------------------------------------------------------
 
     def _on_trade_close(self, pnl_usd: float) -> None:
         if not self.trader.closed_trades:
@@ -207,14 +197,11 @@ class BetaBacktester:
             window = candles[start_idx:i]
             trigger_candle = candles[i]
 
-            # Process open trades first (SL/TP/timeout)
             self.trader.process_candle(trigger_candle)
 
-            # Regime tag
             regime_tag = self.tagger.tag(window)
             regime = regime_tag.regime
 
-            # Run strategies
             signals = self.registry.run_all(window, regime=regime)
             actionable = [s for s in signals if s.direction in ("LONG", "SHORT")]
             if not actionable:
@@ -222,21 +209,29 @@ class BetaBacktester:
                 self.trades_rejected += 1
                 continue
 
-            # Debate
             self.debates_run += 1
             debate = self.debate.run(
                 signals, window,
                 symbol=self.symbol, timeframe=self.timeframe,
             )
 
-            # Min confidence gate
             min_conf = self.registry.get_min_confidence(regime)
-            if debate.winner_confidence < min_conf:
+            passed_gate = debate.winner_confidence >= min_conf
+
+            # D7c: record every debate for the histogram
+            self._debate_records.append({
+                "winner": debate.winner,
+                "confidence": float(debate.winner_confidence),
+                "min_conf": float(min_conf),
+                "passed_gate": bool(passed_gate),
+                "regime": regime,
+            })
+
+            if not passed_gate:
                 self.rejected_low_confidence += 1
                 self.trades_rejected += 1
                 continue
 
-            # Jury
             verdict = self.jury.run(
                 debate=debate,
                 candles=window,
@@ -253,31 +248,27 @@ class BetaBacktester:
             )
 
             if verdict.final_decision != "APPROVED":
-                # D6c: split by which jury rejected
                 if not verdict.risk.approved:
                     self.rejected_risk_jury += 1
                 elif not verdict.portfolio.approved:
                     self.rejected_portfolio_jury += 1
                 else:
-                    # defensive: final_jury rejected for some other reason
                     self.rejected_risk_jury += 1
                 self.trades_rejected += 1
                 continue
 
-            # Open paper trade
             winner_dir = "LONG" if debate.winner == "BUY" else "SHORT" if debate.winner == "SELL" else None
             contributing = [s.strategy for s in actionable if s.direction == winner_dir] if winner_dir else []
 
             trade = self.trader.open_trade(
                 verdict, [trigger_candle],
-                max_hold_bars=self.max_hold_bars,  # D6c
+                max_hold_bars=self.max_hold_bars,
                 contributing_strategies=contributing,
                 regime=regime,
             )
             if trade:
                 self.trades_opened += 1
 
-        # Close remaining at last close
         if self.trader.open_trades and len(candles) > 0:
             last = candles[-1]
             before = len(self.trader.closed_trades)
@@ -292,7 +283,6 @@ class BetaBacktester:
 
         runtime = time.time() - start_ts
 
-        # Build stats + enrich
         stats = self.trader.get_stats()
         trade_returns = []
         for t in self.trader.closed_trades:
@@ -300,7 +290,6 @@ class BetaBacktester:
                 notional = t.entry_price * t.qty
                 trade_returns.append(t.pnl_usd / notional if notional > 0 else 0.0)
 
-        # D6c: pass period_days so enrich can infer trades-per-year
         try:
             t0 = candles[0]["open_time"] / 1000
             t1 = candles[-1]["open_time"] / 1000
@@ -333,6 +322,106 @@ class BetaBacktester:
             trades=trades_out,
         )
 
+    # ------------------------------------------------------------------
+    # D7c diagnostics
+    # ------------------------------------------------------------------
+
+    def confidence_histogram(self) -> Dict[str, Any]:
+        """Bucket winner_confidence for BUY/SELL winners.
+
+        Only counts debates where the winner was BUY or SELL
+        (HOLD verdicts never reach the gate).
+        """
+        buckets_all = {f"{CONF_BUCKETS[i]:.1f}-{CONF_BUCKETS[i+1]:.1f}": 0
+                       for i in range(len(CONF_BUCKETS) - 1)}
+        buckets_passed = dict(buckets_all)
+        buckets_rejected = dict(buckets_all)
+
+        n_total = 0
+        n_passed = 0
+        n_rejected = 0
+        confs = []
+
+        for r in self._debate_records:
+            if r["winner"] not in ("BUY", "SELL"):
+                continue
+            c = r["confidence"]
+            confs.append(c)
+            n_total += 1
+            label = None
+            for i in range(len(CONF_BUCKETS) - 1):
+                if CONF_BUCKETS[i] <= c < CONF_BUCKETS[i + 1]:
+                    label = f"{CONF_BUCKETS[i]:.1f}-{CONF_BUCKETS[i+1]:.1f}"
+                    break
+            if label is None:
+                label = f"{CONF_BUCKETS[-2]:.1f}-{CONF_BUCKETS[-1]:.1f}"
+
+            buckets_all[label] += 1
+            if r["passed_gate"]:
+                buckets_passed[label] += 1
+                n_passed += 1
+            else:
+                buckets_rejected[label] += 1
+                n_rejected += 1
+
+        mean_c = sum(confs) / len(confs) if confs else 0.0
+        confs_sorted = sorted(confs)
+        median_c = confs_sorted[len(confs_sorted) // 2] if confs_sorted else 0.0
+
+        return {
+            "n_buy_sell_debates": n_total,
+            "n_passed_gate": n_passed,
+            "n_rejected_by_gate": n_rejected,
+            "mean_confidence": round(mean_c, 3),
+            "median_confidence": round(median_c, 3),
+            "buckets_all": buckets_all,
+            "buckets_passed": buckets_passed,
+            "buckets_rejected": buckets_rejected,
+        }
+
+    def volatile_by_strategy(self) -> Dict[str, Dict[str, Any]]:
+        """Per-strategy trade count, wins, and PnL restricted to VOLATILE regime."""
+        out: Dict[str, Dict[str, Any]] = {}
+        for t in self.trader.closed_trades:
+            if t.regime != "VOLATILE":
+                continue
+            for s in (t.contributing_strategies or []):
+                e = out.setdefault(s, {"trades": 0, "wins": 0, "losses": 0,
+                                       "pnl_usd": 0.0})
+                e["trades"] += 1
+                if t.pnl_usd > 0:
+                    e["wins"] += 1
+                elif t.pnl_usd < 0:
+                    e["losses"] += 1
+                e["pnl_usd"] += t.pnl_usd
+        for s, e in out.items():
+            e["pnl_usd"] = round(e["pnl_usd"], 2)
+            e["win_rate"] = round(e["wins"] / e["trades"] * 100, 1) if e["trades"] else 0.0
+        return out
+
+    def tmo_by_strategy(self) -> Dict[str, Dict[str, Any]]:
+        """Per-strategy trades + PnL + avg bars for CLOSED_TIMEOUT exits."""
+        out: Dict[str, Dict[str, Any]] = {}
+        for t in self.trader.closed_trades:
+            if t.status != "CLOSED_TIMEOUT":
+                continue
+            for s in (t.contributing_strategies or []):
+                e = out.setdefault(s, {"trades": 0, "wins": 0, "losses": 0,
+                                       "pnl_usd": 0.0, "bars_total": 0})
+                e["trades"] += 1
+                if t.pnl_usd > 0:
+                    e["wins"] += 1
+                elif t.pnl_usd < 0:
+                    e["losses"] += 1
+                e["pnl_usd"] += t.pnl_usd
+                e["bars_total"] += t.bars_held
+        for s, e in out.items():
+            e["pnl_usd"] = round(e["pnl_usd"], 2)
+            e["avg_bars"] = round(e["bars_total"] / e["trades"], 1) if e["trades"] else 0.0
+            del e["bars_total"]
+            e["win_rate"] = round(e["wins"] / e["trades"] * 100, 1) if e["trades"] else 0.0
+        return out
+
     def get_analyzer_dict(self) -> Dict[str, Any]:
         return self.analyzer.to_dict()
 
@@ -342,10 +431,13 @@ class BetaBacktester:
             "debates_run": self.debates_run,
             "trades_opened": self.trades_opened,
             "trades_rejected": self.trades_rejected,
-            # D6c stage breakdown
             "rejected_hold": self.rejected_hold,
             "rejected_low_confidence": self.rejected_low_confidence,
             "rejected_risk_jury": self.rejected_risk_jury,
             "rejected_portfolio_jury": self.rejected_portfolio_jury,
             "max_hold_bars_used": self.max_hold_bars,
+            # D7c
+            "confidence_histogram": self.confidence_histogram(),
+            "volatile_by_strategy": self.volatile_by_strategy(),
+            "tmo_by_strategy": self.tmo_by_strategy(),
         }

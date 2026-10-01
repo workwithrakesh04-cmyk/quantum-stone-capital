@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-10-01 15:58 UTC
+Auto-generated: 2026-10-01 16:20 UTC
 
-Total files: 293
+Total files: 296
 
 ```
 .gitignore
@@ -88,6 +88,7 @@ data/models/brain/current.json
 docs/BACKTEST_ANALYSIS.md
 docs/BETA_BRAIN.md
 docs/CONTEXT.md
+docs/D6C_REPORT.md
 docs/FILE_TREE.md
 docs/HYBRID_ARCHITECTURE.md
 docs/INTEGRATION_PLAN_7_12.md
@@ -244,6 +245,8 @@ tests/test_beta_verdict_engine.py
 tests/test_bos_choch.py
 tests/test_consensus_arbiter.py
 tests/test_consensus_audit.py
+tests/test_d6c_backtester_config.py
+tests/test_d6c_performance_metrics.py
 tests/test_debate_engine.py
 tests/test_elliott_wave.py
 tests/test_execution_engine.py

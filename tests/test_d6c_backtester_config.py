@@ -1,5 +1,6 @@
 """D6c tests - BetaBacktester config-driven max_hold_bars + stage counters."""
 import pytest
+from types import SimpleNamespace
 import tempfile
 import os
 import yaml
@@ -109,6 +110,9 @@ class TestStageCounters:
         bt.rejected_risk_jury = 0
         bt.rejected_portfolio_jury = 0
         bt.max_hold_bars = 0
+        # D7c: get_diagnostics now touches these two
+        bt._debate_records = []
+        bt.trader = SimpleNamespace(closed_trades=[])
         diag = bt.get_diagnostics()
         assert diag["rejected_hold"] == 0
         assert diag["rejected_low_confidence"] == 0
@@ -127,6 +131,9 @@ class TestStageCounters:
         bt.rejected_risk_jury = 4000
         bt.rejected_portfolio_jury = 1265
         bt.max_hold_bars = 12
+        # D7c: get_diagnostics now touches these two
+        bt._debate_records = []
+        bt.trader = SimpleNamespace(closed_trades=[])
         diag = bt.get_diagnostics()
         for k in ("candles_processed", "debates_run", "trades_opened",
                   "trades_rejected", "rejected_hold", "rejected_low_confidence",
