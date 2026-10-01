@@ -227,3 +227,25 @@ Commit: pending
 **Next:** 5a-3 (liquidity + supply_demand: liquidity_sweep,
 false_breakout, bs_ss_liquidity, turtle_soup, quasimodo, rbd_dbr,
 sd_zones, ftr_compression, flag_limits, three_drive)
+---
+
+## Delivery 5a-3 — 2026-10-01 — Liquidity + Supply/Demand
+Commit: pending
+
+**Created:**
+- `strategies_py/liquidity/liquidity_sweep.py`
+- `strategies_py/liquidity/false_breakout.py`
+- `strategies_py/liquidity/bs_ss_liquidity.py`
+- `strategies_py/liquidity/turtle_soup.py`
+- `strategies_py/liquidity/quasimodo.py`
+- `strategies_py/supply_demand/rbd_dbr.py`
+- `strategies_py/supply_demand/sd_zones.py`
+- `strategies_py/supply_demand/ftr_compression.py`
+- `strategies_py/supply_demand/flag_limits.py`
+- `strategies_py/supply_demand/three_drive.py`
+- `tests/test_strategies_py_liquidity_sd.py` (10 tests)
+
+**Tests:** 459 → ~469 (+10)
+
+**Next:** 5a-4 (ICT/SMC + patterns + ML + volatility + trend, plus
+knowledge base — the final 5a batch)

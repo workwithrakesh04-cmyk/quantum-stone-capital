@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-10-01 07:27 UTC
+Auto-generated: 2026-10-01 07:30 UTC
 
-Total files: 219
+Total files: 228
 
 ```
 .gitignore
@@ -153,6 +153,14 @@ strategies_py/liquidity/__init__.py
 strategies_py/loader.py
 strategies_py/ml_adaptive/__init__.py
 strategies_py/order_flow/__init__.py
+strategies_py/order_flow/absorption.py
+strategies_py/order_flow/delta_divergence.py
+strategies_py/order_flow/naked_poc.py
+strategies_py/order_flow/poc_strategy.py
+strategies_py/order_flow/stacked_imbalance.py
+strategies_py/order_flow/trapped_traders.py
+strategies_py/order_flow/value_area.py
+strategies_py/order_flow/volume_cluster.py
 strategies_py/patterns/__init__.py
 strategies_py/registry.py
 strategies_py/supply_demand/__init__.py
@@ -200,6 +208,7 @@ tests/test_prop_rules.py
 tests/test_signal_filter.py
 tests/test_strategies_py_base.py
 tests/test_strategies_py_loader.py
+tests/test_strategies_py_order_flow.py
 tests/test_strategies_py_registry.py
 tests/test_strategies_py_tier_manager.py
 tests/test_strategy_registry.py
