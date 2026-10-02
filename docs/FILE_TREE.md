@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-10-02 16:40 UTC
+Auto-generated: 2026-10-02 16:57 UTC
 
-Total files: 305
+Total files: 307
 
 ```
 .gitignore
@@ -93,6 +93,7 @@ docs/D6C_REPORT.md
 docs/D7B_REPORT.md
 docs/D7_REPORT.md
 docs/D8C2_REPORT.md
+docs/D8C3_REPORT.md
 docs/D8C_REPORT.md
 docs/FILE_TREE.md
 docs/HYBRID_ARCHITECTURE.md
@@ -255,6 +256,7 @@ tests/test_d6c_backtester_config.py
 tests/test_d6c_performance_metrics.py
 tests/test_d7_diagnostics.py
 tests/test_d8c2_hard_stop.py
+tests/test_d8c3_hard_stop_wiring.py
 tests/test_debate_engine.py
 tests/test_elliott_wave.py
 tests/test_execution_engine.py

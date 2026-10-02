@@ -685,3 +685,52 @@ deliveries.
   shortens bad windows rather than fixing them.
 
 **Next:** D8 shadow trading - the first out-of-sample test.
+
+---
+
+## Delivery 8 - 2026-10-02 - Shadow Trading Infrastructure
+Commit: pending
+
+**Created:**
+- `beta_brain/shadow_audit.py` - JSONL writer for shadow runs
+- `scripts/shadow_run.py` - the shadow loop
+- `scripts/shadow_analysis.py` - CLI wrapper for analysis
+- `backtest/shadow_analysis.py` - read JSONL, replay, compare
+- `tests/test_d8_shadow_audit.py` (14 tests)
+- `tests/test_d8_shadow_analysis.py` (21 tests)
+- `docs/D8_REPORT.md`
+
+**Modified:** none (all new files)
+
+**Tests:** 631 -> 666 (+35)
+
+**Result: INFRASTRUCTURE VALIDATED. Edge verdict deferred to D8b.**
+
+Run on 100 fresh out-of-sample candles (2026-10-01T16:20Z ->
+2026-10-02T16:40Z):
+
+    candles_processed:    100
+    debates_run:          100
+    verdicts_approved:      0
+    verdicts_rejected:    100
+    trades_opened:          0
+    return_pct:           0.00%
+
+**0 trades in 100 candles.** This is exactly what D8c-3's trade
+frequency predicts (~10 trades per 3,500 candles -> ~0.29 expected
+in 100). All 100 records are `no_verdict` - the strategies never
+fired. The confidence gate was not the blocker.
+
+**D8 does NOT claim the edge is real.** 100 candles is not a
+sample. D8b (scheduled ~17 days out, >=5,000 OOS candles) is the
+real analysis.
+
+**Key deliverables:**
+- Shadow runner works end-to-end on fresh Binance data
+- Run isolation via `run_id` (no pollution between runs)
+- Full OHLC logging -> faithful intrabar replay in analysis
+- Same metrics pipeline as D8c-3 (paper-trader fill, enrich())
+
+**Next:** D8b scheduled re-run at >=5,000 OOS candles. Pass
+criterion: return_pct >= 0, sharpe >= 0.5, max_dd <= 8,
+total_trades >= 30.

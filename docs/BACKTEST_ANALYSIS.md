@@ -553,3 +553,67 @@ Monotonic improvement across four deliveries.
 
 First out-of-sample test. Log live/near-live outcomes to JSONL.
 If D8c-3's numbers hold, D8 is a real step toward paper trading.
+
+---
+
+# D8 - Shadow Trading Infrastructure (2026-10-02)
+
+**Reference:** full report in `docs/D8_REPORT.md`
+**Status:** INFRASTRUCTURE VALIDATED. Sample too small for edge
+verdict. D8b is the real analysis.
+
+## What D8 shipped
+
+A shadow runner that fetches fresh candles from Binance, runs the
+exact Beta Brain pipeline (same window/warmup/max_hold_bars/hard
+stop as D8c-3), logs every decision to JSONL, and an analysis
+module that replays and compares to D8c-3.
+
+## The 100-candle run
+
+    candles_processed:    100
+    debates_run:          100
+    verdicts_approved:      0
+    verdicts_rejected:    100
+    trades_opened:          0
+    return_pct:           0.00%
+    halted:              false
+
+**100 debates, 100 rejections, 0 trades.**
+
+This is the right result for the sample size. D8c-3 produced ~10
+trades per 3,500 candles. 100 candles -> ~0.29 expected trades.
+We got 0.
+
+The JSONL tally shows `no_verdict = 100` - meaning the strategies
+never fired. Not a confidence-gate rejection.
+
+## D8 does NOT claim the edge is real
+
+100 candles is not a validation. D8b is the real analysis.
+
+### D8b plan
+
+Re-run the shadow when **>=5,000 OOS candles** have accumulated
+(~17 days from 2026-10-02). Pass criterion (adjusted for OOS):
+
+    1. return_pct >= 0
+    2. sharpe >= 0.5
+    3. max_drawdown_pct <= 8
+    4. total_trades >= 30
+
+If pass -> D9 (paper trading).
+If fail -> rebuild strategy selection from walk-forward at every
+step.
+
+## Files added
+
+- `beta_brain/shadow_audit.py`
+- `scripts/shadow_run.py`
+- `scripts/shadow_analysis.py`
+- `backtest/shadow_analysis.py`
+- `tests/test_d8_shadow_audit.py` (14 tests)
+- `tests/test_d8_shadow_analysis.py` (21 tests)
+- `docs/D8_REPORT.md`
+
+**Tests:** 631 -> 666 (+35).

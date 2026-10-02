@@ -276,3 +276,4 @@ _(steps will be appended here as we build)_
 - [2026-10-02 21:52] [Step 183] Delivery 8c: walk-forward-driven pruning to 4 active strategies - PARTIAL PASS (2/4 criteria, chained equity +1.81%, DD halved)
 - [2026-10-02 22:04] [Step 184] D8c-2 hotfix: make get_diagnostics defensive (getattr), fix 3 failing tests
 - [2026-10-02 22:10] [Step 185] Delivery 8c-3: hard stop wired + validated - FULL PASS 4/4 (chained equity +8.33%, DD 4.67%)
+- [2026-10-02 22:27] [Step 186] Delivery 8: shadow trading infrastructure validated on 100 OOS candles (0 trades - expected for sample); D8b scheduled for >=5k OOS candles
