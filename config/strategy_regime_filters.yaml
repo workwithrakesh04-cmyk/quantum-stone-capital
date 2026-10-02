@@ -31,12 +31,36 @@ global_disable:
   #   flag_limits: -$124.64 net, 25.0% WR (worst by WR), all TMO exits were losers
   - rbd_dbr
   - flag_limits
+  # D8c - shadowed on walk-forward consistency (10 windows, 20k candles):
+  #   rule: shadow if positive_rate < 50% AND total_pnl < 0
+  #   mad_bb          40.0% pos, 66 trades, -$124.90
+  #   rmd_trail       40.0% pos, 66 trades, -$332.34
+  #   three_drive     44.4% pos, 21 trades, -$449.26
+  #   bos_choch       40.0% pos, 63 trades, -$711.55
+  #   adaptive_rsi_ml 30.0% pos, 59 trades, -$654.00
+  #   bs_ss_liquidity  0.0% pos,  1 trade,  -$62.75  (sample too small)
+  #   ichimoku_rsi     0.0% pos,  1 trade,  -$96.11  (sample too small)
+  - mad_bb
+  - rmd_trail
+  - three_drive
+  - bos_choch
+  - adaptive_rsi_ml
+  - bs_ss_liquidity
+  - ichimoku_rsi
+  # D8c - ai_source_ma shadowed: 0 trades across 4 backtests (D6c, D7c,
+  # D7b, D8b). Zero evidence of contribution. Revisit if it ever fires.
+  - ai_source_ma
 
 regime_enable_only:
   quasimodo:
     - VOLATILE
-  volume_cluster:
-    - VOLATILE
+  # D8c - volume_cluster freed from VOLATILE-only.
+  # Rationale: it produced only 3 trades across 20k candles (11% VOLATILE
+  # share); 100% WR on 3 trades is a small-sample artifact, not edge.
+  # Freeing it lets D8c actually test whether volume_cluster has signal.
+  # Old (D7c and earlier):
+  #   volume_cluster:
+  #     - VOLATILE
 
 regime_rules:
   RANGING:

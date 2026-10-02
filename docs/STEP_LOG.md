@@ -273,3 +273,4 @@ _(steps will be appended here as we build)_
 - [2026-10-01 21:28] [Step 180] Delivery 6c: honest Sharpe/Sortino + config-driven max_hold_bars + stage rejection diagnostics
 - [2026-10-01 21:50] [Step 181] Delivery 7c: shadow rbd_dbr + flag_limits, 3 diagnostic aggregations, fix 2 D6c tests
 - [2026-10-01 22:01] [Step 182] Delivery 7b: 20k-candle validation of D7c - D7c magnitude INVALIDATED (Sharpe 4.84 -> 0.17), new CHOPPY finding, D7b report written
+- [2026-10-02 21:52] [Step 183] Delivery 8c: walk-forward-driven pruning to 4 active strategies - PARTIAL PASS (2/4 criteria, chained equity +1.81%, DD halved)

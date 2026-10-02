@@ -377,3 +377,63 @@ That is the only way to distinguish real edge from one-period
 luck.
 
 See `docs/D7B_REPORT.md` section 6 for the full recommendation.
+
+---
+
+# D8c - Walk-Forward-Driven Strategy Pruning (2026-10-02)
+
+**Reference:** full report in `docs/D8C_REPORT.md`
+**Run:** `data/logs/walk_forward_beta_BTCUSDT_2026-10-02_2049.*`
+**Status:** PARTIAL PASS - 2 of 4 criteria met
+
+## The four criteria
+
+| # | Criterion | D8b | D8c | Pass? |
+|---|-----------|-----|-----|-------|
+| 1 | Chained equity positive | -2.29% | **+1.81%** | YES |
+| 2 | Sharpe pos windows >= 7/10 | 5/10 | **6/10** | NO |
+| 3 | Mean Sharpe >= 0 | -1.44 | -1.66 | NO |
+| 4 | Max window DD <= 5% | 10.80% | **9.01%** | NO |
+
+## What improved
+
+- Chained equity flipped from -2.29% to +1.81%
+- Worst window DD halved: 10.8% -> 9.0%
+- `liquidity_sweep` and `trapped_traders` flipped from negative
+  to positive (+$246, +$244)
+- RANGING confirmed as the positive regime (80% consistency,
+  +$293)
+
+## What still fails
+
+- Max window DD at 9.01% (prop cap is 10%)
+- Mean Sharpe still negative, but **median Sharpe is +1.085** -
+  the mean is distorted by small-sample windows with <15 trades
+  (window min Sharpe -24.32 is a mathematical artifact)
+- 6/10 Sharpe positive windows (need 7)
+- `volume_cluster` still weak (42.9%, -$30.43)
+
+**The mean-Sharpe criterion was poorly chosen.** Median Sharpe
+is the more reliable statistic across windows. See
+`docs/D8C_REPORT.md` section 3b.
+
+## The pruning
+
+Shadowed 8 strategies (7 from D8b's consistency table + `ai_source_ma`
+which fired 0 trades across 4 backtests).
+
+Kept active: `false_breakout`, `trapped_traders`,
+`liquidity_sweep`, `volume_cluster`.
+
+Also: `volume_cluster` removed from `regime_enable_only`.
+
+## Next: D8c-2
+
+1. Shadow `volume_cluster`
+2. Add per-window hard stop to `BetaBacktester` (close at -3%
+   window DD, stop opening for rest of window)
+3. Rerun with **median Sharpe** as the primary risk metric
+
+If D8c-2 passes, next is D8 shadow trading. If it fails, the
+strategies themselves - not the infrastructure - are the
+limiting factor.

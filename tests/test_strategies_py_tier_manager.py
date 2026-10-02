@@ -1,4 +1,4 @@
-﻿"""Tests for strategies_py.tier_manager."""
+"""Tests for strategies_py.tier_manager."""
 from strategies_py.tier_manager import TierManager
 
 
@@ -23,7 +23,9 @@ def test_get_weight_matches_tier():
     tm = TierManager()
     assert tm.get_weight("false_breakout") == 1.0
     assert tm.get_weight("sd_zones") == 0.7
-    assert tm.get_weight("mad_bb") == 0.5
+    # D8c: mad_bb was demoted tier_3 -> tier_4_shadow on walk-forward
+    # evidence. Its weight is now 0.0, not 0.5.
+    assert tm.get_weight("mad_bb") == 0.0
     assert tm.get_weight("fvg") == 0.0
 
 
@@ -32,7 +34,9 @@ def test_get_enabled_strategies_for_personal():
     enabled = tm.get_enabled_strategies("personal")
     assert "false_breakout" in enabled
     assert "sd_zones" in enabled
-    assert "mad_bb" in enabled
+    # D8c: mad_bb was demoted tier_3 -> tier_4_shadow, so it is no
+    # longer in an enabled tier for personal.
+    assert "mad_bb" not in enabled
     assert "fvg" not in enabled
 
 

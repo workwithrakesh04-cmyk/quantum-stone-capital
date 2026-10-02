@@ -27,18 +27,14 @@ tiers:
     strategies:
       - sd_zones
       - mad_fl
-      - ichimoku_rsi
       - poc
-      - three_drive
 
   tier_3_probationary:
     description: "Helped in walk-forward but auditor negative - re-evaluate often"
     weight: 0.5
     trade_cap: 12
     review_frequency_days: 7
-    strategies:
-      - mad_bb
-      - rmd_trail
+    strategies: []
 
   tier_4_shadow:
     description: "Disabled but monitored - promote when profitable"
@@ -65,6 +61,24 @@ tiers:
       # D7c - demoted on evidence from D6c
       - rbd_dbr         # was tier_2; -$28.60 net, -$209 TMO PnL
       - flag_limits     # -$124.64 net, 25.0% WR
+      # D8c - demoted on walk-forward consistency (10 windows, 20k candles)
+      - mad_bb          # was tier_3; 40.0% pos, -$124.90
+      - rmd_trail       # was tier_3; 40.0% pos, -$332.34
+      - three_drive     # was tier_2; 44.4% pos, -$449.26
+      - bos_choch       # 40.0% pos, -$711.55
+      - adaptive_rsi_ml # 30.0% pos, -$654.00
+      - bs_ss_liquidity #  0.0% pos (1 trade), -$62.75
+      - ichimoku_rsi    # was tier_2; 0.0% pos (1 trade), -$96.11
+      - ai_source_ma    # 0 trades across 4 backtests; no evidence either way
+      # D8c - demoted on walk-forward consistency (10 windows, 20k candles)
+      - mad_bb          # was tier_3; 40.0% pos, -$124.90
+      - rmd_trail       # was tier_3; 40.0% pos, -$332.34
+      - three_drive     # was tier_2; 44.4% pos, -$449.26
+      - bos_choch       # 40.0% pos, -$711.55
+      - adaptive_rsi_ml # 30.0% pos, -$654.00
+      - bs_ss_liquidity #  0.0% pos (1 trade), -$62.75
+      - ichimoku_rsi    # was tier_2; 0.0% pos (1 trade), -$96.11
+      - ai_source_ma    # 0 trades across 4 backtests; no evidence either way
 
 accounts:
   personal:

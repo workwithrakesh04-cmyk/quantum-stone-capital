@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-10-01 16:31 UTC
+Auto-generated: 2026-10-02 16:22 UTC
 
-Total files: 298
+Total files: 299
 
 ```
 .gitignore
@@ -89,6 +89,7 @@ docs/BACKTEST_ANALYSIS.md
 docs/BETA_BRAIN.md
 docs/CONTEXT.md
 docs/D6C_REPORT.md
+docs/D7B_REPORT.md
 docs/D7_REPORT.md
 docs/FILE_TREE.md
 docs/HYBRID_ARCHITECTURE.md
