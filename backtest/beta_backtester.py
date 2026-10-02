@@ -70,6 +70,7 @@ class BetaBacktester:
         warmup: int = 100,
         max_window: int = 500,
         mode: str = "scalp",
+        window_hard_stop_pct: float = 0.0,
     ):
         self.symbol = symbol
         self.timeframe = timeframe
@@ -78,6 +79,13 @@ class BetaBacktester:
         self.warmup = warmup
         self.max_window = max_window
         self.mode = mode
+        # D8c-2: if > 0, halt trading for the rest of the run when the
+        # account's cumulative return drops below -window_hard_stop_pct.
+        # Closes all open trades at the trigger candle, then stops
+        # opening new ones. Pass a percent (e.g. 3.0 = halt at -3%).
+        self.window_hard_stop_pct = float(window_hard_stop_pct)
+        self._window_halted = False
+        self._halt_candle_idx: Optional[int] = None
 
         with open(config_path, "r", encoding="utf-8-sig") as f:
             self.account_cfg = yaml.safe_load(f)
@@ -198,6 +206,29 @@ class BetaBacktester:
             trigger_candle = candles[i]
 
             self.trader.process_candle(trigger_candle)
+
+            # D8c-2 window hard stop: if cumulative return breaches the
+            # threshold, close everything and refuse further opens.
+            if (not self._window_halted
+                    and self.window_hard_stop_pct > 0.0
+                    and self.starting_balance > 0):
+                ret_pct = (
+                    (self.trader.balance - self.starting_balance)
+                    / self.starting_balance * 100.0
+                )
+                if ret_pct <= -self.window_hard_stop_pct:
+                    self.trader.close_all_at_price(trigger_candle)
+                    self._window_halted = True
+                    self._halt_candle_idx = i
+                    logger.warning(
+                        f"BetaBacktester: WINDOW HARD STOP at candle {i} "
+                        f"(ret={ret_pct:.2f}% <= "
+                        f"-{self.window_hard_stop_pct:.2f}%)"
+                    )
+
+            # If halted, skip all trade-opening logic for the rest of the run.
+            if self._window_halted:
+                continue
 
             regime_tag = self.tagger.tag(window)
             regime = regime_tag.regime
@@ -436,6 +467,10 @@ class BetaBacktester:
             "rejected_risk_jury": self.rejected_risk_jury,
             "rejected_portfolio_jury": self.rejected_portfolio_jury,
             "max_hold_bars_used": self.max_hold_bars,
+            # D8c-2
+            "window_hard_stop_pct": self.window_hard_stop_pct,
+            "window_halted": self._window_halted,
+            "halt_candle_idx": self._halt_candle_idx,
             # D7c
             "confidence_histogram": self.confidence_histogram(),
             "volatile_by_strategy": self.volatile_by_strategy(),

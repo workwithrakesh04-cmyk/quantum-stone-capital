@@ -6,7 +6,7 @@ that touches `beta_brain/`, `strategies_py/`, `consensus/`, or
 
 ---
 
-## Delivery 1 — 2026-10-01 — Skeleton
+## Delivery 1 â€” 2026-10-01 â€” Skeleton
 Commit: `f796fd9`
 
 **Created:**
@@ -23,20 +23,20 @@ Commit: `f796fd9`
 
 ---
 
-## Delivery 2 — 2026-10-01 — 6 Standalone Modules
+## Delivery 2 â€” 2026-10-01 â€” 6 Standalone Modules
 Commit: `a07dcae`
 
 **Created:**
-- `beta_brain/regime_tagger.py` — 5-regime classifier (BTC 5m)
-- `beta_brain/account_guard.py` — daily reset + kill switch + loss scaling
-- `beta_brain/paper_trader.py` — SL-before-TP intrabar sim
-- `beta_brain/performance_metrics.py` — Sharpe/Sortino/Calmar/expectancy
-- `beta_brain/strategy_analyzer.py` — per-strategy PnL attribution
-- `beta_brain/shadow_tracker.py` — hypothetical trades for disabled strategies
+- `beta_brain/regime_tagger.py` â€” 5-regime classifier (BTC 5m)
+- `beta_brain/account_guard.py` â€” daily reset + kill switch + loss scaling
+- `beta_brain/paper_trader.py` â€” SL-before-TP intrabar sim
+- `beta_brain/performance_metrics.py` â€” Sharpe/Sortino/Calmar/expectancy
+- `beta_brain/strategy_analyzer.py` â€” per-strategy PnL attribution
+- `beta_brain/shadow_tracker.py` â€” hypothetical trades for disabled strategies
 - 6 test files (~62 tests)
 
 **Modified:** none
-**Tests:** 259 → 325 (+66)
+**Tests:** 259 â†’ 325 (+66)
 
 **Fixes during delivery:**
 - ShadowTracker test used flat candles (ATR=0) causing 8 failures.
@@ -44,20 +44,20 @@ Commit: `a07dcae`
 
 ---
 
-## Delivery 3 — 2026-10-01 — Training Package
+## Delivery 3 â€” 2026-10-01 â€” Training Package
 Commit: `0cdd885`
 
 **Created:**
-- `consensus/audit.py` — JSONL writer + rotation + archive
-- `training/loader.py` — TrainingSample + TrainingLoader
-- `training/strategy_weights.py` — win-rate-driven weight adjuster
-- `training/arbiter_thresholds.py` — per-regime beta-disable logic
-- `training/trainer.py` — orchestrates the daily cycle
-- `training/rollback.py` — manual pointer switch
-- `scripts/train_brain_daily.py` — full CLI (replaces stub)
+- `consensus/audit.py` â€” JSONL writer + rotation + archive
+- `training/loader.py` â€” TrainingSample + TrainingLoader
+- `training/strategy_weights.py` â€” win-rate-driven weight adjuster
+- `training/arbiter_thresholds.py` â€” per-regime beta-disable logic
+- `training/trainer.py` â€” orchestrates the daily cycle
+- `training/rollback.py` â€” manual pointer switch
+- `scripts/train_brain_daily.py` â€” full CLI (replaces stub)
 - 4 test files (~35 tests)
 
-**Tests:** 325 → 360 (+35)
+**Tests:** 325 â†’ 360 (+35)
 
 **Fixes during delivery (3b, 3c, 3d):**
 - **3b:** UTF-8 BOM in `current.json` broke `json.load`. Fixed by
@@ -71,19 +71,19 @@ Commit: `0cdd885`
 
 ---
 
-## Delivery 4a — 2026-10-01 — Signal + Debate
+## Delivery 4a â€” 2026-10-01 â€” Signal + Debate
 Commit: `f6f1476`
 
 **Created:**
-- `beta_brain/signal.py` — self-contained Signal dataclass
+- `beta_brain/signal.py` â€” self-contained Signal dataclass
 - `beta_brain/debate/__init__.py`
-- `beta_brain/debate/transcript.py` — Argument + DebateTranscript
+- `beta_brain/debate/transcript.py` â€” Argument + DebateTranscript
 - `beta_brain/debate/buy_bot.py`, `sell_bot.py`, `hold_bot.py`
 - `beta_brain/debate/argument_scorer.py`
-- `beta_brain/debate/engine.py` — 3-round orchestrator
+- `beta_brain/debate/engine.py` â€” 3-round orchestrator
 - 4 test files (~32 tests)
 
-**Tests:** 360 → 392 (+32)
+**Tests:** 360 â†’ 392 (+32)
 
 **Fix during delivery:**
 - `test_buy_bot_no_signals` expected 0.0 but got 0.037 (momentum
@@ -91,19 +91,19 @@ Commit: `f6f1476`
 
 ---
 
-## Delivery 4b — 2026-10-01 — 3-Jury Verdict System
+## Delivery 4b â€” 2026-10-01 â€” 3-Jury Verdict System
 Commit: `e9247be`
 
 **Created:**
 - `beta_brain/jury/__init__.py`
-- `beta_brain/jury/transcript.py` — RiskVerdict, PortfolioVerdict, JuryVerdict
-- `beta_brain/jury/risk_jury.py` — ATR SL + loss-scaled sizing + notional cap
-- `beta_brain/jury/portfolio_jury.py` — position count + exposure limits
-- `beta_brain/jury/final_jury.py` — both-must-approve combiner
-- `beta_brain/jury/verdict_engine.py` — orchestrator for the 3 juries
+- `beta_brain/jury/transcript.py` â€” RiskVerdict, PortfolioVerdict, JuryVerdict
+- `beta_brain/jury/risk_jury.py` â€” ATR SL + loss-scaled sizing + notional cap
+- `beta_brain/jury/portfolio_jury.py` â€” position count + exposure limits
+- `beta_brain/jury/final_jury.py` â€” both-must-approve combiner
+- `beta_brain/jury/verdict_engine.py` â€” orchestrator for the 3 juries
 - 5 test files (~35 tests)
 
-**Tests:** 392 → 427 (+35)
+**Tests:** 392 â†’ 427 (+35)
 
 **Notes:**
 - VerdictEngine takes `config` in constructor OR via `set_config()`.
@@ -112,7 +112,7 @@ Commit: `e9247be`
 
 ---
 
-## Delivery 0 — 2026-10-01 — Continuity Layer
+## Delivery 0 â€” 2026-10-01 â€” Continuity Layer
 Commit: pending
 
 **Created:**
@@ -121,7 +121,7 @@ Commit: pending
 - `docs/PHASE_LOG.md`
 
 **Rewrote:**
-- `docs/BETA_BRAIN.md` (this file — expanded)
+- `docs/BETA_BRAIN.md` (this file â€” expanded)
 - `docs/HYBRID_ARCHITECTURE.md` (updated to current state)
 - `PROJECT_STATE.md` (refreshed)
 
@@ -134,22 +134,22 @@ current chat hits its context limit.
 
 ---
 
-## Delivery 5a-1 — Pending
+## Delivery 5a-1 â€” Pending
 **Scope:** `strategies_py/base.py`, `registry.py`, `tier_manager.py`,
 `loader.py`, `config/strategy_regime_filters.yaml`,
 `config/strategy_tiers.yaml`, plus ~23 tests.
 
-## Delivery 5a-2 — Pending
+## Delivery 5a-2 â€” Pending
 **Scope:** order_flow strategies (8 files + 8 tests)
 
-## Delivery 5a-3 — Pending
+## Delivery 5a-3 â€” Pending
 **Scope:** liquidity + supply_demand (10 files + 10 tests)
 
-## Delivery 5a-4 — Pending
+## Delivery 5a-4 â€” Pending
 **Scope:** ICT/SMC + patterns + ml_adaptive + volatility + trend +
 `knowledge/` (~19 strategies + knowledge base + tests)
 
-## Delivery 5b — Pending (CHECKPOINT)
+## Delivery 5b â€” Pending (CHECKPOINT)
 **Scope:** `beta_brain/beta_brain.py`, `consensus/arbiter.py`,
 `scripts/run_hybrid.py`, patch `core/main_brain_v2.py`,
 patch `dashboard/state.py`. ~25 tests.
@@ -173,14 +173,14 @@ Then run `.\scripts\checkpoint.ps1 -Label "Hybrid deliveries 1-5 complete"`.
 
 ---
 
-## Delivery 5a-1 — 2026-10-01 — strategies_py Infrastructure
+## Delivery 5a-1 â€” 2026-10-01 â€” strategies_py Infrastructure
 Commit: pending
 
 **Created:**
-- `strategies_py/base.py` — BaseStrategy abstract + helpers
-- `strategies_py/registry.py` — StrategyRegistry with regime filter + tier
-- `strategies_py/tier_manager.py` — TierManager
-- `strategies_py/loader.py` — auto-discovery loader
+- `strategies_py/base.py` â€” BaseStrategy abstract + helpers
+- `strategies_py/registry.py` â€” StrategyRegistry with regime filter + tier
+- `strategies_py/tier_manager.py` â€” TierManager
+- `strategies_py/loader.py` â€” auto-discovery loader
 - 8 category packages (`order_flow/`, `liquidity/`, `supply_demand/`,
   `ict_smc/`, `patterns/`, `ml_adaptive/`, `volatility/`, `trend/`)
   with `__init__.py`
@@ -188,7 +188,7 @@ Commit: pending
 - `config/strategy_tiers.yaml` (from HFT_Brain)
 - 4 test files (~23 tests)
 
-**Tests:** 427 → ~450 (+23)
+**Tests:** 427 â†’ ~450 (+23)
 
 **Notes:**
 - Loader silently skips modules that don't exist yet (later deliveries
@@ -202,7 +202,7 @@ stacked_imbalance, trapped_traders, naked_poc, poc_strategy,
 value_area, volume_cluster)
 ---
 
-## Delivery 5a-2 — 2026-10-01 — Order Flow Strategies
+## Delivery 5a-2 â€” 2026-10-01 â€” Order Flow Strategies
 Commit: pending
 
 **Created:**
@@ -216,7 +216,7 @@ Commit: pending
 - `strategies_py/order_flow/volume_cluster.py`
 - `tests/test_strategies_py_order_flow.py` (9 tests)
 
-**Tests:** 450 → ~458 (+8)
+**Tests:** 450 â†’ ~458 (+8)
 
 **Notes:**
 - All 8 strategies instantiate, run on flat candles, and return valid Signals
@@ -229,7 +229,7 @@ false_breakout, bs_ss_liquidity, turtle_soup, quasimodo, rbd_dbr,
 sd_zones, ftr_compression, flag_limits, three_drive)
 ---
 
-## Delivery 5a-3 — 2026-10-01 — Liquidity + Supply/Demand
+## Delivery 5a-3 â€” 2026-10-01 â€” Liquidity + Supply/Demand
 Commit: pending
 
 **Created:**
@@ -245,13 +245,13 @@ Commit: pending
 - `strategies_py/supply_demand/three_drive.py`
 - `tests/test_strategies_py_liquidity_sd.py` (10 tests)
 
-**Tests:** 459 → ~469 (+10)
+**Tests:** 459 â†’ ~469 (+10)
 
 **Next:** 5a-4 (ICT/SMC + patterns + ML + volatility + trend, plus
-knowledge base — the final 5a batch)
+knowledge base â€” the final 5a batch)
 ---
 
-## Delivery 5a-4a — 2026-10-01 — Final 19 Strategies
+## Delivery 5a-4a â€” 2026-10-01 â€” Final 19 Strategies
 Commit: pending
 
 **Created:**
@@ -266,7 +266,7 @@ Commit: pending
   `intermarket.py` (3)
 - `tests/test_strategies_py_final_batch.py` (20 tests)
 
-**Tests:** 469 → ~489 (+20)
+**Tests:** 469 â†’ ~489 (+20)
 
 **Notes:**
 - ML strategies (adaptive_rsi_ml, ai_source_ma, ai_trend_flow,
@@ -280,7 +280,7 @@ Commit: pending
 integration into strategies_py.base._get_rule_weight)
 ---
 
-## Delivery 5a-4b — 2026-10-01 — Knowledge Base Port
+## Delivery 5a-4b â€” 2026-10-01 â€” Knowledge Base Port
 Commit: pending
 
 **Created:**
@@ -298,13 +298,13 @@ Commit: pending
 - `knowledge/knowledge_loader.py` (full query API)
 
 **Modified:**
-- `strategies_py/base.py` — `_get_rule_weight()` now queries knowledge base
+- `strategies_py/base.py` â€” `_get_rule_weight()` now queries knowledge base
   (option A: silent fallback to 0.5 if unavailable)
 
 **Created tests:**
 - `tests/test_knowledge_loader.py` (8 tests)
 
-**Tests:** 489 → ~497 (+8)
+**Tests:** 489 â†’ ~497 (+8)
 
 **Strategy audit:** 38 strategies load correctly. HFT_Brain has 42
 files in strategies/ of which 4 are infrastructure (`__init__.py`,
@@ -312,7 +312,7 @@ files in strategies/ of which 4 are infrastructure (`__init__.py`,
 achieved: 42 - 4 = 38.
 
 **Next:** 5b (BetaBrain wrapper + ConsensusArbiter + run_hybrid.py
-+ main_brain_v2 patch + dashboard patch) — CHECKPOINT
++ main_brain_v2 patch + dashboard patch) â€” CHECKPOINT
 ---
 
 ## Delivery 5b - 2026-10-01 - Full Hybrid Integration (CHECKPOINT)
@@ -525,8 +525,19 @@ is the correct next step.
 
 ---
 
+## Note on D8b code commit
+
+D8b's harness code (`backtest/walk_forward_beta.py`,
+`scripts/walk_forward_beta.py`, `tests/test_walk_forward_beta.py`,
+`backtest/__init__.py` export) was committed together with D8c in
+commit `a5cba74`, not in a separate D8b commit. D8b's *docs* were
+committed earlier at `f398a34`. Future readers looking for the D8b
+code change should look at `a5cba74`.
+
+---
+
 ## Delivery 8c - 2026-10-02 - Walk-Forward-Driven Strategy Pruning
-Commit: pending
+Commit: a5cba74
 
 **Modified:**
 - `config/strategy_regime_filters.yaml` - 8 strategies shadowed
@@ -571,3 +582,56 @@ fixed to pass with the new tier structure, net 0)
 **Next:** D8c-2 - shadow `volume_cluster`, add per-window hard
 stop to `BetaBacktester`, rerun with median Sharpe as primary
 metric. If it passes, next is D8 shadow trading.
+
+---
+
+## Delivery 8c-2 - 2026-10-02 - Shadow volume_cluster + Hard Stop Implementation
+Commit: pending
+
+**Modified:**
+- `backtest/beta_backtester.py` - added `window_hard_stop_pct`
+  parameter + halt logic + 3 diagnostics fields
+- `config/strategy_regime_filters.yaml` - `volume_cluster` in
+  `global_disable`
+- `config/strategy_tiers.yaml` - `volume_cluster` in `tier_4_shadow`
+- `docs/BETA_BRAIN.md` - D8b code-commit note
+
+**Created:**
+- `tests/test_d8c2_hard_stop.py` (13 tests)
+- `docs/D8C2_REPORT.md`
+
+**Tests:** 615 -> 628 (+13)
+
+**Result: PARTIAL PASS - 3 of 4 criteria.**
+
+| Criterion | Result | Pass? |
+|-----------|--------|-------|
+| Chained equity positive | +2.86% | YES |
+| Median Sharpe >= 1.0 | +1.045 | YES |
+| Sharpe pos windows >= 7/10 | 7/10 | YES |
+| Max window DD <= 5% | 9.01% | NO |
+
+**Three straight improvements:**
+- D8b: -2.29%
+- D8c: +1.81%
+- D8c-2: +2.86%
+
+**Remaining problem is window 3:**
+- 10 trades, 1 win / 9 losses, -$901.43, DD 9.01%
+- Every other window is between -1.86% and +3.94%
+- The 9.01% DD comes entirely from this one window
+- `volume_cluster` was not involved; shadowing it did not help
+
+**Hard stop is implemented but NOT wired:**
+- `BetaBacktester` accepts `window_hard_stop_pct`
+- `WalkForwardRunner` does not pass it yet (D8c-3)
+
+**Correlated strategies caveat:**
+The 3 active strategies fire on nearly every trade together.
+Identical trade counts (108) and PnL (+$345.18). This is one
+RANGING signal credited three times, not 3 independent edges.
+
+**Next:** D8c-3 - wire `window_hard_stop_pct` through
+`WalkForwardRunner` + `scripts/walk_forward_beta.py`, rerun at
+`--window-hard-stop 3.0`. If D8c-3 passes 4/4, next is D8 shadow
+trading.

@@ -50,6 +50,12 @@ global_disable:
   # D8c - ai_source_ma shadowed: 0 trades across 4 backtests (D6c, D7c,
   # D7b, D8b). Zero evidence of contribution. Revisit if it ever fires.
   - ai_source_ma
+  # D8c-2 - volume_cluster shadowed: D8c evidence put it below the
+  # pruning rule (positive_rate < 50% AND total_pnl < 0).
+  #   42.9% pos, 12 trades, -$30.43
+  # Kept in D8c to test the theory it might fire more once freed from
+  # VOLATILE-only. It fired 12 times but still lost money. Shadow now.
+  - volume_cluster
 
 regime_enable_only:
   quasimodo:

@@ -70,6 +70,7 @@ tiers:
       - bs_ss_liquidity #  0.0% pos (1 trade), -$62.75
       - ichimoku_rsi    # was tier_2; 0.0% pos (1 trade), -$96.11
       - ai_source_ma    # 0 trades across 4 backtests; no evidence either way
+      - volume_cluster  # D8c-2; 42.9% pos, -$30.43
       # D8c - demoted on walk-forward consistency (10 windows, 20k candles)
       - mad_bb          # was tier_3; 40.0% pos, -$124.90
       - rmd_trail       # was tier_3; 40.0% pos, -$332.34
@@ -79,6 +80,7 @@ tiers:
       - bs_ss_liquidity #  0.0% pos (1 trade), -$62.75
       - ichimoku_rsi    # was tier_2; 0.0% pos (1 trade), -$96.11
       - ai_source_ma    # 0 trades across 4 backtests; no evidence either way
+      - volume_cluster  # D8c-2; 42.9% pos, -$30.43
 
 accounts:
   personal:

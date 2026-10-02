@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-10-02 16:22 UTC
+Auto-generated: 2026-10-02 16:31 UTC
 
-Total files: 299
+Total files: 303
 
 ```
 .gitignore
@@ -12,6 +12,7 @@ README.md
 backtest/__init__.py
 backtest/beta_backtester.py
 backtest/reporter.py
+backtest/walk_forward_beta.py
 beta_brain/__init__.py
 beta_brain/account_guard.py
 beta_brain/beta_brain.py
@@ -91,6 +92,7 @@ docs/CONTEXT.md
 docs/D6C_REPORT.md
 docs/D7B_REPORT.md
 docs/D7_REPORT.md
+docs/D8C_REPORT.md
 docs/FILE_TREE.md
 docs/HYBRID_ARCHITECTURE.md
 docs/INTEGRATION_PLAN_7_12.md
@@ -161,6 +163,7 @@ scripts/run_live.py
 scripts/run_paper.py
 scripts/train_brain_daily.py
 scripts/update_file_tree.py
+scripts/walk_forward_beta.py
 strategies/__init__.py
 strategies/elliott_wave/wave3_entries.yaml
 strategies/harmonic/seo_patterns.yaml
@@ -288,6 +291,7 @@ tests/test_training_strategy_weights.py
 tests/test_training_trainer.py
 tests/test_utils.py
 tests/test_vpa.py
+tests/test_walk_forward_beta.py
 training/__init__.py
 training/arbiter_thresholds.py
 training/loader.py

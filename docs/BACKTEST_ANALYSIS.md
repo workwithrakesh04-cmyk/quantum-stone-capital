@@ -437,3 +437,56 @@ Also: `volume_cluster` removed from `regime_enable_only`.
 If D8c-2 passes, next is D8 shadow trading. If it fails, the
 strategies themselves - not the infrastructure - are the
 limiting factor.
+
+---
+
+# D8c-2 - Shadow volume_cluster + Hard Stop Implementation (2026-10-02)
+
+**Reference:** full report in `docs/D8C2_REPORT.md`
+**Run:** `data/logs/walk_forward_beta_BTCUSDT_2026-10-02_2157.*`
+**Status:** PARTIAL PASS - 3 of 4 criteria met
+
+## The four criteria (updated to use MEDIAN Sharpe)
+
+| # | Criterion | D8c | D8c-2 | Pass? |
+|---|-----------|-----|-------|-------|
+| 1 | Chained equity positive | +1.81% | **+2.86%** | YES |
+| 2 | Median Sharpe >= 1.0 | +1.085 | **+1.045** | YES |
+| 3 | Sharpe pos windows >= 7/10 | 6/10 | **7/10** | YES |
+| 4 | Max window DD <= 5% | 9.01% | 9.01% | NO |
+
+## Changes
+
+- Shadowed `volume_cluster` (last weak strategy)
+- Implemented per-window hard stop in `BetaBacktester`
+  (`window_hard_stop_pct` param) - **but not yet wired into the
+  walk-forward runner** (that is D8c-3)
+- Added 13 tests for the hard stop
+- Added 3 diagnostics: `window_hard_stop_pct`, `window_halted`,
+  `halt_candle_idx`
+
+## The DD is entirely window 3
+
+Window 3 lost 10% of its trades (1 win / 9 losses, -$901.43).
+Every other window is between -1.86% and +3.94%. The 9.01% max
+DD comes from this single window.
+
+`volume_cluster` was not involved in the window-3 drawdown, so
+shadowing it did not change the DD. The hard stop (D8c-3) is the
+targeted fix.
+
+## Correlated strategies caveat
+
+The three active strategies have *identical* trade counts and
+PnL (108 trades, +$345.18 each). They co-fire on nearly every
+trade. **This is one RANGING signal credited three times**, not
+three independent edges. The system is effectively a single
+strategy, not a portfolio.
+
+## Next: D8c-3
+
+Wire `window_hard_stop_pct` through `WalkForwardRunner` + CLI,
+rerun at `--window-hard-stop 3.0`. Expected: window 3 halts at
+-3% instead of -9%.
+
+If D8c-3 passes all 4, next is D8 shadow trading.
