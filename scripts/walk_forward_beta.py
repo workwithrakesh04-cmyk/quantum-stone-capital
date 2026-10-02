@@ -170,6 +170,13 @@ def main():
     parser.add_argument("--config", type=str, default="config/beta_personal.yaml")
     parser.add_argument("--starting-balance", type=float, default=10000.0)
     parser.add_argument("--mode", type=str, default="scalp")
+    parser.add_argument(
+        "--window-hard-stop",
+        type=float,
+        default=0.0,
+        help="If >0, halt trading for the rest of a window when its "
+             "cumulative return hits -X%%. Example: 3.0 = halt at -3%%.",
+    )
     args = parser.parse_args()
 
     runner = WalkForwardRunner(
@@ -183,12 +190,14 @@ def main():
         step_size=args.step,
         warmup=args.warmup,
         mode=args.mode,
+        window_hard_stop_pct=args.window_hard_stop,
     )
 
     logger.info("=" * 78)
     logger.info(f"  Walk-Forward | {args.symbol} {args.timeframe}")
     logger.info(f"  Candles: {args.candles} | Windows: {args.windows} | "
                 f"Window size: {args.window_size} | Step: {args.step}")
+    logger.info(f"  Window hard stop: {args.window_hard_stop}%")
     logger.info(f"  Need >= {runner.required_candles} candles")
     logger.info("=" * 78)
 

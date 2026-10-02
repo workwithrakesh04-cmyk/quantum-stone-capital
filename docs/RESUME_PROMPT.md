@@ -56,8 +56,8 @@ tail for the exact last step number.
 
 See `docs/HYBRID_ARCHITECTURE.md` for the full design. Key points:
 
-- **Beta Brain** lives entirely in `beta_brain/` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â isolated namespace
-- **Python strategies** live in `strategies_py/` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â 42 files in 6
+- **Beta Brain** lives entirely in `beta_brain/` ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â isolated namespace
+- **Python strategies** live in `strategies_py/` ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â 42 files in 6
   categories (order_flow, liquidity, supply_demand, ict_smc, patterns,
   ml_adaptive, volatility, trend)
 - **QSC's YAML strategies** in `strategies/` are untouched
@@ -87,7 +87,7 @@ See `docs/HYBRID_ARCHITECTURE.md` for the full design. Key points:
 
 Full list in `docs/CONTEXT.md`. Summary:
 
-- Q13: Flat test layout ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `tests/test_*.py`, no subfolders
+- Q13: Flat test layout ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â `tests/test_*.py`, no subfolders
 - Q14: JSONL daily rotation to `logs/consensus/archive/`
 - Q16: Training target = strategy weights + arbiter thresholds
 - Q17: Manual trainer invocation (`scripts/train_brain_daily.py`)
@@ -135,14 +135,14 @@ After 5b, run: `.\scripts\checkpoint.ps1 -Label "Hybrid deliveries 1-5 complete"
 
 ## 7. Rules the Assistant Must Follow
 
-1. **Every file is created via terminal paste** ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â no "open VS Code
+1. **Every file is created via terminal paste** ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â no "open VS Code
    and paste this." Use `@'...'@ | Out-File` blocks.
 2. **Data files (JSON/JSONL/YAML) are UTF-8 without BOM.** Use
    `[System.IO.File]::WriteAllText($path, $content, [System.Text.UTF8Encoding]::new($false))`.
    Never `Out-File -Encoding utf8` for those.
 3. **Tests are flat** in `tests/test_*.py`. Run with `pytest tests/ -q`.
 4. **Every delivery ends with:**
-   - `pytest tests/ -q` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â must be green
+   - `pytest tests/ -q` ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â must be green
    - `.\scripts\log_step.ps1 -Message "..."`
    - `python scripts/update_file_tree.py`
    - `git add . && git commit -m "..." && git push`
@@ -150,12 +150,12 @@ After 5b, run: `.\scripts\checkpoint.ps1 -Label "Hybrid deliveries 1-5 complete"
 6. **No QSC file is deleted or rewritten** except the 2 files listed in
    HYBRID_ARCHITECTURE section 7 (`core/main_brain_v2.py` and
    `dashboard/state.py`) in Delivery 5b.
-7. **Naming:** QSC Brain / Beta Brain / Arbiter / Trainer ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â never
+7. **Naming:** QSC Brain / Beta Brain / Arbiter / Trainer ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â never
    "brain" alone.
 8. **Windows/PowerShell context:** LF->CRLF warnings from git are
    benign; ignore them.
 9. **Tests:** always report count and PASS/FAIL. If a test fails,
-   diagnose root cause and propose either source fix or test fix ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+   diagnose root cause and propose either source fix or test fix ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â
    never silently adjust.
 
 ---
@@ -164,12 +164,12 @@ After 5b, run: `.\scripts\checkpoint.ps1 -Label "Hybrid deliveries 1-5 complete"
 
 | File | Purpose |
 |------|---------|
-| `docs/STEP_LOG.md` | Full chronological history (Steps 001ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“current) |
+| `docs/STEP_LOG.md` | Full chronological history (Steps 001ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œcurrent) |
 | `PROJECT_STATE.md` | Live snapshot (commit, tests, checkpoint) |
 | `docs/CONTEXT.md` | Locked Q&A decisions + conventions |
 | `docs/HYBRID_ARCHITECTURE.md` | System design (updated) |
 | `docs/BETA_BRAIN.md` | Beta Brain delivery log |
-| `docs/PHASE_LOG.md` | Phase-level narrative (Phases 1ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“13, Hybrid) |
+| `docs/PHASE_LOG.md` | Phase-level narrative (Phases 1ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ13, Hybrid) |
 | `docs/FILE_TREE.md` | Auto-generated full file tree |
 | `KNOWLEDGE_BASE.md` | Project knowledge notes (root) |
 | `README.md` | Project overview (root) |
@@ -179,7 +179,7 @@ After 5b, run: `.\scripts\checkpoint.ps1 -Label "Hybrid deliveries 1-5 complete"
 ## 9. Recovery Scenarios
 
 **If a paste failed mid-execution:**
-Re-run the entire paste block. Blocks are idempotent ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â overwriting
+Re-run the entire paste block. Blocks are idempotent ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â overwriting
 files with `-Force` is safe.
 
 **If tests are red after a paste:**
@@ -209,10 +209,10 @@ Re-run the delivery paste. Nothing prevents re-running.
 
 ---
 
-## Current State (2026-10-02 22:00)
+## Current State (2026-10-02 22:15)
 
-**Last delivery:** 8c-2 (shadow volume_cluster + hard stop implementation - PARTIAL PASS 3/4)
-**Pending:** D8c-3 (wire hard stop through walk-forward runner + rerun), D8 (shadow trading), D9 (XAUUSD)
+**Last delivery:** 8c-3 (hard stop wired + validated - **FULL PASS 4/4**)
+**Pending:** D8 (shadow trading - first out-of-sample test), D9 (XAUUSD)
 **Resources queue:** D7-12 integration plan in `docs/INTEGRATION_PLAN_7_12.md`
 
 ### Latest Backtest (BTCUSDT 5m, 20,000 candles, D7c config)
@@ -405,3 +405,41 @@ Active strategies after D8c-2:
   (all 3 co-fire on nearly every trade - effectively one signal)
 
 Full report: `docs/D8C2_REPORT.md`
+
+### D8c-3 Result (2026-10-02) - latest - FULL PASS
+
+**Walk-forward on 20k candles, 3 active strategies, hard stop at -3%.**
+
+| Criterion | Result | Pass? |
+|-----------|--------|-------|
+| Chained equity positive | **+8.33%** | YES |
+| Median Sharpe >= 1.0 | **+1.045** | YES |
+| Sharpe pos windows >= 7/10 | **7/10** | YES |
+| Max window DD <= 5% | **4.67%** | YES |
+
+**4 of 4. First full pass.**
+
+**The D8b -> D8c-3 arc:**
+
+| Metric | D8b | D8c | D8c-2 | D8c-3 |
+|--------|-----|-----|-------|-------|
+| Chained equity | -2.29% | +1.81% | +2.86% | +8.33% |
+| Median Sharpe | -0.575 | +1.085 | +1.045 | +1.045 |
+| Pos Sharpe windows | 5/10 | 6/10 | 7/10 | 7/10 |
+| Max window DD | 10.80% | 9.01% | 9.01% | 4.67% |
+
+**Key finding:** the hard stop didn't just reduce risk - it
+**increased return by 5.47pp.** By cutting window 3's losers at
+-3%, the account preserved capital to capture window 4's gain.
+A hard stop protects the recovery, not just the drawdown.
+
+**Still applies:**
+- The 3 active strategies are correlated (effectively one signal)
+- One symbol, one timeframe, one 70-day period
+- No out-of-sample test yet
+
+**Next:** D8 shadow trading - the first out-of-sample test.
+Log live outcomes to JSONL, then measure whether the backtest
+edge holds. If it does, D9 is paper trading.
+
+Full report: `docs/D8C3_REPORT.md`

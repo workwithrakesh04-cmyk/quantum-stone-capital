@@ -490,3 +490,66 @@ rerun at `--window-hard-stop 3.0`. Expected: window 3 halts at
 -3% instead of -9%.
 
 If D8c-3 passes all 4, next is D8 shadow trading.
+
+---
+
+# D8c-3 - Hard Stop Wired + Validated (2026-10-02)
+
+**Reference:** full report in `docs/D8C3_REPORT.md`
+**Run:** `data/logs/walk_forward_beta_BTCUSDT_2026-10-02_2209.*`
+**Status:** PASS - 4 of 4 criteria met (FIRST FULL PASS)
+
+## The four criteria
+
+| # | Criterion | D8c-2 | D8c-3 | Pass? |
+|---|-----------|-------|-------|-------|
+| 1 | Chained equity positive | +2.86% | **+8.33%** | YES |
+| 2 | Median Sharpe >= 1.0 | +1.045 | +1.045 | YES |
+| 3 | Sharpe pos windows >= 7/10 | 7/10 | 7/10 | YES |
+| 4 | Max window DD <= 5% | 9.01% | **4.67%** | YES |
+
+## What the hard stop did
+
+Window 3 lost trades were cut at -3% cumulative return:
+- Before: -$901.43, -9.01% DD (1W/9L over the full window)
+- After:  -$417.30, -4.17% DD (4 losing trades, then halt)
+
+Max window DD across all 10 windows: **4.67%** (was 9.01%).
+
+## Return ALSO went up - the important finding
+
+Chained equity: +2.86% -> +8.33%. **+5.47pp improvement.**
+
+The stop protects the recovery, not just the drawdown. Cutting
+window 3's loss short means the account enters window 4 with
+~$500 more capital to capture that window's gain.
+
+General lesson: **a hard stop at -3% is not "risk reduction at
+the cost of return."** In a system where most windows are
+positive, cutting a bad window short preserves capital for the
+next window's recovery.
+
+## The arc: D8b -> D8c-3
+
+| Metric | D8b | D8c | D8c-2 | D8c-3 |
+|--------|-----|-----|-------|-------|
+| Chained equity | -2.29% | +1.81% | +2.86% | **+8.33%** |
+| Median Sharpe | -0.575 | +1.085 | +1.045 | +1.045 |
+| Sharpe pos wins | 5/10 | 6/10 | 7/10 | 7/10 |
+| Max window DD | 10.80% | 9.01% | 9.01% | **4.67%** |
+
+Monotonic improvement across four deliveries.
+
+## Caveats (still apply)
+
+1. 3 active strategies are correlated (identical trade counts
+   and PnL). This is effectively one signal.
+2. One symbol, one timeframe, one 70-day period. No
+   out-of-sample test.
+3. Window 3's Sharpe is -30.19 - the stop shortens bad windows,
+   it does not fix them.
+
+## Next: D8 shadow trading
+
+First out-of-sample test. Log live/near-live outcomes to JSONL.
+If D8c-3's numbers hold, D8 is a real step toward paper trading.

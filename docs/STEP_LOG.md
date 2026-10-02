@@ -275,3 +275,4 @@ _(steps will be appended here as we build)_
 - [2026-10-01 22:01] [Step 182] Delivery 7b: 20k-candle validation of D7c - D7c magnitude INVALIDATED (Sharpe 4.84 -> 0.17), new CHOPPY finding, D7b report written
 - [2026-10-02 21:52] [Step 183] Delivery 8c: walk-forward-driven pruning to 4 active strategies - PARTIAL PASS (2/4 criteria, chained equity +1.81%, DD halved)
 - [2026-10-02 22:04] [Step 184] D8c-2 hotfix: make get_diagnostics defensive (getattr), fix 3 failing tests
+- [2026-10-02 22:10] [Step 185] Delivery 8c-3: hard stop wired + validated - FULL PASS 4/4 (chained equity +8.33%, DD 4.67%)

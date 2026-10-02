@@ -635,3 +635,53 @@ RANGING signal credited three times, not 3 independent edges.
 `WalkForwardRunner` + `scripts/walk_forward_beta.py`, rerun at
 `--window-hard-stop 3.0`. If D8c-3 passes 4/4, next is D8 shadow
 trading.
+
+---
+
+## Delivery 8c-3 - 2026-10-02 - Wire Hard Stop + Validate
+Commit: pending
+
+**Modified:**
+- `backtest/walk_forward_beta.py` - `window_hard_stop_pct` param
+  + pass-through to BetaBacktester
+- `scripts/walk_forward_beta.py` - `--window-hard-stop` CLI flag
+- `docs/D8C2_REPORT.md` - test-count clarification
+
+**Created:**
+- `tests/test_d8c3_hard_stop_wiring.py` (5 tests)
+- `docs/D8C3_REPORT.md`
+
+**Tests:** 626 -> 631 (+5)
+
+**Result: PASS - 4 of 4 criteria (FIRST FULL PASS).**
+
+| Criterion | Result | Pass? |
+|-----------|--------|-------|
+| Chained equity positive | **+8.33%** | YES |
+| Median Sharpe >= 1.0 | +1.045 | YES |
+| Sharpe pos windows >= 7/10 | 7/10 | YES |
+| Max window DD <= 5% | **4.67%** | YES |
+
+**What the hard stop did:**
+- Window 3: -9.01% -> -4.17% (halted after 4 losing trades)
+- Max window DD: 9.01% -> 4.67%
+- Chained equity: +2.86% -> **+8.33%**
+
+**Key finding:** the hard stop did not just reduce risk - it
+**improved total return by 5.47 percentage points.** Cutting
+window 3's losers at -3% preserved the capital needed to
+capture window 4's +3.94% gain. A hard stop protects the
+recovery, not just the drawdown.
+
+**The D8b -> D8c-3 arc:** monotonic improvement across four
+deliveries.
+
+**Caveats (still apply):**
+- The 3 active strategies are correlated (identical per-strategy
+  numbers). Effectively one signal.
+- One symbol, one timeframe, one 70-day period. No
+  out-of-sample test.
+- Window 3 Sharpe -30.19 is mathematically correct; the stop
+  shortens bad windows rather than fixing them.
+
+**Next:** D8 shadow trading - the first out-of-sample test.

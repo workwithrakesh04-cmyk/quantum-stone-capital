@@ -82,6 +82,7 @@ class WalkForwardRunner:
         warmup: int = 100,
         max_window: int = 500,
         mode: str = "scalp",
+        window_hard_stop_pct: float = 0.0,
     ):
         self.symbol = symbol
         self.timeframe = timeframe
@@ -96,6 +97,10 @@ class WalkForwardRunner:
         self.warmup = warmup
         self.max_window = max_window
         self.mode = mode
+        # D8c-3: pass-through to BetaBacktester's window hard stop.
+        # Pass a percent (e.g. 3.0 = halt trading at -3% return for
+        # the rest of the window). 0.0 = disabled.
+        self.window_hard_stop_pct = float(window_hard_stop_pct)
 
         # Sanity: windows must fit
         required = warmup + (n_windows - 1) * step_size + window_size
@@ -175,6 +180,7 @@ class WalkForwardRunner:
             warmup=self.warmup,
             max_window=self.max_window,
             mode=self.mode,
+            window_hard_stop_pct=self.window_hard_stop_pct,
         )
         t0 = time.time()
         result = bt.run_on_candles(candles_slice)
