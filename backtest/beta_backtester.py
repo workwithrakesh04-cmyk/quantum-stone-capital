@@ -373,7 +373,7 @@ class BetaBacktester:
         n_rejected = 0
         confs = []
 
-        for r in self._debate_records:
+        for r in getattr(self, "_debate_records", []):
             if r["winner"] not in ("BUY", "SELL"):
                 continue
             c = r["confidence"]
@@ -413,7 +413,8 @@ class BetaBacktester:
     def volatile_by_strategy(self) -> Dict[str, Dict[str, Any]]:
         """Per-strategy trade count, wins, and PnL restricted to VOLATILE regime."""
         out: Dict[str, Dict[str, Any]] = {}
-        for t in self.trader.closed_trades:
+        closed = getattr(getattr(self, "trader", None), "closed_trades", [])
+        for t in closed:
             if t.regime != "VOLATILE":
                 continue
             for s in (t.contributing_strategies or []):
@@ -433,7 +434,8 @@ class BetaBacktester:
     def tmo_by_strategy(self) -> Dict[str, Dict[str, Any]]:
         """Per-strategy trades + PnL + avg bars for CLOSED_TIMEOUT exits."""
         out: Dict[str, Dict[str, Any]] = {}
-        for t in self.trader.closed_trades:
+        closed = getattr(getattr(self, "trader", None), "closed_trades", [])
+        for t in closed:
             if t.status != "CLOSED_TIMEOUT":
                 continue
             for s in (t.contributing_strategies or []):
@@ -467,10 +469,11 @@ class BetaBacktester:
             "rejected_risk_jury": self.rejected_risk_jury,
             "rejected_portfolio_jury": self.rejected_portfolio_jury,
             "max_hold_bars_used": self.max_hold_bars,
-            # D8c-2
-            "window_hard_stop_pct": self.window_hard_stop_pct,
-            "window_halted": self._window_halted,
-            "halt_candle_idx": self._halt_candle_idx,
+            # D8c-2. Use getattr so a bare instance (constructed via
+            # __new__ in tests) does not crash this method.
+            "window_hard_stop_pct": getattr(self, "window_hard_stop_pct", 0.0),
+            "window_halted": getattr(self, "_window_halted", False),
+            "halt_candle_idx": getattr(self, "_halt_candle_idx", None),
             # D7c
             "confidence_histogram": self.confidence_histogram(),
             "volatile_by_strategy": self.volatile_by_strategy(),
