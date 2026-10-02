@@ -277,3 +277,5 @@ _(steps will be appended here as we build)_
 - [2026-10-02 22:04] [Step 184] D8c-2 hotfix: make get_diagnostics defensive (getattr), fix 3 failing tests
 - [2026-10-02 22:10] [Step 185] Delivery 8c-3: hard stop wired + validated - FULL PASS 4/4 (chained equity +8.33%, DD 4.67%)
 - [2026-10-02 22:27] [Step 186] Delivery 8: shadow trading infrastructure validated on 100 OOS candles (0 trades - expected for sample); D8b scheduled for >=5k OOS candles
+- [2026-10-02 23:08] [Step 187] D9b in progress: qsc_context.py + qsc_backtester.py written, 31 context tests passing, BOS+delta wired, regime distribution confirms QSC trades in ranging (38/400). Awaiting CLI + 5k run.
+- [2026-10-02 23:27] [Step 188] Delivery 9b: QSC backtest harness built; QSC measured as NOT tradeable (-171.11% on 20k); 3 bugs found (1 fixed SL/TP inversion, 2 open RR gate + direction); D9a deferred

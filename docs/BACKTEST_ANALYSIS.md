@@ -617,3 +617,69 @@ step.
 - `docs/D8_REPORT.md`
 
 **Tests:** 631 -> 666 (+35).
+
+---
+
+# D9b - QSC Backtest (2026-10-02)
+
+**Reference:** full report in `docs/D9B_REPORT.md`
+**Status:** COMPLETE. QSC is NOT tradeable as-implemented.
+
+## The 20k-candle result
+
+    Starting balance:   $10,000.00
+    Ending balance:     $-7,110.90
+    Net PnL:            $-17,110.90  (-171.11%)
+    Trades:             1,302
+    Win rate:           57.45%
+    Profit factor:      0.805
+    Sharpe:             -5.75
+    Expectancy/trade:   $-13.14
+
+**Every active strategy is negative:**
+- trap_double_top:             -$5,531.92
+- trap_fake_breakout_bearish:  -$6,010.14
+- ifvg:                        -$13,410.57
+
+## Three structural bugs found
+
+1. **SL/TP inversion for shorts** (FIXED in D9b's bridge).
+   QSC's `stop_loss`/`take_profit` are direction-agnostic; for
+   shorts the stop must be above entry. Before the fix: 331/358
+   SELLs "stopped out" below entry and recorded a fake win. The
+   first 5k run reported a fake +372% net PnL.
+
+2. **`min_rr_ratio: 2.0` is dead config** (OPEN). `master.yaml`
+   declares it; no code enforces it. 94% of opened trades have
+   RR < 2.0 (mean 0.894). Fixing this requires a QSC source
+   change.
+
+3. **Direction from 20-bar momentum** (OPEN).
+   `_build_proposal` sets direction from the sign of momentum.
+   In the 20k window BTC trended up (+21%); QSC shorted into it
+   almost the entire time. Fixing requires a QSC source change.
+
+## Comparison with Beta on the same window
+
+| Metric | Beta (D8c-3) | QSC (D9b) |
+|---|---|---|
+| Net PnL | +8.33% | -171.11% |
+| Trades | 102 | 1,302 |
+| WR | ~47% | 57.45% |
+| PF | 1.36 | 0.805 |
+| Sharpe | +1.045 (median) | -5.75 |
+
+Beta makes money. QSC loses money.
+
+## D9a deferred
+
+The planned hybrid demo would have shown QSC losing money in
+sim. **D9a is deferred until QSC is fixed.** The D8 shadow
+infrastructure already demonstrates Beta's live behavior.
+
+## Next: D9b-2 (fresh session)
+
+Fix the two open bugs (RR gate + trend-aware direction) in
+QSC's source. Re-run 20k. Walk-forward validate (D9b-3).
+
+Do NOT do this in the same session as D9b.

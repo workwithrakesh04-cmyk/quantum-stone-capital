@@ -734,3 +734,56 @@ real analysis.
 **Next:** D8b scheduled re-run at >=5,000 OOS candles. Pass
 criterion: return_pct >= 0, sharpe >= 0.5, max_dd <= 8,
 total_trades >= 30.
+
+---
+
+## Delivery 9b - 2026-10-02 - QSC Backtest
+Commit: pending
+
+**Created:**
+- `backtest/qsc_context.py` - real MarketContext builder
+- `backtest/qsc_backtester.py` - QSC harness
+- `scripts/backtest_qsc.py` - CLI
+- `tests/test_d9b_qsc_context.py` (31 tests)
+- `docs/D9B_REPORT.md`
+
+**Modified:**
+- `docs/RESUME_PROMPT.md` - folded in the uncommitted D8b pointer
+
+**Tests:** 666 -> 697 (+31)
+
+**Result: QSC IS NOT TRADEABLE AS-IMPLEMENTED.**
+
+20k-candle backtest:
+- Net PnL: -171.11% (starting $10k, ending -$7,110)
+- Trades: 1,302
+- WR: 57.45%
+- PF: 0.805
+- Sharpe: -5.75
+
+Every active strategy is negative.
+
+**Three structural bugs found:**
+
+1. **SL/TP inversion for shorts** - FIXED in the D9b bridge.
+   QSC's stop/target are direction-agnostic; before the fix,
+   331/358 SELLs closed below entry at a fake profit. The first
+   5k run reported a fake +372% net PnL.
+
+2. **`min_rr_ratio: 2.0` is dead config** - OPEN. 94% of opened
+   trades have RR < 2.0 (mean 0.894). No code enforces the
+   declared value. Requires a QSC source fix.
+
+3. **Direction from 20-bar momentum** - OPEN. QSC shorted into
+   a +21% uptrend almost the entire 20k window. Requires a
+   QSC source fix.
+
+**D9a hybrid demo deferred** until QSC is fixed. The planned
+demo would have shown a live system losing money in sim.
+
+**Next: D9b-2 (fresh session).**
+- Implement an RR gate or fix `_stop_from_context`/`_tp_from_context`
+- Add trend-aware direction
+- Re-run 20k
+- Then D9b-3 walk-forward validation
+- Then D9a hybrid demo (with a working QSC)

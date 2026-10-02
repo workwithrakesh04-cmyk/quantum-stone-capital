@@ -1,8 +1,8 @@
 # File Tree - Quantum Stone Capital
 
-Auto-generated: 2026-10-02 16:57 UTC
+Auto-generated: 2026-10-02 17:57 UTC
 
-Total files: 307
+Total files: 314
 
 ```
 .gitignore
@@ -12,6 +12,7 @@ README.md
 backtest/__init__.py
 backtest/beta_backtester.py
 backtest/reporter.py
+backtest/shadow_analysis.py
 backtest/walk_forward_beta.py
 beta_brain/__init__.py
 beta_brain/account_guard.py
@@ -32,6 +33,7 @@ beta_brain/jury/verdict_engine.py
 beta_brain/paper_trader.py
 beta_brain/performance_metrics.py
 beta_brain/regime_tagger.py
+beta_brain/shadow_audit.py
 beta_brain/shadow_tracker.py
 beta_brain/signal.py
 beta_brain/strategy_analyzer.py
@@ -95,6 +97,7 @@ docs/D7_REPORT.md
 docs/D8C2_REPORT.md
 docs/D8C3_REPORT.md
 docs/D8C_REPORT.md
+docs/D8_REPORT.md
 docs/FILE_TREE.md
 docs/HYBRID_ARCHITECTURE.md
 docs/INTEGRATION_PLAN_7_12.md
@@ -163,6 +166,8 @@ scripts/run_dashboard.py
 scripts/run_hybrid.py
 scripts/run_live.py
 scripts/run_paper.py
+scripts/shadow_analysis.py
+scripts/shadow_run.py
 scripts/train_brain_daily.py
 scripts/update_file_tree.py
 scripts/walk_forward_beta.py
@@ -255,6 +260,8 @@ tests/test_consensus_audit.py
 tests/test_d6c_backtester_config.py
 tests/test_d6c_performance_metrics.py
 tests/test_d7_diagnostics.py
+tests/test_d8_shadow_analysis.py
+tests/test_d8_shadow_audit.py
 tests/test_d8c2_hard_stop.py
 tests/test_d8c3_hard_stop_wiring.py
 tests/test_debate_engine.py
